@@ -1,0 +1,59 @@
+   Call: (1) jealous(_25826, _25828)
+   Unify: (1) jealous(_25826, _25828)
+   Call: (2) loves(_25826, _26942)
+   Unify: (2) loves(vincent, mia)
+   Exit: (2) loves(vincent, mia)
+   Call: (2) loves(_25828, mia)
+   Unify: (2) loves(vincent, mia)
+   Exit: (2) loves(vincent, mia)
+   Call: (2) vincent\==vincent
+   Fail: (2) vincent\==vincent
+   Redo: (2) loves(_25828, mia)
+   Unify: (2) loves(marcellus, mia)
+   Exit: (2) loves(marcellus, mia)
+   Call: (2) vincent\==marcellus
+   Exit: (2) vincent\==marcellus
+   Exit: (1) jealous(vincent, marcellus)
+   Call: (2) atom_to_term('protocola(\'out.txt\')', _34728, _34730)
+   Exit: (2) atom_to_term('protocola(\'out.txt\')', protocola('out.txt'), [])
+   Call: (2) protocola('out.txt')
+   Exit: (2) protocola('out.txt')
+   Redo: (2) loves(_25826, _26942)
+   Unify: (2) loves(marcellus, mia)
+   Exit: (2) loves(marcellus, mia)
+   Call: (2) loves(_25828, mia)
+   Unify: (2) loves(vincent, mia)
+   Exit: (2) loves(vincent, mia)
+   Call: (2) marcellus\==vincent
+   Exit: (2) marcellus\==vincent
+   Exit: (1) jealous(marcellus, vincent)
+   Call: (2) atom_to_term('protocola(\'out.txt\')', _41964, _41966)
+   Exit: (2) atom_to_term('protocola(\'out.txt\')', protocola('out.txt'), [])
+   Call: (2) protocola('out.txt')
+   Exit: (2) protocola('out.txt')
+   Redo: (2) loves(_25828, mia)
+   Unify: (2) loves(marcellus, mia)
+   Exit: (2) loves(marcellus, mia)
+   Call: (2) marcellus\==marcellus
+   Fail: (2) marcellus\==marcellus
+   Redo: (2) loves(_25826, _26942)
+   Unify: (2) loves(pumpkin, honey_bunny)
+   Exit: (2) loves(pumpkin, honey_bunny)
+   Call: (2) loves(_25828, honey_bunny)
+   Unify: (2) loves(pumpkin, honey_bunny)
+   Exit: (2) loves(pumpkin, honey_bunny)
+   Call: (2) pumpkin\==pumpkin
+   Fail: (2) pumpkin\==pumpkin
+   Redo: (2) loves(_25826, _26942)
+   Unify: (2) loves(honey_bunny, pumpkin)
+   Exit: (2) loves(honey_bunny, pumpkin)
+   Call: (2) loves(_25828, pumpkin)
+   Unify: (2) loves(honey_bunny, pumpkin)
+   Exit: (2) loves(honey_bunny, pumpkin)
+   Call: (2) honey_bunny\==honey_bunny
+   Fail: (2) honey_bunny\==honey_bunny
+   Fail: (1) jealous(_25826, _25828)
+   Call: (1) atom_to_term('nodebug,noprotocol', _56428, _56430)
+   Exit: (1) atom_to_term('nodebug,noprotocol', (nodebug, noprotocol), [])
+^  Call: (1) nodebug, noprotocol
+^  Unify: (1) user:nodebug, user:noprotocol

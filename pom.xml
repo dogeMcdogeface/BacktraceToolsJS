@@ -14,4 +14,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <!-- JitPack used for getting Maven packages from GitHub -->
+        <repository>
+            <id>jitpack.io</id>
+            <name>JitPack Repository</name>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <!--  JPL bidirectional Prolog-Java: https://github.com/SWI-Prolog/packages-jpl  -->
+        <dependency>
+            <groupId>com.github.SWI-Prolog</groupId>
+            <artifactId>packages-jpl</artifactId>
+            <version>V8.3.2</version>
+            <scope>compile</scope>    <!-- version 7.6.1 of JPL -->
+        </dependency>
+    </dependencies>
+
 </project>
