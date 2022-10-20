@@ -1,29 +1,32 @@
 package org.example;
 
+import java.awt.*;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
+import java.net.URI;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
+import Server.MyServer;
+
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(3636), 0);
-        server.createContext("/test", new MyHandler());
-        server.setExecutor(null); // creates a default executor
-        server.start();
+        MyServer.init(3636);
+
+
+        openDefaultBrowser(new URI("http://localhost:3636/test"));
     }
 
-    static class MyHandler implements HttpHandler {
-        @Override
-        public void handle(HttpExchange t) throws IOException {
-            String response = "This is the response";
-            t.sendResponseHeaders(200, response.length());
-            OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
-            os.close();
+
+    public static void openDefaultBrowser(URI uri) throws IOException {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            // windows
+            Desktop desktop = Desktop.getDesktop();
+            desktop.browse(uri);
+
+        } else {
+            // linux / mac
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec(new String[]{"xdg-open ", uri.toString()});
+
         }
     }
 }
