@@ -7,10 +7,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 <header>
-    <!-- menù superiore -->
+    <!-- menu superiore -->
     <ul>
         <li>File</li>
         <li>Edit</li>
@@ -19,11 +20,11 @@
 </header>
 <main>
     <section id="UpperEditor">
-        <textarea id="top" ></textarea>
+        <textarea id="top"></textarea>
     </section>
     <section id="Result"></section>
     <section id="LowerEditor">
-        <textarea id="bottom" ></textarea>
+        <textarea id="bottom"></textarea>
     </section>
     <section id="Output">
         <textarea id="outputText" readonly> Testo output read-only</textarea>
@@ -32,10 +33,9 @@
 <footer>
     <!-- menù inferiore -->
     <ul>
-        <button id="SubmitRun" class="submit">Run!</button>
+        <button id="SubmitRun" onclick="SubmitRun()" class="submit">Run!</button>
         <button id="Submit2" class="submit">bottone2!</button>
     </ul>
 </footer>
-<script src="" async defer></script>
 </body>
 </html>

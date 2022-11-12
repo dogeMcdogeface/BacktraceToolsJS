@@ -12,7 +12,7 @@ public class Main {
         MyServer.init(3636);
 
 
-        openDefaultBrowser(new URI("http://localhost:3636/example.html"));
+        openDefaultBrowser(new URI("http://localhost:3636/editor/index.html"));
     }
 
 
