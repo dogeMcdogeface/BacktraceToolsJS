@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 
-public class FileHandler implements HttpHandler {
+public class Handler_Api implements HttpHandler {
     @Override
     public void handle(HttpExchange t) throws IOException {
         File root = new File("var/www/").getCanonicalFile();
