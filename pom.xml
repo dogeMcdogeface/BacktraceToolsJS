@@ -32,6 +32,11 @@
             <version>V8.3.2</version>
             <scope>compile</scope>    <!-- version 7.6.1 of JPL -->
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.3</version>
+        </dependency>
     </dependencies>
 
 </project>

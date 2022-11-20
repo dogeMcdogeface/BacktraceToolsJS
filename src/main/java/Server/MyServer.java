@@ -10,6 +10,7 @@ public class MyServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new Handler_File());
         server.createContext("/api/test", new Handler_Api_Test());
+        server.createContext("/api/query", new Handler_Query());
         server.setExecutor(null); // creates a default executor
         server.start();
     }
