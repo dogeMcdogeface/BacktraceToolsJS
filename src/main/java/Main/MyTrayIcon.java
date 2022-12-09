@@ -27,20 +27,20 @@ public class MyTrayIcon {
             trayIcon.setImageAutoSize(true);
 
 
+            MenuItem GUIItem = new MenuItem("Apri interfaccia");
+            popup.add(GUIItem);
+            GUIItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    openWebGUI();
+                }
+            });
+
             MenuItem exitItem = new MenuItem("Esci");
             popup.add(exitItem);
             exitItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     System.out.println("Exiting...");
                     System.exit(0);
-                }
-            });
-
-            MenuItem GUIItem = new MenuItem("Apri interfaccia");
-            popup.add(GUIItem);
-            GUIItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    openWebGUI();
                 }
             });
 
