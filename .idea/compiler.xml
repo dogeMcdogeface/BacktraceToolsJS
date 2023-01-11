@@ -9,5 +9,8 @@
         <module name="BacktraceToolsJS" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="BacktraceToolsJS (1)" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

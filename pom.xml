@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>BacktraceToolsJS</artifactId>
+    <artifactId>BacktraceToolsJS2</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -23,9 +23,7 @@
         </repository>
     </repositories>
 
-
     <dependencies>
-        <!--  JPL bidirectional Prolog-Java: https://github.com/SWI-Prolog/packages-jpl  -->
         <dependency>
             <groupId>com.github.SWI-Prolog</groupId>
             <artifactId>packages-jpl</artifactId>
@@ -34,8 +32,13 @@
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.2.3</version>
+            <version>2.9.8</version>
         </dependency>
     </dependencies>
 
