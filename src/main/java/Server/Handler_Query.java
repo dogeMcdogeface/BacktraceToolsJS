@@ -26,7 +26,6 @@ public class Handler_Query implements HttpHandler {
     String parseRequestBody(HttpExchange t) throws IOException {
         InputStreamReader isr = new InputStreamReader(t.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
-        // From now on, the right way of moving from bytes to utf-8 characters:
         int b;
         StringBuilder buf = new StringBuilder(512);
         while ((b = br.read()) != -1) {
