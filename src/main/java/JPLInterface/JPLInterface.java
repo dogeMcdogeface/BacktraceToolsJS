@@ -56,6 +56,7 @@ public class JPLInterface {
         }
         //Load program on Prolog
         String indProgramPath = programFile.getPath().replace("\\", "/");         //TODO: clean up converting windows\paths to generic/paths
+        System.out.println("Loading program: " + indProgramPath);
         String consult = "consult('" + indProgramPath + "')";
         System.out.println(consult + " " + (Query.hasSolution(consult) ? "succeeded" : "failed"));
 
