@@ -58,8 +58,11 @@ public class JPLInterface {
         String indProgramPath = programFile.getPath().replace("\\", "/");         //TODO: clean up converting windows\paths to generic/paths
         System.out.println("Loading program: " + indProgramPath);
         String consult = "consult('" + indProgramPath + "')";
-        System.out.println(consult + " " + (Query.hasSolution(consult) ? "succeeded" : "failed"));
-
+        try {
+            System.out.println(consult + " " + (Query.hasSolution(consult) ? "succeeded" : "failed"));
+        }catch (Exception e){
+            System.err.println(e);
+        }
     }
 
     private static File saveTmp(String txt) {   //Saving to a tmp file with randomized name prevents conflict from running multiple instances of the program
