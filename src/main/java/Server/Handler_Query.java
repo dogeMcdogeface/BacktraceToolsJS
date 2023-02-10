@@ -46,7 +46,7 @@ public class Handler_Query implements HttpHandler {
             }
         }
 
-        System.out.println("API Request: " + request + "\nResponse: " + response);
+        //System.out.println("API Request: " + request + "\nResponse: " + response);
 
         //------    Send results to browser for displaying to user          ------------------------------------//
         t.getResponseHeaders().set("Content-Type", "application/json");
