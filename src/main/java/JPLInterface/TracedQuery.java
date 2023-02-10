@@ -33,11 +33,12 @@ public class TracedQuery extends Query {
         System.out.println("Parsing Trace: "+traceFile);
         if (traceFile == null) return null; //Se per qualche motivo il file che contiene la trace non esiste, skippa il metodo
 
-        //Leggi il file "tracefile"
-
-
         Map<String, Object> hm_padri = new HashMap<>();
+
+        //Leggi il file "tracefile"
         //Parsa i contenuti in una lista
+
+
         hm_padri.put("test", "bloblbob");
 
         return hm_padri;
