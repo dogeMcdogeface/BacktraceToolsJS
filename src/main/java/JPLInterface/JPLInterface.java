@@ -25,24 +25,24 @@ public class JPLInterface {
 
     //------    Execute incoming query                                  ------------------------------------//
     public static Map<String, Object> execute(String id, String program, String query, int count) {
-        Map<String, Object> response = new HashMap<String, Object>();
         System.out.println("Executing " + id);
+        Map<String, Object> response = new HashMap<String, Object>();
 
-        response.put("key1", id);
-        response.put("key2", query);
+        response.put("id", id);
+        response.put("query", query);
 
         JPLInterface.consultString(program);
 
         TracedQuery myQuery = new TracedQuery(query); //"jealous(X,Y)"
         //System.out.println("each solution of " + myQuery);
         int sol = 0;
-        while (myQuery.hasMoreSolutionsT()) {
+        while (myQuery.hasMoreSolutionsT() && sol < count) {
             String txt = myQuery.nextSolution().toString();
             response.put("sol" + sol++, txt);
             System.out.println(txt);
         }
 
-        response.put("traceMap", myQuery.parseTrace());
+        response.put("trace", myQuery.getTrace());
 
         return response;
     }
@@ -63,7 +63,7 @@ public class JPLInterface {
         String consult = "consult('" + indProgramPath + "')";
         try {
             System.out.println(consult + " " + (Query.hasSolution(consult) ? "succeeded" : "failed"));
-        }catch (Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
     }

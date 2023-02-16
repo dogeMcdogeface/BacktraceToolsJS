@@ -4,13 +4,17 @@ package JPLInterface;
 import org.jpl7.Query;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 
 public class TracedQuery extends Query {
-
-    private File traceFile = null;
+    private static final ResourceBundle PROLOGBUNDLE = ResourceBundle.getBundle("Prolog");
+    private final String[] ignoreWords = PROLOGBUNDLE.getString("Prolog.IgnoredWords").split(", ");
+    private File traceFile;
 
     public TracedQuery(String s) {
         super(s);
@@ -20,27 +24,24 @@ public class TracedQuery extends Query {
         if (traceFile == null)
             traceFile = JPLInterface.startTrace();
 
-        boolean a = super.hasMoreSolutions();
-        if (a) {
+        boolean hasMoreSolutions = super.hasMoreSolutions();
+        if (hasMoreSolutions) {
             JPLInterface.updateTrace(traceFile);
         } else {
             JPLInterface.stopTrace(traceFile);
         }
-        return a;
+        return hasMoreSolutions;
     }
 
-    public Map<String, Object> parseTrace() {
-        System.out.println("Parsing Trace: "+traceFile);
-        if (traceFile == null) return null; //Se per qualche motivo il file che contiene la trace non esiste, skippa il metodo
 
-        Map<String, Object> hm_padri = new HashMap<>();
-
-        //Leggi il file "tracefile"
-        //Parsa i contenuti in una lista
-
-
-        hm_padri.put("test", "bloblbob");
-
-        return hm_padri;
+    public String[] getTrace() {
+        try {
+            return Files.lines(traceFile.toPath())
+                    .filter(line -> Arrays.stream(ignoreWords).noneMatch(line::contains))
+                    .toArray(String[]::new);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+            return null;
+        }
     }
 }
