@@ -1,0 +1,30 @@
+#answer-request-area {
+        grid-area: footer;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        margin: 5px;
+      }
+      #answer-number-input {
+        display: inline-block;
+        vertical-align: middle;
+        width: 6ch;
+        height: 30px;
+        font-size: 16px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #answer-request-button {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 16px;
+        padding: 5px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+      }

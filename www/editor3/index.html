@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="code-editor.css">
+    <link rel="stylesheet" href="answer-request-area.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template:
+          "header header" 5%
+          "text1 text2" 60%
+          "text3 text4" auto
+          "footer ." min-content
+          / 1fr 2fr;
+        height: 100vh;
+        width: 100vw;
+        max-width: 100vw;
+        max-height: 100vh;
+      }
+
+      #header {
+        grid-area: header;
+        background-color: gray;
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        padding: 0;
+      }
+
+
+
+      #editor {
+        border: 1px solid black;
+      }
+      textarea {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid black;
+        box-sizing: border-box;
+        resize: none;
+      }
+    </style>
+</head>
+<body>
+<div class="grid-container">
+    <div id="header">This is the header</div>
+    <div class="code-editor">
+        <div id="line-numbers"></div>
+        <textarea id="code" name="code" placeholder="Enter your code here..."></textarea>
+    </div>
+    <textarea id="text2" name="text2"></textarea>
+    <textarea id="text3" name="text3"></textarea>
+    <textarea id="text4" name="text4"></textarea>
+    <div id="answer-request-area">
+        <button id="answer-request-button">Next</button>
+        <textarea id="answer-number-input">10</textarea>
+        <span>Answers</span>
+    </div>
+</div>
+
+<script src="code-editor.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+
+        main {
+            display: grid;
+            border: 0px red;
+            padding: 0px;
+            grid-gap: 0px;
+            height: 100vh;
+            grid-template:
+            "code   trace" 1fr
+            "query  console" 2fr
+            / 1fr 3fr;
+        }
+
+        code{
+            grid-area: code;
+            border: 1px solid pink;
+            overflow: auto;
+            resize: both;
+            min-width: 100%;
+            min-height: 100%;
+        }
+        query{
+            grid-area: query;
+            border: 1px solid blue;
+            overflow: auto;
+            min-width: min-content;
+            min-height: 100%;
+        }
+
+        trace {
+            grid-area: trace;
+            border: 1px solid orange;
+            overflow: auto;
+            min-width: min-content;
+            min-height: min-content;
+        }
+
+        console {
+            grid-area: console;
+            border: 1px solid gray;
+            overflow: auto;
+            min-width: min-content;
+            min-height: min-content;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <code>
+        <ul>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+        </ul>
+    </code>
+
+    <query>
+        <ul>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+            <li>Nav Item</li>
+        </ul>
+    </query>
+
+    <trace>
+        <h1>Header Title</h1>
+        <small>Header Subtitle</small>
+    </trace>
+
+    <console>
+        <p>Lorlaborum.</p>
+    </console>
+
+</main>
+</body>
+
+<script>
+    console.log("hiii")
+</script>
+</html>
