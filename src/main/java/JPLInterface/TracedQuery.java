@@ -3,7 +3,9 @@ package JPLInterface;
 
 import org.jpl7.Query;
 
-import java.io.File;
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TracedQuery extends Query {
@@ -25,5 +27,20 @@ public class TracedQuery extends Query {
             JPLInterface.stopTrace(traceFile);
         }
         return a;
+    }
+
+    public Map<String, Object> parseTrace() {
+        System.out.println("Parsing Trace: "+traceFile);
+        if (traceFile == null) return null; //Se per qualche motivo il file che contiene la trace non esiste, skippa il metodo
+
+        Map<String, Object> hm_padri = new HashMap<>();
+
+        //Leggi il file "tracefile"
+        //Parsa i contenuti in una lista
+
+
+        hm_padri.put("test", "bloblbob");
+
+        return hm_padri;
     }
 }

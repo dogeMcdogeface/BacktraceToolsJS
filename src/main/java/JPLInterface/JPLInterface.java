@@ -34,13 +34,16 @@ public class JPLInterface {
         JPLInterface.consultString(program);
 
         TracedQuery myQuery = new TracedQuery(query); //"jealous(X,Y)"
-        System.out.println("each solution of " + myQuery);
+        //System.out.println("each solution of " + myQuery);
         int sol = 0;
-        while (myQuery.hasMoreSolutions()) {
+        while (myQuery.hasMoreSolutionsT()) {
             String txt = myQuery.nextSolution().toString();
             response.put("sol" + sol++, txt);
             System.out.println(txt);
         }
+
+        response.put("traceMap", myQuery.parseTrace());
+
         return response;
     }
 
