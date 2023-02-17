@@ -2,11 +2,18 @@
 .custom-header {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Add this line to space items out horizontally */
   background-color: gray;
   color: white;
   font-size: 24px;
   padding: 0 10px;
   border-bottom: 1px solid silver;
+  user-select: none;
+}
+.header-title {
+  padding: 0px 0px;
+    margin: 0 0px;
+      margin-left: auto; /* Add this line to align the text to the right */
 }
 
 /* Define custom dropdown */
@@ -14,7 +21,8 @@ custom-dropdown {
   position: relative;
   display: inline-block;
   background-color: gray;
-}
+  margin-right: 0px; /* Add this line to align the custom dropdown elements to the left */
+ }
 
 /* Style the button in the custom dropdown */
 custom-dropdown button {
