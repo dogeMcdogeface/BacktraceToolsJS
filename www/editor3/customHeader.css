@@ -1,0 +1,52 @@
+/* Define custom header element */
+custom-header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: gray;
+  color: white;
+  font-size: 24px;
+  padding: 0 10px;
+}
+
+/* Define styles for custom header buttons */
+custom-header button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+custom-header button:hover,
+custom-header button:focus{
+  background-color: white;
+  color: gray;
+}
+
+custom-header button:active {
+  transform: translateY(2px);
+}
+
+/* Define styles for custom header text */
+custom-header span {
+  margin-left: auto;
+  padding: 10px;
+}
+
+/* Define styles for custom header submenu */
+.custom-header-submenu {
+  display: none;
+  position: absolute;
+  background-color: silver;
+  z-index: 1;
+  flex-direction: column;
+}
+
+.custom-header-submenu.show {
+  display: block;
+}
+
