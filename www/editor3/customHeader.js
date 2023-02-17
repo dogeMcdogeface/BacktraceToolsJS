@@ -31,7 +31,6 @@ class CustomHeader extends HTMLElement {
 
         const subMenu = document.createElement('div');
         subMenu.classList.add('custom-header-submenu');
-
         buttonData.subMenus.forEach((subMenuName) => {
           const subMenuButton = document.createElement('button');
           subMenuButton.textContent = subMenuName;
@@ -39,7 +38,11 @@ class CustomHeader extends HTMLElement {
         });
 
         button.addEventListener('focusin', () => {
-          subMenu.classList.toggle('show', true);
+        var width =( button.offsetLeft) ;
+        subMenu.style.left = width+'px'
+        subMenu.classList.toggle('show', true);
+         console.log(button.offsetLeft);
+
         });
         button.addEventListener('focusout', () => {
           subMenu.classList.toggle('show', false);

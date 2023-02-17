@@ -15,8 +15,8 @@ custom-header button {
   background-color: transparent;
   color: white;
   border: none;
-  padding: 5px 10px;
-  margin: 0 5px;
+  padding: 10px 15px;
+  margin: 0 0px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -41,6 +41,7 @@ custom-header span {
 .custom-header-submenu {
   display: none;
   position: absolute;
+  flex-direction: column;
   background-color: silver;
   z-index: 1;
   flex-direction: column;
@@ -50,3 +51,11 @@ custom-header span {
   display: block;
 }
 
+/* Define styles for custom header submenu items */
+.custom-header-submenu button {
+  display: block; /* Add this line to set items to display as blocks */
+  width: 100%; /* Add this line to set width to 100% */
+  text-align: left; /* Add this line to left-align text within items */
+  padding: 5px 10px;
+  margin: 5px;
+}
