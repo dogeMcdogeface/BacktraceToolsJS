@@ -70,3 +70,7 @@ custom-dropdown:hover .dropdown-content {
   background-color: CornflowerBlue;
   color: white;
 }
+.dropdown-content button:active  {
+  transition: all 0.2s;
+  filter: brightness(90%);
+  }
