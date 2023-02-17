@@ -9,11 +9,11 @@
       .grid-container {
         display: grid;
         grid-template:
-          "header header"min-content
-          "text1 text2"60%
-          "text3 text4"auto
-          "footer1 footer2"min-content
-          / 1fr 2fr;
+          "header   header" min-content
+          "code     trace"  60%
+          "query    consl"  auto
+          "footer1  footer2"min-content
+           / 1fr    2fr;
         height: 100vh;
         width: 100vw;
         max-width: 100vw;
@@ -26,24 +26,25 @@
         grid-area: header;
       }
 
-      .code-editor {
-       grid-area: text1;
+      #codeArea {
+       grid-area: code;
         border: 1px solid gray;
-      }
-
-      console-area {
-        border: 1px solid gray;
-      }
-
-      #answer-request-area {
-        border-right: 1px solid gray;
       }
 
       #queryArea {
+        grid-area: query;
         border: 1px solid gray;
         background: linear-gradient(to right, #e0e0e0 10%, transparent 10%);
         padding-left: 10%;
       }
+
+
+      console-area {
+             grid-area: consl;
+        border: 1px solid gray;
+      }
+
+
 
 
 

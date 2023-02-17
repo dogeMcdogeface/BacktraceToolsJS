@@ -4,7 +4,7 @@ class CodeArea extends HTMLElement {
     this.innerHTML = `
       <div class="container">
         <ol><li></li></ol>
-        <textarea></textarea>
+        <textarea placeholder="${this.innerText}"></textarea>
       </div>
     `;
     this.textarea = this.querySelector('textarea');
