@@ -1,0 +1,8 @@
+console-area {
+  display: block;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow: auto;
+  padding: 10px;
+}

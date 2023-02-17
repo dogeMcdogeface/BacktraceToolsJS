@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Textarea</title>
+</head>
+<body>
+<custom-textarea></custom-textarea>
+
+<script>
+    class CustomTextarea extends HTMLElement {
+      constructor() {
+        super();
+
+        // Create the shadow root for the custom element
+        const shadow = this.attachShadow({mode: 'open'});
+
+        // Create the required DOM elements for the custom element
+        const container = document.createElement('div');
+        const lineNumbers = document.createElement('div');
+        const textArea = document.createElement('textarea');
+
+        // Set the attributes for the DOM elements
+        container.style.display = 'flex';
+        container.style.flexDirection = 'row';
+        container.style.width = '100%';
+        container.style.height = '100%';
+        lineNumbers.style.flexShrink = '0';
+        lineNumbers.style.width = '30px';
+        lineNumbers.style.paddingRight = '10px';
+        lineNumbers.style.textAlign = 'right';
+        textArea.style.flexGrow = '1';
+        textArea.style.width = '100%';
+        textArea.style.height = '100%';
+        textArea.style.border = 'none';
+        textArea.style.resize = 'none';
+        textArea.style.outline = 'none';
+
+        // Append the DOM elements to the shadow root
+        shadow.appendChild(container);
+        container.appendChild(lineNumbers);
+        container.appendChild(textArea);
+
+        // Set the initial value of the textarea
+        textArea.value = this.getAttribute('value') || '';
+
+        // Update the line numbers when the textarea is updated
+        const updateLineNumbers = () => {
+          lineNumbers.innerHTML = '';
+          const lines = textArea.value.split('\n');
+          for (let i = 1; i <= lines.length; i++) {
+            const lineNumber = document.createElement('div');
+            lineNumber.innerText = i;
+            lineNumbers.appendChild(lineNumber);
+          }
+        };
+        textArea.addEventListener('input', updateLineNumbers);
+        updateLineNumbers();
+      }
+    }
+    customElements.define('custom-textarea', CustomTextarea);
+  </script>
+</body>
+</html>

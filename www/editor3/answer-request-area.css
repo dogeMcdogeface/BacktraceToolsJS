@@ -1,30 +1,35 @@
-#answer-request-area {
-        grid-area: footer;
-        display: flex;
-        align-items: center;
-        font-size: 16px;
-        margin: 5px;
-      }
-      #answer-number-input {
-        display: inline-block;
-        vertical-align: middle;
-        width: 6ch;
-        height: 30px;
-        font-size: 16px;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-left: 10px;
-        margin-right: 10px;
-      }
+/* Define styles for answer request area */
+        #answer-request-area {
+            grid-area: footer;
+            background-color: Silver;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            padding: 3px;
+        }
 
-      #answer-request-button {
-        display: inline-block;
-        vertical-align: middle;
-        font-size: 16px;
-        padding: 5px;
-        border: none;
-        border-radius: 5px;
-        margin-left: 10px;
-        cursor: pointer;
-      }
+        /* Define styles for answer number input */
+        #answer-number-input {
+            display: inline-block;
+            width: 6ch;
+            height: 30px;
+            font-size: 16px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Define styles for answer request button */
+        #answer-request-button {
+            display: inline-block;
+            font-size: 16px;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
