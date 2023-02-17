@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="code-editor.css">
     <link rel="stylesheet" href="console-area.css">
     <link rel="stylesheet" href="answer-controls-area.css">
-    <link rel="stylesheet" href="customHeader.css">
+    <link rel="stylesheet" href="customDropdown.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,7 +12,24 @@
 <!-- Define grid layout using CSS grid -------------------------------------------------------------------->
 <div class="grid-container">
     <!-- Define header section ---------------------------------------------------------------------------->
-    <custom-header>Backtrace Tools</custom-header>
+    <header class="custom-header">Backtrace Tools
+
+
+        <custom-dropdown class="dropdown" title="File">
+            <li>New</li>
+            <li>Open</li>
+            <li>Save</li>
+        </custom-dropdown>
+        <custom-dropdown class="dropdown" title="Edit">
+            <li>one</li>
+            <li>ttwo</li>
+            <li>3</li>
+        </custom-dropdown>
+
+
+
+
+    </header>
     <!-- Define code editor section with line numbers and input textarea ---------------------------------->
     <div class="code-editor">
         <div id="line-numbers"></div>
@@ -39,7 +56,7 @@
 
 <script src="code-editor.js"></script>
 <script src="console-area.js"></script>
-<script src="customHeader.js"></script>
+<script src="customDropdown.js"></script>
 <script defer src="script.js"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@
       }
 
       /* Define styles for header */
-      custom-header {
+      header {
         grid-area: header;
       }
 

@@ -1,3 +1,40 @@
+
+class CustomDropdown extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+
+        const dropButt = document.createElement('button');
+        dropButt.textContent = this.title;
+        dropButt.className = 'dropdown-button';
+
+
+        const dropList = document.createElement('div');
+        dropList.className = 'dropdown-content';
+
+        for (let child of this.children){
+            const btn = document.createElement('button');
+            btn.textContent = child.textContent;
+            dropList.appendChild(btn);
+        }
+
+        this.innerHTML = '';
+        this.appendChild(dropButt);
+        this.appendChild(dropList);
+
+
+    }
+}
+customElements.define('custom-dropdown', CustomDropdown);
+
+
+
+
+
+
+
 class CustomHeader extends HTMLElement {
   constructor() {
     super();
