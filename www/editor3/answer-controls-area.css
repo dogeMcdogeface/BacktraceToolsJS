@@ -1,6 +1,5 @@
 /* Define styles for answer request area */
-        #answer-request-area {
-            grid-area: footer;
+        .answer-controls {
             background-color: Silver;
             display: flex;
             align-items: center;
@@ -9,7 +8,7 @@
         }
 
         /* Define styles for answer number input */
-        #answer-number-input {
+        .answer-controls textarea {
             display: inline-block;
             width: 6ch;
             height: 30px;
@@ -23,7 +22,7 @@
         }
 
         /* Define styles for answer request button */
-        #answer-request-button {
+        .answer-controls button {
             display: inline-block;
             font-size: 16px;
             padding: 5px;
@@ -33,3 +32,4 @@
             cursor: pointer;
             vertical-align: middle;
         }
+

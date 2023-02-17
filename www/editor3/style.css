@@ -1,0 +1,61 @@
+/* Reset default margin and padding */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Define grid layout */
+      .grid-container {
+        display: grid;
+        grid-template:
+          "header header"min-content
+          "text1 text2"60%
+          "text3 text4"auto
+          "footer1 footer2"min-content
+          / 1fr 2fr;
+        height: 100vh;
+        width: 100vw;
+        max-width: 100vw;
+        max-height: 100vh;
+        border: 0px;
+      }
+
+      /* Define styles for header */
+      custom-header {
+        grid-area: header;
+      }
+
+      .code-editor {
+        border: 1px solid gray;
+      }
+
+      console-area {
+        border: 1px solid gray;
+      }
+
+      #answer-request-area {
+        border-right: 1px solid gray;
+      }
+
+      #queryArea {
+        border: 1px solid gray;
+        background: linear-gradient(to right, #e0e0e0 10%, transparent 10%);
+        padding-left: 10%;
+      }
+
+      /* Define styles for text areas */
+      textarea {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        font-size: 16px;
+        resize: none;
+      }
+
+      #answer-request-area {
+          grid-area: footer1;
+      }
+      #answer-display-area {
+          grid-area: footer2;
+      }

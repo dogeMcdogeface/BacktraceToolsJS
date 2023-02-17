@@ -34,17 +34,17 @@ class CustomHeader extends HTMLElement {
         buttonData.subMenus.forEach((subMenuName) => {
           const subMenuButton = document.createElement('button');
           subMenuButton.textContent = subMenuName;
+          subMenuButton.id = "header-"+subMenuName+"-button";
           subMenu.appendChild(subMenuButton);
+          subMenuButton.addEventListener('click', () => console.log('Button clicked asdsadasd'));
         });
 
         button.addEventListener('focusin', () => {
         var width =( button.offsetLeft) ;
         subMenu.style.left = width+'px'
         subMenu.classList.toggle('show', true);
-         console.log(button.offsetLeft);
-
         });
-        button.addEventListener('focusout', () => {
+       button.addEventListener('focusout', () => {
           subMenu.classList.toggle('show', false);
         });
 
