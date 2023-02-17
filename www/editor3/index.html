@@ -17,7 +17,7 @@
       .grid-container {
         display: grid;
         grid-template:
-          "header header"5%
+          "header header"min-content
           "text1 text2"60%
           "text3 text4"auto
           "footer ."min-content
@@ -66,7 +66,7 @@
 <!-- Define grid layout using CSS grid -------------------------------------------------------------------->
 <div class="grid-container">
     <!-- Define header section ---------------------------------------------------------------------------->
-    <custom-header>This is the headern</custom-header>
+    <custom-header>Backtrace Tools</custom-header>
     <!-- Define code editor section with line numbers and input textarea ---------------------------------->
     <div class="code-editor">
         <div id="line-numbers"></div>
@@ -75,7 +75,7 @@
     <!-- Define three textareas for different content ----------------------------------------------------->
     <textarea id="text3" name="text3"></textarea>
     <!-- Define a textarea to write queries into      ----------------------------------------------------->
-    <textarea id="queryArea" name="text2"></textarea>
+    <textarea id="queryArea" name="text2" placeholder="Enter your query here..."></textarea>
     <!-- Define a textarea which acts as a console    ----------------------------------------------------->
     <console-area id="console" name="text4"></console-area>
     <!-- Define answer request section with button, input field, and text --------------------------------->
