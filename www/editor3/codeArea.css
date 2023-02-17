@@ -1,0 +1,50 @@
+code-area {
+  font-family: monospace;
+  font-size: 16px;
+  padding: 0px;
+  --code-background-color: white;
+  --code-text-color: black;
+  --side-background-color: silver;
+  --side-text-color: black;
+}
+
+code-area .container {
+  background-color: var(--side-background-color);
+  color: var(--side-text-color);
+  display: flex;
+  height: 100%;
+  min-height: 100%;
+  overflow: auto;
+}
+
+code-area textarea {
+  background-color: var(--code-background-color);
+  color: var(--code-text-color);
+  border: none;
+  flex: 1;
+  font-family: inherit;
+  font-size: inherit;
+  height: 100%;
+  overflow: hidden;
+  padding-left: 5px;
+  resize: none;
+}
+
+code-area ol {
+  counter-reset: linenumbers;
+  flex: 1;
+  font-family: monospace;
+  height: 100%;
+  margin-left: 5px;
+  margin-right: 5px;
+  max-width: 5ch;
+  white-space: pre;
+}
+
+code-area li:before {
+  content: counter(linenumbers) ".";
+  counter-increment: linenumbers;
+  display: inline-block;
+  text-align: right;
+  width: 2.5em;
+}

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Backtrace Tools GUI</title>
-    <link rel="stylesheet" href="code-editor.css">
+    <link rel="stylesheet" href="codeArea.css">
     <link rel="stylesheet" href="console-area.css">
     <link rel="stylesheet" href="answer-controls-area.css">
     <link rel="stylesheet" href="customDropdown.css">
@@ -27,10 +27,7 @@
         <text class="header-title">Backtrace Tools</text>
     </header>
     <!-- Define code editor section with line numbers and input textarea ---------------------------------->
-    <div class="code-editor">
-        <div id="line-numbers"></div>
-        <textarea id="code" name="code" placeholder="Enter your code here..."></textarea>
-    </div>
+        <code-area class="code-editor"></code-area>
     <!-- Define the viewport for the trace/tree       ----------------------------------------------------->
     <textarea id="text3" name="text3"></textarea>
     <!-- Define a textarea to write queries into      ----------------------------------------------------->
@@ -50,7 +47,7 @@
     </div>
 </div>
 
-<script src="code-editor.js"></script>
+<script src="codeArea.js"></script>
 <script src="console-area.js"></script>
 <script src="customDropdown.js"></script>
 <script defer src="script.js"></script>
