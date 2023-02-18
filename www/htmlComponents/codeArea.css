@@ -4,6 +4,7 @@ code-area {
    --code-text-color: black;
    --side-background-color: silver;
    --side-text-color: black;
+   --side-text-value: counter(linenumbers) ".";
    font-family: monospace;
    font-size: 16px;
    padding: 0px;
@@ -33,7 +34,7 @@ code-area ol {
 
 /* Define styles for the line number list items */
 code-area li:before {
-   content: counter(linenumbers) ".";
+   content: var(--side-text-value);
    counter-increment: linenumbers;
    display: inline-block;
    text-align: right;

@@ -10,6 +10,10 @@ class CodeArea extends HTMLElement {
     this.textarea = this.querySelector('textarea');
     this.ol = this.querySelector('ol');
     this.autoResize = this.autoResize.bind(this);
+
+    let sideTextValue = getComputedStyle(this).getPropertyValue('--side-text-value');
+    sideTextValue = sideTextValue.replace(/[^"]*"([^"]*)"[^"]*/g, '$1').trim();
+    this.ol.style.maxWidth = `${4 + sideTextValue.length}ch`;
   }
 
   connectedCallback() {
@@ -17,6 +21,7 @@ class CodeArea extends HTMLElement {
     this.textarea.addEventListener('input', this.autoResize);
     window.addEventListener('resize', this.autoResize);
     this.autoResize();
+
     window.addEventListener('beforeunload', () => localStorage.setItem('codeAreaContent'+this.className, this.textarea.value));
   }
 

@@ -43,6 +43,7 @@ header {
 .queryArea {
    grid-area: query;
    border-right: 4px solid silver;
+      --side-text-value: "?-" counter(linenumbers) ;
 }
 
 /* Define styles for console area */
@@ -58,3 +59,4 @@ header {
 #answer-display-area {
    grid-area: footer2;
 }
+
