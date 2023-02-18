@@ -41,7 +41,7 @@ public class Handler_Query implements HttpHandler {
             System.out.println(results);
             try {
                 response = new ObjectMapper().writeValueAsString(results);
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println(e);
             }
         }
