@@ -21,3 +21,23 @@ jealous(X, Y) :-
 */
 
 
+
+
+
+
+likes(john, apple).
+likes(john, pear).
+likes(john, grapes).
+likes(bill, mango).
+likes(bill, apple).
+
+all_likes(_, []).
+all_likes(What, [X|Rest]) :-
+likes(X, What),
+all_likes(What, Rest).
+
+/** <examples>
+
+?- all_likes(apple,[john, bill]).
+?- likes(bill, umbrella)
+*/

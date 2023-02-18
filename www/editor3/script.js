@@ -7,7 +7,7 @@ const traceArea = document.getElementById("traceArea");
 // Main function that initializes the tool and calls testConsole()
 function main() {
    console.log("Starting Backtrace Tools");
-   testConsole();
+   //testConsole();
 }
 
 // Sends a query request to the API and displays the response in the console area
@@ -30,13 +30,21 @@ function answerRequest() {
 
 // Displays the given response text in the console area
 function displayResponse(responseText) {
-   //console.log("Receiving", responseText);
-   //consoleArea.print(responseText, "blue");
    const responseObj = JSON.parse(responseText);
-      console.log("Receiving", responseObj);
-      consoleArea.print(responseObj, "blue");
+   const solutions = responseObj.solutions;
+   //console.log("Receiving", responseText);
+   console.log("Receiving", responseObj);
+
+    if (solutions.length === 0) {
+        consoleArea.write("FALSE", "Red");
+    } else if (solutions.length === 1 && Object.keys(solutions[0]).length === 0) {
+        consoleArea.write("TRUE", "DarkGreen ");
+    } else {
+        consoleArea.print(solutions, "blue");
+    }
    //   consoleArea.insert(t);
 }
+
 
 // Clears the console area
 function clearConsole() {
