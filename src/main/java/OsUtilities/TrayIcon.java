@@ -4,16 +4,17 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 
 public class TrayIcon {
-    static java.awt.TrayIcon trayIcon;
+    private static java.awt.TrayIcon trayIcon;
 
     private static final ResourceBundle MESSAGES = ResourceBundle.getBundle("Messages");
 
-    static public void init() {
+    public static void init() {
         System.out.println("Loading Tray Icon");
 
         //------    Detect System tray compatibility                        ------------------------------------//
@@ -28,7 +29,7 @@ public class TrayIcon {
         Image image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         try {
             image = ImageIO.read(Objects.requireNonNull(TrayIcon.class.getClassLoader().getResourceAsStream("stellar.png")));
-        } catch (Exception e) {
+        } catch (IOException | RuntimeException e) {
             System.err.println("Could not load tray icon");
         }
 

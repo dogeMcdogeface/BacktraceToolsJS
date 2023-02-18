@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
@@ -18,20 +19,6 @@ public class Handler_Default implements HttpHandler {
 
     @Override
     public void handle(HttpExchange t) throws IOException {
-
-        /*
-        //Reads web directory from resources folder. Breaks when using jar
-        File root;
-        try {
-            URL rootURL = this.getClass().getClassLoader().getResource("www");
-            if (rootURL == null) throw new Exception();
-            root = Paths.get(rootURL.toURI()).toFile();
-            root = root.getCanonicalFile();
-        } catch (Exception e) {
-            URL searchedFolder = this.getClass().getClassLoader().getResource("");
-            System.err.println("Could not access server root directory www in " + searchedFolder );
-            throw new RuntimeException(e);
-        }*/
 
         //------    Sanitize server root directory and requested file path  ------------------------------------//
         File root = new File("www/").getCanonicalFile();
@@ -45,14 +32,14 @@ public class Handler_Default implements HttpHandler {
             String response = MessageFormat.format(SERVERBUNDLE.getString("Strings.403"), "\n");
             t.sendResponseHeaders(403, response.length());
             OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
+            os.write(response.getBytes(StandardCharsets.UTF_8));
             os.close();
         } else if (!file.isFile()) {
             // Object does not exist or is not a file: reject with 404 error.
             String response = MessageFormat.format(SERVERBUNDLE.getString("Strings.404"), "\n");
             t.sendResponseHeaders(404, response.length());
             OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
+            os.write(response.getBytes(StandardCharsets.UTF_8));
             os.close();
         } else {
             //------    Serve file if found                                     ------------------------------------//
@@ -60,7 +47,7 @@ public class Handler_Default implements HttpHandler {
             t.sendResponseHeaders(200, 0);
             OutputStream os = t.getResponseBody();
             FileInputStream fs = new FileInputStream(file);
-            final byte[] buffer = new byte[0x10000];
+            byte[] buffer = new byte[0x10000];
             int count;
             while ((count = fs.read(buffer)) >= 0) {
                 os.write(buffer, 0, count);

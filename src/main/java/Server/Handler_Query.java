@@ -1,6 +1,7 @@
 package Server;
 
 import JPLInterface.JPLInterface;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -41,7 +42,7 @@ public class Handler_Query implements HttpHandler {
             System.out.println(results);
             try {
                 response = new ObjectMapper().writeValueAsString(results);
-            } catch (Exception e) {
+            } catch (JsonProcessingException | RuntimeException e) {
                 System.err.println(e);
             }
         }
@@ -52,12 +53,12 @@ public class Handler_Query implements HttpHandler {
         t.getResponseHeaders().set("Content-Type", "application/json");
         t.sendResponseHeaders(200, response.length());
         OutputStream os = t.getResponseBody();
-        os.write(response.getBytes());
+        os.write(response.getBytes(StandardCharsets.UTF_8));
         os.close();
     }
 
     //------    Parse incoming JSON into java MAP                       ------------------------------------//
-    Map<String, Object> parseRequest(HttpExchange t) throws IOException {
+    private Map<String, Object> parseRequest(HttpExchange t) throws IOException {
         InputStreamReader isr = new InputStreamReader(t.getRequestBody(), StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(isr);
         int b;
