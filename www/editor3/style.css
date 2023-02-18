@@ -11,7 +11,7 @@
         grid-template:
           "header   header" min-content
           "code     trace"  60%
-          "query    consl"  auto
+          "query    consl"  minmax(0%, 1fr)
           "footer1  footer2"min-content
            / 1fr    2fr;
         height: 100vh;
@@ -34,13 +34,12 @@
       #queryArea {
         grid-area: query;
         border: 1px solid gray;
-        background: linear-gradient(to right, #e0e0e0 10%, transparent 10%);
-        padding-left: 10%;
+                max-height: 200px;
       }
 
 
       console-area {
-             grid-area: consl;
+        grid-area: consl;
         border: 1px solid gray;
       }
 

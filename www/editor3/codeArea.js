@@ -13,10 +13,11 @@ class CodeArea extends HTMLElement {
   }
 
   connectedCallback() {
-    this.textarea.value = localStorage.getItem('codeAreaContent') || '';
+    this.textarea.value = localStorage.getItem('codeAreaContent'+this.className) || '';
     this.textarea.addEventListener('input', this.autoResize);
+    window.addEventListener('resize', this.autoResize);
     this.autoResize();
-    window.addEventListener('beforeunload', () => localStorage.setItem('codeAreaContent', this.textarea.value));
+    window.addEventListener('beforeunload', () => localStorage.setItem('codeAreaContent'+this.className, this.textarea.value));
   }
 
   autoResize() {

@@ -24,11 +24,18 @@ code-area textarea {
   flex: 1;
   font-family: inherit;
   font-size: inherit;
-  height: 100%;
+  min-height: 100%;
   overflow: hidden;
   padding-left: 5px;
   resize: none;
 }
+
+code-area textarea:focus{
+     outline: none !important;
+     box-shadow: 0 0 10px DodgerBlue;
+     clip-path: inset(0px -15px 0px -15px);
+
+  }
 
 code-area ol {
   counter-reset: linenumbers;
