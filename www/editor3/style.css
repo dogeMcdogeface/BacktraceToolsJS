@@ -5,58 +5,66 @@
    box-sizing: border-box;
 }
 
-/* Define grid layout */
-.grid-container {
-   display: grid;
-   height: 100vh;
-   width: 100vw;
-   max-width: 100vw;
-   max-height: 100vh;
-   border: 0px;
-   grid-template:
-      "header   header" min-content
-      "code     trace" 60%
-      "query    consl" minmax(0%, 1fr)
-      "footer1  footer2" min-content
-      / 1fr 2fr;
-}
-
 /* Define styles for header */
 header {
-   grid-area: header;
 }
 
 /* Define styles for code area */
 .codeArea {
-   grid-area: code;
-   border-right: 4px solid silver;
-   border-bottom: 4px solid silver;
 }
 
 /* Define styles for trace area */
 .traceArea {
-   grid-area: trace;
-   border-bottom: 4px solid silver;
 }
 
 /* Define styles for query area */
 .queryArea {
-   grid-area: query;
-   border-right: 4px solid silver;
-      --side-text-value: "?-" counter(linenumbers) ;
+   --side-text-value: "?-" counter(linenumbers);
+   --side-text-color: black;
 }
 
 /* Define styles for console area */
 .consoleArea {
-   grid-area: consl;
 }
-
 /* Define styles for footer areas */
 #answer-request-area {
-   grid-area: footer1;
 }
 
 #answer-display-area {
-   grid-area: footer2;
 }
 
+/* Define styles for answer request area */
+.answer-controls {
+   display: flex;
+   align-items: center;
+   background-color: Silver;
+   font-size: 16px;
+   padding: 3px;
+}
+
+/* Define styles for answer number input */
+.answer-controls textarea {
+   display: inline-block;
+   width: 6ch;
+   height: 30px;
+   padding: 5px;
+   font-size: 16px;
+   margin-left: 10px;
+   margin-right: 10px;
+   vertical-align: middle;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   resize: none;
+}
+
+/* Define styles for answer request button */
+.answer-controls button {
+   display: inline-block;
+   font-size: 16px;
+   padding: 5px;
+   border: none;
+   border-radius: 5px;
+   margin-left: 10px;
+   vertical-align: middle;
+   cursor: pointer;
+}

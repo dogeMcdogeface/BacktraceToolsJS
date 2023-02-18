@@ -3,7 +3,7 @@ code-area {
    --code-background-color: white;
    --code-text-color: black;
    --side-background-color: silver;
-   --side-text-color: black;
+   --side-text-color: DarkSlateGrey ;
    --side-text-value: counter(linenumbers) ".";
    font-family: monospace;
    font-size: 16px;
