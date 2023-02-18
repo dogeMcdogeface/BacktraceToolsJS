@@ -1,55 +1,60 @@
-/* Reset default margin and padding */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+/* Reset default margin and padding for all elements */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
 
-      /* Define grid layout */
-      .grid-container {
-        display: grid;
-        grid-template:
-          "header   header" min-content
-          "code     trace"  60%
-          "query    consl"  minmax(0%, 1fr)
-          "footer1  footer2"min-content
-           / 1fr    2fr;
-        height: 100vh;
-        width: 100vw;
-        max-width: 100vw;
-        max-height: 100vh;
-        border: 0px;
-      }
+/* Define grid layout */
+.grid-container {
+   display: grid;
+   height: 100vh;
+   width: 100vw;
+   max-width: 100vw;
+   max-height: 100vh;
+   border: 0px;
+   grid-template:
+      "header   header" min-content
+      "code     trace" 60%
+      "query    consl" minmax(0%, 1fr)
+      "footer1  footer2" min-content
+      / 1fr 2fr;
+}
 
-      /* Define styles for header */
-      header {
-        grid-area: header;
-      }
+/* Define styles for header */
+header {
+   grid-area: header;
+}
 
-      #codeArea {
-       grid-area: code;
-        border: 1px solid gray;
-      }
+/* Define styles for code area */
+.codeArea {
+   grid-area: code;
+   border-right: 4px solid silver;
+   border-bottom: 4px solid silver;
+}
 
-      #queryArea {
-        grid-area: query;
-        border: 1px solid gray;
-                max-height: 200px;
-      }
+/* Define styles for trace area */
+.traceArea {
+   grid-area: trace;
+   border-bottom: 4px solid silver;
+}
 
+/* Define styles for query area */
+.queryArea {
+   grid-area: query;
+   border-right: 4px solid silver;
+}
 
-      console-area {
-        grid-area: consl;
-        border: 1px solid gray;
-      }
+/* Define styles for console area */
+.consoleArea {
+   grid-area: consl;
+}
 
+/* Define styles for footer areas */
+#answer-request-area {
+   grid-area: footer1;
+}
 
-
-
-
-      #answer-request-area {
-          grid-area: footer1;
-      }
-      #answer-display-area {
-          grid-area: footer2;
-      }
+#answer-display-area {
+   grid-area: footer2;
+}
