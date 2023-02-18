@@ -12,7 +12,7 @@ function main() {
 
 // Sends a query request to the API and displays the response in the console area
 function answerRequest() {
-   consoleArea.write("Executing Query", "green");
+   consoleArea.print("Executing Query ", "", "green");
    const count = parseInt(document.getElementById("answer-number-input").value, 10);
    const query = {
       program: codeArea.value,
@@ -34,17 +34,16 @@ function displayResponse(responseText) {
    const solutions = responseObj.solutions;
    //console.log("Receiving", responseText);
    console.log("Receiving", responseObj);
-
-    if (solutions.length === 0) {
-        consoleArea.write("FALSE", "Red");
-    } else if (solutions.length === 1 && Object.keys(solutions[0]).length === 0) {
-        consoleArea.write("TRUE", "DarkGreen ");
-    } else {
-        consoleArea.print(solutions, "blue");
-    }
+   consoleArea.print("Query: ", responseObj.query, "Black");
+   if (solutions.length === 0) {
+      consoleArea.print("FALSE", "Red");
+   } else if (solutions.length === 1 && Object.keys(solutions[0]).length === 0) {
+      consoleArea.print("TRUE", "DarkGreen ");
+   } else {
+      consoleArea.print(solutions, "blue");
+   }
    //   consoleArea.insert(t);
 }
-
 
 // Clears the console area
 function clearConsole() {
@@ -89,7 +88,7 @@ const buttonHandlers = {
 
 // Assigns an onclick event handler to each button on the page, using the appropriate handler from buttonHandlers
 for (const button of document.querySelectorAll("button")) {
-  button.onclick = buttonHandlers[button.id] || unknownButton;
+   button.onclick = buttonHandlers[button.id] || unknownButton;
 }
 
 // Returns a unique ID string using a random number and base 36 encoding

@@ -1,12 +1,6 @@
-   Call: (1) likes(john, apple)
-   Unify: (1) likes(john, apple)
-   Exit: (1) likes(john, apple)
-   Call: (2) atom_to_term('protocola(\'out.txt\')', _323610, _323612)
-   Exit: (2) atom_to_term('protocola(\'out.txt\')', protocola('out.txt'), [])
-   Call: (2) protocola('out.txt')
-   Exit: (2) protocola('out.txt')
-   Fail: (1) likes(john, apple)
-   Call: (1) atom_to_term('nodebug,noprotocol', _326398, _326400)
+   Call: (1) likes(jdfgdfgfdgohn, apple)
+   Fail: (1) likes(jdfgdfgfdgohn, apple)
+   Call: (1) atom_to_term('nodebug,noprotocol', _391816, _391818)
    Exit: (1) atom_to_term('nodebug,noprotocol', (nodebug, noprotocol), [])
 ^  Call: (1) nodebug, noprotocol
 ^  Unify: (1) user:nodebug, user:noprotocol
