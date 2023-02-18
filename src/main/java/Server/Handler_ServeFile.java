@@ -18,6 +18,7 @@ public class Handler_ServeFile implements HttpHandler {
         File root = new File("www").getCanonicalFile();
         URI uri = exchange.getRequestURI();
         File file = new File(root, uri.getPath()).getCanonicalFile();
+        System.out.println("Requested File: "+ file);
 
         //------    Respond with errors if file not allowed or not found    ------------------------------------//
         if (!file.getPath().startsWith(root.getPath())) {         // Suspected path traversal attack: reject with 403 error.

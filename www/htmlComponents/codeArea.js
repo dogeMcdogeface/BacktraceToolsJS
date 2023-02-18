@@ -17,12 +17,12 @@ class CodeArea extends HTMLElement {
   }
 
   connectedCallback() {
-    this.textarea.value = localStorage.getItem('codeAreaContent'+this.className) || '';
+    this.textarea.value = localStorage.getItem('codeAreaContent'+this.id) || '';
     this.textarea.addEventListener('input', this.autoResize);
     window.addEventListener('resize', this.autoResize);
     this.autoResize();
 
-    window.addEventListener('beforeunload', () => localStorage.setItem('codeAreaContent'+this.className, this.textarea.value));
+    window.addEventListener('beforeunload', () => localStorage.setItem('codeAreaContent'+this.id, this.textarea.value));
   }
 
   autoResize() {

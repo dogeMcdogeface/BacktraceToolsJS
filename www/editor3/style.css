@@ -10,21 +10,21 @@ header {
 }
 
 /* Define styles for code area */
-.codeArea {
+#codeArea {
 }
 
 /* Define styles for trace area */
-.traceArea {
+#traceArea {
 }
 
 /* Define styles for query area */
-.queryArea {
+#queryArea {
    --side-text-value: "?-" counter(linenumbers);
    --side-text-color: black;
 }
 
 /* Define styles for console area */
-.consoleArea {
+#consoleArea {
 }
 /* Define styles for footer areas */
 #answer-request-area {

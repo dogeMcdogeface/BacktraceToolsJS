@@ -16,29 +16,29 @@
 }
 
 .grid-container > *:nth-child(2) {
-    border-right: 5px solid gray; /* Add a 5px red border */
-    border-bottom: 5px solid gray; /* Add a 5px red border */
+    border-right: 4px ridge silver; /* Add a 5px red border */
+    border-bottom: 4px ridge silver; /* Add a 5px red border */
 }
 .grid-container > *:nth-child(3) {
-    border-bottom: 5px solid gray; /* Add a 5px red border */
+    border-bottom: 4px ridge silver; /* Add a 5px red border */
 }
 .grid-container > *:nth-child(4) {
-    border-right: 5px solid gray; /* Add a 5px red border */
+    border-right: 4px ridge silver; /* Add a 5px red border */
 }
 
 header {
    grid-area: header;
 }
-.codeArea {
+#codeArea {
    grid-area: code;
 }
-.traceArea {
+#traceArea {
    grid-area: trace;
 }
-.queryArea {
+#queryArea {
    grid-area: query;
 }
-.consoleArea {
+#consoleArea {
    grid-area: consl;
 }
 #answer-request-area {

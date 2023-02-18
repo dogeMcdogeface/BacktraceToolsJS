@@ -1,11 +1,15 @@
 package JPLInterface;
 
-import org.jpl7.Query;
+import org.jpl7.*;
+import org.jpl7.fli.Prolog;
+
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JPLInterface {
@@ -26,29 +30,26 @@ public class JPLInterface {
     //------    Execute incoming query                                  ------------------------------------//
     public static Map<String, Object> execute(String id, String program, String query, int count) {
         System.out.println("Executing " + id);
-        Map<String, Object> response = new HashMap<String, Object>();
+        consultString(program);
 
-        response.put("id", id);
-        response.put("query", query);
-
-        JPLInterface.consultString(program);
-
-        TracedQuery myQuery = new TracedQuery(query); //"jealous(X,Y)"
-        //System.out.println("each solution of " + myQuery);
-        int sol = 0;
-        while (myQuery.hasMoreSolutionsT() && sol < count) {
-            String txt = myQuery.nextSolution().toString();
-            response.put("sol" + sol++, txt);
-            System.out.println(txt);
+        List<Map<String, String>> solutions = new ArrayList<>();
+        TracedQuery myQuery = new TracedQuery(query);
+        while (myQuery.hasMoreSolutionsT() && solutions.size() < count) {
+            Map<String, String> stringSolution = new HashMap<>();
+            myQuery.nextSolution().forEach((key, value) -> stringSolution.put(key, value.toString()));
+            solutions.add(stringSolution);
         }
 
-        response.put("trace", myQuery.getTrace());
-
-        return response;
+        return Map.of(
+                "id", id,
+                "query", query,
+                "solutions", solutions,
+                "trace", myQuery.getTrace()
+        );
     }
 
     //------    Load program to PROLOG engine                           ------------------------------------//
-    public static void consultString(String program) {
+    private static void consultString(String program) {
         //Save program to tmp file
         File programFile = saveTmp(program);
         if (programFile != null) {

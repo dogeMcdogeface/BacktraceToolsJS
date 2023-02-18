@@ -8,13 +8,24 @@ class ConsoleArea extends HTMLElement {
       shadow.innerHTML = '';
     };
 
-    this.write = function (color, text) {
+    this.write = function (text, color) {
       const line = document.createElement('div');
       line.textContent = text;
       line.style.color = color;
       shadow.appendChild(line);
       this.scrollToBottom();
     };
+
+    this.print = function(...args) {
+  const color = typeof args[args.length - 1] === 'string' ? args.pop() : 'black';
+  const strArgs = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg);
+  const message = strArgs.join(' ');
+  const div = document.createElement('div');
+  div.style.color = color;
+  div.textContent = message;
+      shadow.appendChild(div);
+      this.scrollToBottom();
+    }
 
     this.insert = function (element) {
       shadow.appendChild(element);

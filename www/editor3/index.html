@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Backtrace Tools GUI</title>
     <!-- Import CSS files ------------------------------------------------------------------------>
     <link rel="stylesheet" href="/htmlComponents/codeArea.css">
@@ -28,13 +29,13 @@
         <text class="header-title">Backtrace Tools</text>
     </header>
     <!-- Define code editor section with line numbers and input textarea ------------------------->
-    <code-area class="codeArea">Enter your program here...</code-area>
+    <code-area id="codeArea">Enter your program here...</code-area>
     <!-- Define the viewport for the trace/tree -------------------------------------------------->
-    <div class="traceArea"></div>
+    <div id="traceArea"></div>
     <!-- Define a textarea to write queries into ------------------------------------------------->
-    <code-area class="queryArea">Enter your query here...</code-area>
+    <code-area id="queryArea">Enter your query here...</code-area>
     <!-- Define a textarea which acts as a console ----------------------------------------------->
-    <console-area class="consoleArea" name="text4"></console-area>
+    <console-area id="consoleArea" name="text4"></console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
         <button id="answer-request-button">Next</button>
@@ -51,6 +52,6 @@
 <script src="/htmlComponents/codeArea.js"></script>
 <script src="/htmlComponents/console-area.js"></script>
 <script src="/htmlComponents/customDropdown.js"></script>
-<script defer src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
