@@ -30,7 +30,7 @@ public class Handler_ServeFile implements HttpHandler {
     }
 
     //------    Serve file if found                                     ------------------------------------//
-    private static void sendFile(HttpExchange exchange, File file) throws IOException {
+    private static void sendFile(HttpExchange exchange, File file) throws IOException, OutOfMemoryError  {
         exchange.sendResponseHeaders(200, 0);
         OutputStream outputStream = exchange.getResponseBody();
         FileInputStream fileInputStream = new FileInputStream(file);
