@@ -25,26 +25,22 @@ function postQuery(query, loadedCallback) {
 // Handles the response received from the server and displays the result in the console area
 function queryLoadedCallback(xhttp) {
    console.log("Query loaded: ", xhttp.status, xhttp);
-   if (xhttp.status == 200) {
-      displayResponse(xhttp.responseText);
-   } else {
+   if (xhttp.status != 200) {
       consoleArea.print("Query request failed: ", xhttp.statusText, "Orange");
+      return;
+   }
+   try {
+      const responseObj = JSON.parse(xhttp.responseText);
+      console.log("Receiving", responseObj);
+      displayResponse(responseObj);
+   } catch (error) {
+      console.log("Receiving: ", xhttp.responseText, "\nError parsing JSON string:", error.message);
+      consoleArea.print("Error parsing results:", error.message, "Orange");
    }
 }
 
-// Parses the response JSON, builds a table from the solution data, and displays it in the console area
-function displayResponse(responseText) {
-   console.log(
-      "Receiving",
-      ((r) => {
-         try {
-            return JSON.parse(r);
-         } catch {
-            return r;
-         }
-      })(responseText)
-   );
-   const responseObj = JSON.parse(responseText);
+// Prints the solutions, builds a table from the solution data, and displays it in the console area
+function displayResponse(responseObj) {
    const solutions = responseObj.solutions;
    consoleArea.print("Query: ", responseObj.query, "Black");
    consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");

@@ -12,7 +12,6 @@ function btn_showAnswer() {
 }
 
 function btn_clearConsole() {
-   console.log("btn_clearConsole");
    consoleArea.clear();
 }
 
