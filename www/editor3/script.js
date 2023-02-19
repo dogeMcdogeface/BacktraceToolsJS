@@ -46,7 +46,7 @@ function displayResponse(responseText) {
    const solutions = responseObj.solutions;
    consoleArea.print("Query: ", responseObj.query, "Black");
 
-   consoleArea.print(solutions, "blue");
+   consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
    const table = buildAnswerTable(solutions);
    consoleArea.insert(table);
 }
