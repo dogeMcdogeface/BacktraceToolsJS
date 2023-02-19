@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 //------    Serve file as would be expected of any server           ------------------------------------//
@@ -32,6 +33,12 @@ public class Handler_ServeFile implements HttpHandler {
 
     //------    Serve file if found                                     ------------------------------------//
     private static void sendFile(HttpExchange exchange, File file) throws IOException, OutOfMemoryError  {
+        // Get the MIME type of the file based on its extension
+        String mimeType = Files.probeContentType(file.toPath());
+        // Set the MIME type of the response
+        exchange.getResponseHeaders().set("Content-Type", mimeType);
+        // Send the response with the file contents
+        exchange.sendResponseHeaders(200, 0);
         exchange.sendResponseHeaders(200, 0);
         OutputStream outputStream = exchange.getResponseBody();
         FileInputStream fileInputStream = new FileInputStream(file);
