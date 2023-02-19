@@ -39,7 +39,6 @@ public class Handler_ServeFile implements HttpHandler {
         exchange.getResponseHeaders().set("Content-Type", mimeType);
         // Send the response with the file contents
         exchange.sendResponseHeaders(200, 0);
-        exchange.sendResponseHeaders(200, 0);
         OutputStream outputStream = exchange.getResponseBody();
         FileInputStream fileInputStream = new FileInputStream(file);
         byte[] buffer = new byte[0x10000];
