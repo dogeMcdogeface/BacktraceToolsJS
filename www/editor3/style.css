@@ -29,10 +29,15 @@ header {
 
 .solutionTable {
   border: 1px solid black;
+     overflow: auto;
+}
+.solutionTable thead tr {
+  position: sticky;
+  top: -10px;
+  background-color: LemonChiffon;
 }
 
-
-consoleArea th, #consoleArea td {
+.solutionTable tbody th, .solutionTable td {
   border: 1px solid black;
   padding: 10px;
 }

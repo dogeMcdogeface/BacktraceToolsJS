@@ -53,6 +53,9 @@ function buildTable(data) {
 
   // Create the header row with property names as columns
   const headerRow = document.createElement('tr');
+  const numberHeader = document.createElement('th');
+  numberHeader.textContent = "#";
+  headerRow.appendChild(numberHeader);
   for (const property in data[0]) {
     const th = document.createElement('th');
     th.textContent = property;
@@ -62,11 +65,18 @@ function buildTable(data) {
   table.appendChild(thead);
 
   // Create a row for each object in the data array
-  data.forEach((obj) => {
+  data.forEach((obj, index) => {
     const row = document.createElement('tr');
+    const numberCell = document.createElement('td');
+    numberCell.textContent = index + 1;
+    row.appendChild(numberCell);
     for (const property in obj) {
       const td = document.createElement('td');
-      td.textContent = obj[property];
+      if (Object.keys(obj).length === 0) {
+        td.textContent = "TRUE";
+      } else {
+        td.textContent = obj[property];
+      }
       row.appendChild(td);
     }
     tbody.appendChild(row);
@@ -75,6 +85,7 @@ function buildTable(data) {
 
   return table;
 }
+
 
 
 // Clears the console area
