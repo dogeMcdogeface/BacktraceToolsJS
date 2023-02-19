@@ -18,22 +18,32 @@ function requestAnswer() {
       count: count,
       id: uniqueID(),
    };
-   postQuery(query, displayResponse);
+   postQuery(query, queryLoadedCallback);
 }
 
-function postQuery(query, callback) {
-   consoleArea.print("Executing Query ", "", "green");
-   const xhttp = new XMLHttpRequest();
-   xhttp.onload = () => callback(xhttp.responseText);
-   xhttp.open("POST", "/api/query");
-   xhttp.send(JSON.stringify(query));
+function postQuery(query, loadedCallback) {
+  consoleArea.print("Executing Query", "", "green");
+  const xhttp = new XMLHttpRequest();
+  xhttp.addEventListener("load", () => loadedCallback(xhttp));
+  xhttp.open("POST", "/api/query");
+  xhttp.send(JSON.stringify(query));
+}
+
+function queryLoadedCallback(xhttp) {
+    console.log("Query loaded: ", xhttp.status, xhttp);
+    if(xhttp.status == 200){
+    displayResponse(xhttp.responseText);
+    }else{
+        consoleArea.print("Query request failed: ",xhttp.statusText, "Orange");
+    }
+
 }
 
 // Displays the given response text in the console area
 function displayResponse(responseText) {
-   const responseObj = JSON.parse(responseText);
+   console.log("Receiving", ((r) => { try { return JSON.parse(r) } catch { return r } })(responseText));
+    const responseObj = JSON.parse(responseText);
    const solutions = responseObj.solutions;
-   console.log("Receiving", responseObj);
    consoleArea.print("Query: ", responseObj.query, "Black");
 
    consoleArea.print(solutions, "blue");
