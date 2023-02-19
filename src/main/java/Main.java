@@ -5,6 +5,5 @@ public final class Main {
         System.out.println("Starting BacktraceTools");
         OsUtilities.TrayIcon.init();
         MyServer.init(3636);
-
     }
 }

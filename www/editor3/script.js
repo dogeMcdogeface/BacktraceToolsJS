@@ -32,7 +32,6 @@ function answerRequest() {
 function displayResponse(responseText) {
    const responseObj = JSON.parse(responseText);
    const solutions = responseObj.solutions;
-   //console.log("Receiving", responseText);
    console.log("Receiving", responseObj);
    consoleArea.print("Query: ", responseObj.query, "Black");
    if (solutions.length === 0) {
@@ -41,9 +40,42 @@ function displayResponse(responseText) {
       consoleArea.print("TRUE", "DarkGreen ");
    } else {
       consoleArea.print(solutions, "blue");
+             const table = buildTable(solutions);
+            consoleArea.insert(table);
    }
-   //   consoleArea.insert(t);
 }
+
+function buildTable(data) {
+  const table = document.createElement('table');
+  const thead = document.createElement('thead');
+  const tbody = document.createElement('tbody');
+  table.classList.add("solutionTable");
+
+  // Create the header row with property names as columns
+  const headerRow = document.createElement('tr');
+  for (const property in data[0]) {
+    const th = document.createElement('th');
+    th.textContent = property;
+    headerRow.appendChild(th);
+  }
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Create a row for each object in the data array
+  data.forEach((obj) => {
+    const row = document.createElement('tr');
+    for (const property in obj) {
+      const td = document.createElement('td');
+      td.textContent = obj[property];
+      row.appendChild(td);
+    }
+    tbody.appendChild(row);
+  });
+  table.appendChild(tbody);
+
+  return table;
+}
+
 
 // Clears the console area
 function clearConsole() {
@@ -90,6 +122,18 @@ const buttonHandlers = {
 for (const button of document.querySelectorAll("button")) {
    button.onclick = buttonHandlers[button.id] || unknownButton;
 }
+
+queryArea.textarea.addEventListener("keydown", (event) => {
+   if (event.key === "Enter") {
+      if (!event.ctrlKey ) {
+         event.preventDefault();
+         answerRequest();
+      } else if (event.ctrlKey) {
+         event.preventDefault();
+         queryArea.addNewLine();
+      }
+   }
+});
 
 // Returns a unique ID string using a random number and base 36 encoding
 const uniqueID = () => Math.random().toString(36).substr(2, 12);

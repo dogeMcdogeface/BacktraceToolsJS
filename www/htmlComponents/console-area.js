@@ -2,17 +2,16 @@ class ConsoleArea extends HTMLElement {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: 'open' });
 
     this.clear = function () {
-      shadow.innerHTML = '';
+      this.innerHTML = '';
     };
 
     this.write = function (text, color) {
       const line = document.createElement('div');
       line.textContent = text;
       line.style.color = color;
-      shadow.appendChild(line);
+      this.appendChild(line);
       this.scrollToBottom();
     };
 
@@ -23,12 +22,12 @@ class ConsoleArea extends HTMLElement {
   const div = document.createElement('div');
   div.style.color = color;
   div.textContent = message;
-      shadow.appendChild(div);
+      this.appendChild(div);
       this.scrollToBottom();
     }
 
     this.insert = function (element) {
-      shadow.appendChild(element);
+      this.appendChild(element);
       this.scrollToBottom();
     };
 
