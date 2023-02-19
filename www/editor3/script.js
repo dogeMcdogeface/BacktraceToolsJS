@@ -25,7 +25,7 @@ queryArea.customKeyBehaviour("Enter", kbd_showAnswer); // single key example
 
 function kbd_showAnswer() {
    document.getElementById("answer-show-button").classList.add("pressed");
-    if (window.timerId ) clearTimeout(window.timerId);
+   if (window.timerId) clearTimeout(window.timerId);
    window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
    requestAnswer();
 }
