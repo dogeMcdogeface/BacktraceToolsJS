@@ -35,13 +35,32 @@ class CodeArea extends HTMLElement {
    addNewLine() {
       const currentPos = this.textarea.selectionStart;
       const currentValue = this.textarea.value;
-
       this.textarea.value = currentValue.substring(0, currentPos) + "\n" + currentValue.substring(currentPos, currentValue.length);
       this.textarea.selectionStart = currentPos + 1;
       this.textarea.selectionEnd = currentPos + 1;
       this.textarea.dispatchEvent(new Event('change', { bubbles: true }));
       this.autoResize();
    }
+
+customKeyBehaviour(keys, callback) {
+  const keysArray = keys.split("+").map(key => key.trim().toLowerCase());
+
+  this.textarea.addEventListener('keydown', (event) => {
+    const pressedKeys = keysArray.every(key => {
+      switch(key) {
+        case 'ctrl': return event.ctrlKey;
+        case 'alt': return event.altKey;
+        case 'shift': return event.shiftKey;
+        default: return event.key?.toLowerCase() === key;
+      }
+    });
+
+    if (pressedKeys && keysArray.length === (event.ctrlKey + event.altKey + event.shiftKey + (event.key ? 1 : 0))) {
+      event.preventDefault();
+      callback();
+    }
+  });
+}
 
    get value() {
       return this.textarea.value;

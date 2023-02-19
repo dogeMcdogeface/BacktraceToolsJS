@@ -28,18 +28,19 @@ header {
 }
 
 .solutionTable {
-  border: 1px solid black;
-     overflow: auto;
+   border: 1px solid black;
+   overflow: auto;
 }
 .solutionTable thead tr {
-  position: sticky;
-  top: -10px;
-  background-color: LemonChiffon;
+   position: sticky;
+   top: -10px;
+   background-color: LemonChiffon;
 }
 
-.solutionTable tbody th, .solutionTable td {
-  border: 1px solid black;
-  padding: 10px;
+.solutionTable tbody th,
+.solutionTable td {
+   border: 1px solid black;
+   padding: 10px;
 }
 
 /* Define styles for footer areas */
@@ -83,4 +84,10 @@ header {
    margin-left: 10px;
    vertical-align: middle;
    cursor: pointer;
+   transition: box-shadow 0.4s ease-out;
+}
+.answer-controls button.pressed {
+   transition: box-shadow 0s;
+   /*filter: brightness(80%);*/
+   box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
 }
