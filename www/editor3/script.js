@@ -23,11 +23,10 @@ for (const button of document.querySelectorAll("button")) {
 queryArea.customKeyBehaviour("Enter", kbd_showAnswer); // single key example
 //queryArea.customKeyBehaviour('ctrl+Enter', () => queryArea.addNewLine()); // combined key example
 
-let timerId;
 function kbd_showAnswer() {
    document.getElementById("answer-show-button").classList.add("pressed");
-     clearTimeout(timerId);
-   timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
+    if (window.timerId ) clearTimeout(window.timerId);
+   window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
    requestAnswer();
 }
 
