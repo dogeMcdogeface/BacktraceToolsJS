@@ -50,7 +50,7 @@ public class Handler_Query implements HttpHandler {
             String response = new ObjectMapper().writeValueAsString(responseData);
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             exchange.sendResponseHeaders(200, response.length());
-            exchange.getResponseBody().write(response.getBytes());
+            exchange.getResponseBody().write(response.getBytes(StandardCharsets.UTF_8));
             exchange.close();
             System.out.println("Query successful");
         } catch (JsonProcessingException e) {
