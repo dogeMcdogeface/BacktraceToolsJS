@@ -1,9 +1,11 @@
 class TabContainer extends HTMLElement {
    connectedCallback() {
-      const btnContainer = document.createElement("div");
-      btnContainer.className = "btns";
-      const Container = document.createElement("div");
-      Container.className = "tabs";
+     const btnContainer = document.createElement("div");
+     btnContainer.className = "btns";
+     btnContainer.style.marginRight = `${getScrollbarWidth(this)}px`;
+     const Container = document.createElement("div");
+     Container.className = "tabs";
+
 
       this.tabs = [...this.children];
 
@@ -25,7 +27,7 @@ class TabContainer extends HTMLElement {
 
       this.prepend(btnContainer, Container);
       let as = Number(localStorage.getItem("TabContainerValue" + this.id)) || 0;
-      console.log("retreived", as);
+      //console.log("retreived", as);
       this.setActiveTab(as);
    }
 
@@ -34,9 +36,27 @@ class TabContainer extends HTMLElement {
          tab.classList.toggle("active", i === index);
          this.btns[i].classList.toggle("active", i === index);
       });
-      console.log("storing", index);
+      //console.log("storing", index);
       window.addEventListener("beforeunload", () => localStorage.setItem("TabContainerValue" + this.id, index));
    }
 }
 
 customElements.define("tab-container", TabContainer);
+
+function getScrollbarWidth(element) {
+  // Create an element with a scrollbar to calculate the width
+  const scrollElement = document.createElement('div');
+  scrollElement.style.overflow = 'scroll';
+  scrollElement.style.width = '50px';
+  scrollElement.style.height = '50px';
+  scrollElement.style.visibility = 'hidden';
+  element.appendChild(scrollElement);
+
+  // Calculate the width of the scrollbar
+  const scrollbarWidth = scrollElement.offsetWidth - scrollElement.clientWidth;
+
+  // Remove the temporary element
+  element.removeChild(scrollElement);
+
+  return scrollbarWidth;
+}

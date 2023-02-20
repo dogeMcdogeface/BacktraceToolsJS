@@ -3,17 +3,17 @@ tab-container {
    height: 100%;
    display: inline-block;
    position: relative;
-   overflow-y: scroll;
+   overflow: hidden;
    user-select: none;
 }
 
 tab-container .btns {
    display: flex;
-   justify-content: right;
-   margin-bottom: 5px;
-   position: sticky;
+   justify-content: end;
+   margin-right:17px;
+   position: absolute;
    top: 0;
-   right: 20;
+   right: 0;
    z-index: 2;
 }
 
@@ -47,6 +47,8 @@ tab-container .tabs .tab {
    display: none;
    height: 100%;
    width: 100%;
+   overflow-x:auto;
+   overflow-y:scroll;
 }
 
 tab-container .tabs .tab.active {
