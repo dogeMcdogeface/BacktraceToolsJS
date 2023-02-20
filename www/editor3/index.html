@@ -6,6 +6,7 @@
     <!-- Import CSS files ------------------------------------------------------------------------>
     <link rel="stylesheet" href="/htmlComponents/codeArea.css">
     <link rel="stylesheet" href="/htmlComponents/console-area.css">
+    <link rel="stylesheet" href="/htmlComponents/TabContainer.css">
     <link rel="stylesheet" href="/htmlComponents/customDropdown.css">
     <link rel="stylesheet" href="grid.css">
     <link rel="stylesheet" href="style.css">
@@ -33,11 +34,18 @@
     <!-- Define code editor section with line numbers and input textarea ------------------------->
     <code-area id="codeArea">Enter your program here...</code-area>
     <!-- Define the viewport for the trace/tree -------------------------------------------------->
-    <div id="traceArea"></div>
+        <tab-container id ="traceArea">
+            <div id="Tree">
+                <div id="traceText" style="background-color: Cornsilk ; width: 100%; height: 100%;"></div>
+            </div>
+            <div id="Trace">
+                <div style="background-color: MintCream ; width: 100vw; height: 100vh;"></div>
+            </div>
+        </tab-container>
     <!-- Define a textarea to write queries into ------------------------------------------------->
     <code-area id="queryArea">Enter your query here...</code-area>
     <!-- Define a textarea which acts as a console ----------------------------------------------->
-    <console-area id="consoleArea" name="text4"></console-area>
+    <console-area id="consoleArea"></console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
         <button id="answer-show-button">Show</button>
@@ -53,6 +61,7 @@
 <!-- Import JS files ----------------------------------------------------------------------------->
 <script src="/htmlComponents/codeArea.js"></script>
 <script src="/htmlComponents/console-area.js"></script>
+<script src="/htmlComponents/TabContainer.js"></script>
 <script src="/htmlComponents/customDropdown.js"></script>
 <script src="api.js"></script>
 <script src="interface.js"></script>

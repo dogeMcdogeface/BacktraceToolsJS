@@ -1,31 +1,32 @@
+tab-container{
+}
 
-
-code-area .container {
+tab-container .btns {
   display: flex;
-  min-height: 100%;
-  height: 100%;
-  background: silver;
-  overflow: auto;
+  justify-content: left;
+  margin-bottom: 5px;
 }
 
-code-area ol {
-  font-family: monospace;
-  white-space: pre;
-  height: 100%;
-  max-width: 4ch;
-  flex: 1;
-  margin: 0px;
+tab-container .btn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
 
-code-area li::marker {
-  font-size: 10px;
-  color: grey;
+tab-container .btn:hover {
+  background-color: #ddd;
 }
 
-code-area textarea {
-  flex: 1;
-  border: none;
-  overflow: hidden;
-  resize: none;
-  height: 100%;
+tab-container .btn.active {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+tab-container .tabs .tab {
+  display: none;
+}
+
+tab-container .tabs .tab.active {
+  display: block;
 }

@@ -4,7 +4,7 @@ console.log("Starting Backtrace Tools");
 const codeArea = document.getElementById("codeArea");
 const queryArea = document.getElementById("queryArea");
 const consoleArea = document.getElementById("consoleArea");
-const traceArea = document.getElementById("traceArea");
+const traceText = document.getElementById("traceText");
 
 // Assigns an onclick event handler to each button on the page, using the appropriate handler from buttonHandlers
 for (const button of document.querySelectorAll("button")) {

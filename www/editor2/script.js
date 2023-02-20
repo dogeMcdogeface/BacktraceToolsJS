@@ -1,39 +1,38 @@
-class CodeArea extends HTMLElement {
-  constructor() {
-    super();
-    this.innerHTML = `
-      <div class="container">
-        <ol><li></li></ol>
-        <textarea></textarea>
-      </div>
-    `;
-    this.textarea = this.querySelector('textarea');
-    this.ol = this.querySelector('ol');
-    this.autoResize = this.autoResize.bind(this);
-  }
-
+class TabContainer extends HTMLElement {
   connectedCallback() {
-    this.textarea.value = localStorage.getItem('codeAreaContent') || '';
-    this.textarea.addEventListener('input', this.autoResize);
-    this.autoResize();
-    window.addEventListener('beforeunload', () => localStorage.setItem('codeAreaContent', this.textarea.value));
+    const btnContainer = document.createElement('div');
+    btnContainer.className = 'btns';
+    const Container = document.createElement('div');
+    Container.className = 'tabs';
+
+    this.tabs = [...this.children];
+
+    this.tabs.forEach((tab, i) => {
+      tab.classList.add('tab');
+      Container.appendChild(tab);
+
+      const btn = document.createElement('div');
+      btn.innerText = tab.id;
+      btn.id = `${tab.id}-btn`;
+      btn.classList.add('btn');
+      btn.onclick = () => {
+        this.setActiveTab(i);
+      };
+      btnContainer.appendChild(btn);
+    });
+
+    this.btns =  [...btnContainer.children];
+
+    this.prepend(btnContainer, Container);
+    this.setActiveTab(0);
   }
 
-  autoResize() {
-    const lines = this.textarea.value.split('\n').length;
-    this.textarea.style.height = 'auto';
-    this.textarea.style.height = `${this.textarea.scrollHeight}px`;
-    this.ol.innerHTML = `<li></li>`.repeat(lines);
+  setActiveTab(index) {
+    this.tabs.forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+      this.btns[i].classList.toggle('active', i === index);
+    });
   }
-
-    get value() {
-      return this.textarea.value;
-    }
-
-    set value(value) {
-      this.textarea.value = value;
-      this.autoResize();
-    }
 }
 
-customElements.define('code-area', CodeArea);
+customElements.define('tab-container', TabContainer);
