@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 public class MyServer {
     private static final ResourceBundle SERVERBUNDLE = ResourceBundle.getBundle("Server");
     private static final Object[][] HANDLERS_AND_PATHS = {
-            {SERVERBUNDLE.getString("path"), new Handler_ServeFile()},
-            {SERVERBUNDLE.getString("path.api.query"), new Handler_Query()},
+            {SERVERBUNDLE.getString("path"), new Handler_serveFile()},
+            {SERVERBUNDLE.getString("path.api.query"), new Handler_prologQuery()},
             {SERVERBUNDLE.getString("path.api.test"), new Handler_Api_Test()}
     };
 

@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 //------    Serve file as would be expected of any server           ------------------------------------//
-public class Handler_ServeFile implements HttpHandler {
+public class Handler_serveFile implements HttpHandler {
     private static final ResourceBundle SERVERBUNDLE = ResourceBundle.getBundle("Server");
 
     @Override

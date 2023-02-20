@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 //------    Handle AJAX call, containing PROLOG program and query   ------------------------------------//
-public class Handler_Query implements HttpHandler {
+public class Handler_prologQuery implements HttpHandler {
     private static final ResourceBundle MESSAGES = ResourceBundle.getBundle("Messages");
     private static final ResourceBundle SERVERBUNDLE = ResourceBundle.getBundle("Server");
 
