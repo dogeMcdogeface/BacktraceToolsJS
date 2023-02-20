@@ -1,7 +1,9 @@
 package Server;
 
 import JPLInterface.JPLInterface;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -17,59 +19,54 @@ public class Handler_Query implements HttpHandler {
     private static final ResourceBundle SERVERBUNDLE = ResourceBundle.getBundle("Server");
 
     @Override
-    public void handle(HttpExchange t) throws IOException {
-        //------    Parse JSON request into MAP.                            ------------------------------------//
-        Map<String, Object> request = parseRequest(t);
-        String response = MESSAGES.getString("Console.error");
+    public void handle(HttpExchange exchange) throws IOException {
+        System.out.println("Received Query");
+        try {
+            // Parse the request body as JSON
+            String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+            JsonNode requestJson = new ObjectMapper().readTree(requestBody);
 
-        //------    If mandatory fields are missing, respond with error     ------------------------------------//
-        if (!request.containsKey(SERVERBUNDLE.getString("keyword.program"))) {
-            response += " " + MESSAGES.getString("Console.cantParseProgram");
-        } else if (!request.containsKey(SERVERBUNDLE.getString("keyword.query"))) {
-            response += " " + MESSAGES.getString("Console.cantParseQuery");
-        } else if (!request.containsKey(SERVERBUNDLE.getString("keyword.queryid"))) {
-            response += " " + MESSAGES.getString("Console.cantParseQueryId");
-        } else if (!request.containsKey(SERVERBUNDLE.getString("keyword.count"))) {
-            response += " " + MESSAGES.getString("Console.cantParseCount");
-        } else {
-            //------Otherwise, execute request passing parameters           ------------------------------------//
-            String id = (String) request.get(SERVERBUNDLE.getString("keyword.queryid"));
-            String program = (String) request.get(SERVERBUNDLE.getString("keyword.program"));
-            String query = (String) request.get(SERVERBUNDLE.getString("keyword.query"));
-            int count = (Integer) request.get(SERVERBUNDLE.getString("keyword.count"));
+            // Extract required values from the request
+            String program = requestJson.get("program").asText();
+            String query = requestJson.get("query").asText();
+            int count = requestJson.get("count").asInt();
+            String id = requestJson.get("id").asText();
 
-            Map results = JPLInterface.execute(id, program, query, count);
-            System.out.println(results);
-            try {
-                response = new ObjectMapper().writeValueAsString(results);
-            } catch (JsonProcessingException | RuntimeException e) {
-                System.err.println(e);
+            // Check for missing or invalid values
+            if (program == null || query.isEmpty() || count <= 0 || id.isEmpty()) {
+                throw new IllegalArgumentException("Request has missing or invalid fields");
             }
+
+            // Do something with the extracted values
+            System.out.println("program: " + program);
+            System.out.println("query: " + query);
+            System.out.println("count: " + count);
+            System.out.println("id: " + id);
+
+            // Create a Map with the response data
+            Map<String, Object> responseData = JPLInterface.execute(id, program, query, count);
+
+            // Serialize the Map as JSON and send it back to the client
+            String response = new ObjectMapper().writeValueAsString(responseData);
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            exchange.sendResponseHeaders(200, response.length());
+            exchange.getResponseBody().write(response.getBytes());
+            exchange.close();
+            System.out.println("Query successful");
+        } catch (JsonProcessingException e) {
+            System.out.println("Query failed, malformed json");
+            exchange.sendResponseHeaders(400, -1); // malformed json
+        } catch  (IllegalArgumentException | NullPointerException e) {
+            System.out.println("Query failed, missing or invalid fields");
+            exchange.sendResponseHeaders(406, -1); // missing or invalid fields
+        } catch (IOException e) {
+            System.out.println("Query failed, internal server error");
+            exchange.sendResponseHeaders(500, -1); // internal server error
+        } catch (Exception e) {
+            System.err.println("Query failed, handled error: "+ e);
+            exchange.sendResponseHeaders(536, -1); // internal server error
+        } finally {
+            exchange.close();
         }
-
-        //System.out.println("API Request: " + request + "\nResponse: " + response);
-
-        //------    Send results to browser for displaying to user          ------------------------------------//
-        t.getResponseHeaders().set("Content-Type", "application/json");
-        t.sendResponseHeaders(200, response.length());
-        OutputStream os = t.getResponseBody();
-        os.write(response.getBytes(StandardCharsets.UTF_8));
-        os.close();
-    }
-
-    //------    Parse incoming JSON into java MAP                       ------------------------------------//
-    private Map<String, Object> parseRequest(HttpExchange t) throws IOException {
-        InputStreamReader isr = new InputStreamReader(t.getRequestBody(), StandardCharsets.UTF_8);
-        BufferedReader br = new BufferedReader(isr);
-        int b;
-        StringBuilder buf = new StringBuilder(512);
-        while ((b = br.read()) != -1) {
-            buf.append((char) b);
-        }
-        br.close();
-        isr.close();
-
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(buf.toString(), Map.class);
     }
 }

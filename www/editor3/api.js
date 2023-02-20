@@ -16,8 +16,10 @@ function requestAnswer() {
 // Sends a POST request to the server with the given query object and specifies the function to call when the response is received
 function postQuery(query, loadedCallback) {
    consoleArea.print("Executing Query", "", "green");
+   console.log("Sending request", query);
    const xhttp = new XMLHttpRequest();
    xhttp.addEventListener("load", () => loadedCallback(xhttp));
+   xhttp.addEventListener("error", () => loadedCallback(xhttp));
    xhttp.open("POST", "/api/query");
    xhttp.send(JSON.stringify(query));
 }
