@@ -91,3 +91,24 @@ header {
    /*filter: brightness(80%);*/
    box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
 }
+
+#answer-number-input {
+   display: inline-block;
+   width: 8ch;
+   height: 30px;
+   padding: 5px;
+   font-size: 16px;
+   margin-left: 10px;
+   margin-right: 10px;
+   vertical-align: middle;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   resize: none;
+}
+#answer-number-input:invalid {
+  border: 2px dashed red;
+}
+
+#answer-number-input:valid {
+  border: 2px solid black;
+}

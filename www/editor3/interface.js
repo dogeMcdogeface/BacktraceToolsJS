@@ -41,3 +41,13 @@ function kbd_showAnswer() {
    window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
    requestAnswer();
 }
+
+
+// Assigns an onclick event handler to each button on the page, using the appropriate handler from buttonHandlers
+for (const button of document.querySelectorAll("button")) {
+   button.onclick = buttonHandlers[button.id] || unknownButton;
+}
+
+// Assign a custom action to the query area. Pressing enter executes the query
+queryArea.customKeyBehaviour("Enter", kbd_showAnswer);
+queryArea.addEventListener('input', getQueryAreaValid);

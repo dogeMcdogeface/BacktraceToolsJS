@@ -50,8 +50,9 @@
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
         <button id="answer-show-button">Show</button>
-        <textarea id="answer-number-input">10</textarea>
-        <span>Answers</span>
+        <input type="number" required value="10" min="1" id="answer-number-input"
+               onfocusout="this.value = this.checkValidity() ? this.value : '10';"
+        />
     </div>
     <!-- Define answer request section with buttons ---------------------------------------------->
     <div id="answer-display-area" class="answer-controls">

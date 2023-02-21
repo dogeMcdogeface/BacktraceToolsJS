@@ -1,5 +1,13 @@
 // Sends a query request to the API and displays the response in the console area
 function requestAnswer() {
+    console.log("sending query",getQueryAreaValid());
+
+    if(!getQueryAreaValid()){
+    console.log("senasdsdding query");
+    return;
+    }
+
+
   // Gets the answer number input value from the DOM and converts it to an integer
   const count = parseInt(document.getElementById("answer-number-input").value, 10);
   // Constructs a query object using the program code, query string, count, and a unique ID
@@ -10,7 +18,7 @@ function requestAnswer() {
     id: uniqueID(),
   };
   // Sends the query to the server and specifies the function to call when the response is received
-  postQuery(query, queryLoadedCallback);
+  //postQuery(query, queryLoadedCallback);
 }
 
 // Sends a POST request to the server with the given query object and specifies the function to call when the response is received
@@ -67,6 +75,17 @@ function buildAnswerTable(data) {
     }
   });
   return table;
+}
+
+
+//queryArea.customKeyBehaviour('ctrl+Enter', () => queryArea.addNewLine())
+function getQueryAreaValid() {
+  if (queryArea.value === '') {
+    queryArea.classList.add('invalid');
+    return false;
+  }
+    queryArea.classList.remove('invalid');
+    return true;
 }
 
 
