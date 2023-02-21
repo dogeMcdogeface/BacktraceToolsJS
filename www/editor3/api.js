@@ -31,24 +31,17 @@ function queryLoadedCallback(xhttp) {
       consoleArea.print("Query request failed: ", xhttp.statusText, "Orange");
       return;
    }
+   var responseObj;
    try {
-      const responseObj = JSON.parse(xhttp.responseText);
-      console.log("Receiving", responseObj);
-      displayResponse(responseObj);
+      responseObj = JSON.parse(xhttp.responseText);
    } catch (error) {
       console.log("Receiving: ", xhttp.responseText, "\nError parsing JSON string:", error.message);
       consoleArea.print("Error parsing results:", error.message, "Orange");
    }
+     console.log("Receiving", responseObj);
+     displayResponse(responseObj);
 }
 
-// Prints the solutions, builds a table from the solution data, and displays it in the console area
-function displayResponse(responseObj) {
-   const solutions = responseObj.solutions;
-   consoleArea.print("Query: ", responseObj.query, "Black");
-   consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
-   const table = buildAnswerTable(solutions);
-   consoleArea.insert(table);
-}
 
 // Builds an HTML table from the given data object
 function buildAnswerTable(data) {

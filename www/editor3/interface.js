@@ -1,7 +1,7 @@
 const buttonHandlers = {
    "answer-show-button": btn_showAnswer,
    "clear-console-button": btn_clearConsole,
-   "show-tree-button": btn_showTree,
+   "clear-trace": btn_clearTrace,
    "header-New-button": btn_headerNew,
    "header-Open-button": btn_headerOpen,
    "header-Save-button": btn_headerSave,
@@ -15,8 +15,8 @@ function btn_clearConsole() {
    consoleArea.clear();
 }
 
-function btn_showTree() {
-   console.log("btn_showTree");
+function btn_clearTrace() {
+   console.log("btn_clearTrace");
 }
 
 function btn_headerNew() {
