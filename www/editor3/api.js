@@ -78,10 +78,12 @@ function buildAnswerTable(data) {
 }
 
 
-//queryArea.customKeyBehaviour('ctrl+Enter', () => queryArea.addNewLine())
 function getQueryAreaValid() {
   if (queryArea.value === '') {
     queryArea.classList.add('invalid');
+    queryArea.addEventListener('animationend', () => {
+       queryArea.classList.remove('invalid');
+    });
     return false;
   }
     queryArea.classList.remove('invalid');

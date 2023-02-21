@@ -63,7 +63,27 @@ code-area textarea:focus {
 }
 
 code-area.invalid textarea {
+   transition: box-shadow 0.4s ease-out;
    box-shadow: 0 0 10px red;
    clip-path: inset(0px -15px 0px -15px);
    outline: none !important;
+}
+
+code-area.invalid textarea {
+   transition: box-shadow 0.4s ease-out;
+   clip-path: inset(0px -15px 0px -15px);
+   outline: none !important;
+   animation: blink 1s 1;
+}
+
+@keyframes blink {
+   0% {
+         box-shadow: inherit;
+   }
+   50% {
+         box-shadow: 0 0 10px red;
+   }
+   100% {
+      box-shadow: none;
+   }
 }

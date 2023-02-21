@@ -50,4 +50,5 @@ for (const button of document.querySelectorAll("button")) {
 
 // Assign a custom action to the query area. Pressing enter executes the query
 queryArea.customKeyBehaviour("Enter", kbd_showAnswer);
+//queryArea.customKeyBehaviour('ctrl+Enter', () => queryArea.addNewLine())
 queryArea.addEventListener('input', getQueryAreaValid);
