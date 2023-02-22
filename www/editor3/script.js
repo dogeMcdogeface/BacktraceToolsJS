@@ -28,7 +28,6 @@ traceText.innerHTML="";
         traceText.appendChild(div);
         //const delay = 50 * Math.min(10, index);
         const delay = 500 /(1+ (1/(index*0.5)));
-        console.log(delay);
         setTimeout(() => {
             div.style.display = "block"; // Set the div element to be visible after 50ms
         }, delay); // Multiply the delay by the index to stagger the display of each element
