@@ -11,7 +11,8 @@ import java.util.ResourceBundle;
 
 //------    Serve file as would be expected of any server           ------------------------------------//
 public class Handler_serveFile implements HttpHandler {
-    private static final ResourceBundle SERVERBUNDLE = ResourceBundle.getBundle("Server");
+    private static final ResourceBundle MESSAGES = ResourceBundle.getBundle("Messages");
+    private static final ResourceBundle SERVER = ResourceBundle.getBundle("Server");
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -19,7 +20,7 @@ public class Handler_serveFile implements HttpHandler {
         File root = new File("www").getCanonicalFile();
         URI uri = exchange.getRequestURI();
         File file = new File(root, uri.getPath()).getCanonicalFile();
-        System.out.println("Requested File: "+ file);
+        System.out.println(MESSAGES.getString("console.requested.file") + file);
 
         //------    Respond with errors if file not allowed or not found    ------------------------------------//
         if (!file.getPath().startsWith(root.getPath())) {         // Suspected path traversal attack: reject with 403 error.
@@ -52,7 +53,7 @@ public class Handler_serveFile implements HttpHandler {
 
     //------    Serve error if file not accessible                      ------------------------------------//
     private static void sendErrorResponse(HttpExchange exchange, int code, String key) throws IOException {
-        String response = String.format(SERVERBUNDLE.getString(key), "\n");
+        String response = String.format(SERVER.getString(key), "\n");
         exchange.sendResponseHeaders(code, response.length());
         OutputStream outputStream = exchange.getResponseBody();
         outputStream.write(response.getBytes(StandardCharsets.UTF_8));

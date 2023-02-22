@@ -21,7 +21,7 @@ public class Handler_prologQuery implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        System.out.println(MESSAGES.getString("query.received"));
+        System.out.println(MESSAGES.getString("console.query.received"));
         try {
             // Parse the request body as JSON
             String requestBody = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
@@ -47,19 +47,19 @@ public class Handler_prologQuery implements HttpHandler {
             exchange.sendResponseHeaders(200, response.length());
             exchange.getResponseBody().write(response.getBytes(StandardCharsets.UTF_8));
             exchange.close();
-            System.out.println(MESSAGES.getString("query.successful"));
+            System.out.println(MESSAGES.getString("console.query.successful"));
         } catch (JsonProcessingException e) {
-            System.out.println(MESSAGES.getString("query.failed.bad.json"));
+            System.err.println(MESSAGES.getString("console.query.failed.bad.json") + e);
             exchange.sendResponseHeaders(400, -1); // malformed json
         } catch  (IllegalArgumentException | NullPointerException e) {
-            System.out.println(MESSAGES.getString("query.failed.bad.fields"));
+            System.err.println(MESSAGES.getString("console.query.failed.bad.fields") + e);
             exchange.sendResponseHeaders(406, -1); // missing or invalid fields
         } catch (IOException e) {
-            System.out.println(MESSAGES.getString("query.failed.server.error"));
+            System.err.println(MESSAGES.getString("console.query.failed.server.error") + e);
             exchange.sendResponseHeaders(500, -1); // internal server error
         } catch (Exception e) {
-            System.err.println(MessageFormat.format(MESSAGES.getString("query.failed.error"), e));
-            exchange.sendResponseHeaders(536, -1); // internal server error
+            System.err.println(MESSAGES.getString("console.query.failed.error" + e));
+            exchange.sendResponseHeaders(536, -1); // unhandled error
         } finally {
             exchange.close();
         }

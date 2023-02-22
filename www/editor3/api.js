@@ -3,11 +3,9 @@ function requestAnswer() {
     console.log("sending query",getQueryAreaValid());
 
     if(!getQueryAreaValid()){
-    console.log("senasdsdding query");
+    console.log("invalid query");
     return;
     }
-
-
   // Gets the answer number input value from the DOM and converts it to an integer
   const count = parseInt(document.getElementById("answer-number-input").value, 10);
   // Constructs a query object using the program code, query string, count, and a unique ID
