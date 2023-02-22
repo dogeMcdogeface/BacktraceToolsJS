@@ -18,7 +18,7 @@ function requestAnswer() {
     id: uniqueID(),
   };
   // Sends the query to the server and specifies the function to call when the response is received
-  //postQuery(query, queryLoadedCallback);
+  postQuery(query, queryLoadedCallback);
 }
 
 // Sends a POST request to the server with the given query object and specifies the function to call when the response is received
