@@ -7,17 +7,18 @@ import org.jpl7.fli.Prolog;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class JPLInterface {
+    private static final ResourceBundle SERVER = ResourceBundle.getBundle("Server");
+
     static boolean forceTraceFile = true;     //Forces program to always save trace to out.txt. Used for debug purposes, leave false to use tmp file instead
 
     public static void init() {
         //Creates relevant folders, empties leftover files, starts engine with arguments...
-        System.out.println("init JPL interface");
+        System.out.println("Starting JPL interface");
         String workingDir = System.getProperty("user.dir");
         System.out.println("Working dir: " + workingDir);
 
@@ -28,10 +29,13 @@ public class JPLInterface {
 
 
     //------    Execute incoming query                                  ------------------------------------//
-    public static Map<String, Object> execute(String id, String program, String query, int count) {
-        System.out.println("Executing " + id);
+    public static Map<String, Object> execute(String id, String program, String query, int count) throws IOException {
+        System.out.println("Executing query with id: " + id);
+
+        //Load program
         consultString(program);
 
+        //Calculate solutions one by one
         List<Map<String, String>> solutions = new ArrayList<>();
         TracedQuery myQuery = new TracedQuery(query);
         while (myQuery.hasMoreSolutionsT() && solutions.size() < count) {
@@ -41,49 +45,47 @@ public class JPLInterface {
         }
 
         return Map.of(
-                "id", id,
-                "query", query,
-                "solutions", solutions,
-                "trace", myQuery.getTrace()
+                SERVER.getString("request.id"), id,
+                SERVER.getString("request.query"), query,
+                SERVER.getString("request.solutions"), solutions,
+                SERVER.getString("request.trace"), myQuery.getTrace()
         );
     }
 
     //------    Load program to PROLOG engine                           ------------------------------------//
-    private static void consultString(String program) {
-        //Save program to tmp file
+    private static void consultString(String program) throws IOException {
+        System.out.println("Creating tmp program file");
         File programFile = saveTmp(program);
-        if (programFile != null) {
-            System.out.println("Saved program to: " + programFile);
-        } else {
-            System.out.println("Error saving program");
-            //TODO throw error
-        }
-        //Load program on Prolog
-        String indProgramPath = programFile.getPath().replace("\\", "/");         //TODO: clean up converting windows\paths to generic/paths
-        System.out.println("Loading program: " + indProgramPath);
-        String consult = "consult('" + indProgramPath + "')";
+        System.out.println("Saved program to: " + programFile);
+
+
+        String indProgramPath = programFile.toURI().getPath();
+        String consult = String.format("consult('%s')", indProgramPath);
+        System.out.println( "Loading program: " + consult);
+
         try {
-            System.out.println(consult + " " + (Query.hasSolution(consult) ? "succeeded" : "failed"));
-        } catch (Exception e) {
-            System.err.println(e);
+            boolean success = Query.hasSolution(consult);
+            System.out.println("   Success "+ success);
+        }catch (JPLException e) {
+            throw new IOException(e);
         }
     }
 
-    private static File saveTmp(String txt) {   //Saving to a tmp file with randomized name prevents conflict from running multiple instances of the program
-        try {
-            File tmpFile = File.createTempFile("BTR_pl_", ".tmp");
+    private static File saveTmp(String txt) throws IOException {   //Saving to a tmp file with randomized name prevents conflict from running multiple instances of the program
+        File tmpFile = File.createTempFile("BTR_pl_", ".tmp");
             FileWriter writer = new FileWriter(tmpFile);
             writer.write(txt);
             writer.close();
             return tmpFile;
-        } catch (IOException e) {
-            //TODO throw new RuntimeException(e);
-            return null;
-        }
     }
 
     public static File startTrace() {
-        File traceFile = saveTmp("");
+        File traceFile = null;
+        try {
+            traceFile = saveTmp("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         if (forceTraceFile) traceFile = new File("out.txt");
         String indPath = traceFile.getPath().replace("\\", "/");         //TODO: clean up converting windows\paths to generic/paths
 

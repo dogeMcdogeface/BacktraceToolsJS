@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.jpl7.JPLException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -54,6 +55,9 @@ public class Handler_prologQuery implements HttpHandler {
         } catch  (IllegalArgumentException | NullPointerException e) {
             System.err.println(MESSAGES.getString("console.query.failed.bad.fields") + e);
             exchange.sendResponseHeaders(406, -1); // missing or invalid fields
+        } catch (JPLException e) {
+            System.err.println(MESSAGES.getString("console.query.failed.bad.prolog") + e);
+            exchange.sendResponseHeaders(407, -1); // internal server error
         } catch (IOException e) {
             System.err.println(MESSAGES.getString("console.query.failed.server.error") + e);
             exchange.sendResponseHeaders(500, -1); // internal server error
