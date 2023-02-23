@@ -42,4 +42,5 @@ all_likes(What, Rest).
 ?- likes(bill, umbrella)
 ?- all_likes(X, Y).
 all_likes(_, [john]).
+loves(vincent, mia).
 */
