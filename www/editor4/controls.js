@@ -25,7 +25,7 @@ function btn_showAnswer() {
 
 function btn_clearConsole() {
    console.log("btn_clearConsole");
-   //consoleArea.clear();
+   consoleArea.clear();
 }
 
 function btn_clearTrace() {

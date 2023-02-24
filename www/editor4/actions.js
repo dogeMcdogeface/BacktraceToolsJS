@@ -31,19 +31,16 @@ function buildAnswerTable(data) {
   const headerRow = table.createTHead().insertRow();
   headerRow.insertCell().textContent = "#";
 
-  if (data.length === 0 || Object.keys(data[0]).length === 0) {
-    headerRow.insertCell().textContent = "Has Solutions";
-    data = data.length === 0 ? [{ _: false }] : data.map(obj => Object.keys(obj).length === 0 ? { _: true, ...obj } : obj);
-  } else {
+
     for (const property in data[0]) {
       headerRow.insertCell().textContent = property;
     }
-  }
+
   data.forEach((obj, index) => {
     const row = table.createTBody().insertRow();
     row.insertCell().textContent = index + 1;
     for (const property in obj) {
-      row.insertCell().textContent = obj[property];
+row.insertCell().textContent = (typeof obj[property] === 'object') ? JSON.stringify(obj[property]) : obj[property];
     }
   });
   return table;

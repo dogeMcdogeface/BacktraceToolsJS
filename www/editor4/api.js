@@ -1,62 +1,51 @@
-
-
-function canExecQuery(){
-    return (isQueryAreaValid() && queryNumb.checkValidity() && Prolog != null);
+function canExecQuery() {
+   return isQueryAreaValid() && queryNumb.checkValidity() && Prolog != null;
 }
-
 let queryOpen = false;
-function executeQuery(){
-    if(queryOpen) return;
-    queryOpen = true;
+async function executeQuery() {
+   if (queryOpen) {     //code to stop the query?
+      return;
+   } else if (!canExecQuery()) {
+      console.log("Executing query. All fields valid: ", canExecQuery());
+      return;
+   }
+  queryOpen = true;
 
-    console.log("Executing query. All fields valid: ", canExecQuery());
-    if(!canExecQuery())return;
+  const program = codeArea.value;
+  const count = queryNumb.value.trim();
+  const goal = queryArea.value.trim().replace(/\.$/, '');
+  const limitedGoal = `limit(${count}, (${goal}))`;
+    console.log(limitedGoal);
 
-    const program = codeArea.value;
-    const goal = queryArea.value;
-    const count = queryNumb.value;
-    //console.log(program, goal, count);
-    //load program
-    const loadedProgram = Prolog.load_string(program, "program.pl");    //Can throw ERROR
-    loadedProgram.then( function(result){
-        console.log(result, loadedProgram);
-         //execute the query
-             query = Prolog.query(goal);
-             let answers = [];
-             do {
-              answer = query.next();
-              answers.push(answer);
-              //console.log(answer);
-             } while (!answer.done && answers.length < count);
-             query.close();
-             console.log(query);
-             const parsedAnswers = parseAnswer(answers);
-             displayAnswer(parsedAnswers);
-             queryOpen = false;
+  Prolog.load_string(program, "program.pl")
+    .then(() => Prolog.forEach(limitedGoal))
+    .then(parseAnswer)
+    .then(displayAnswer)
+    .catch(displayError)
+    .finally(() => {
+      queryOpen = false;
+      console.log("Query completed");
     });
 }
 
-function parseAnswer(answers) {
-     var parsedAnswers = [];
-
-     for(answer of answers){
-          var parsed={};
-        if(answer.error == true){
-            parsed.error = answer.message;
-        }else if(!answer.value){
-            parsed['Has Solutions'] = false;
-        }else{
-            parsed = { ...answer.value };
-            delete parsed["$tag"];
-        }
-        parsedAnswers.push(parsed);
-    }
-
-        //console.log(parsedAnswers);
-
- return parsedAnswers;
+function queryNAnswers(query, count) {
+   let answers = [];
+   do {
+      answer = query.next();
+      answers.push(answer);
+   } while (!answer.done && answers.length < count);
+   return answers;
 }
 
+function parseAnswer(answers) {
+console.log(answers);
+   const parsedAnswers = answers.map(({ $tag, ...answer }) => (Object.keys(answer).length === 0 ? { "Has Solutions": true } : answer));
+   return parsedAnswers.length ? parsedAnswers : [{ "Has Solutions": false }];
+}
+
+function displayError(err) {
+   consoleArea.write(err, "red");
+}
 
 // Prints the solutions, builds a table from the solution data, and displays it in the console area
 function displayAnswer(solutions) {

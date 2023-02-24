@@ -43,4 +43,6 @@ all_likes(What, Rest).
 ?- all_likes(X, Y).
 all_likes(_, [john]).
 loves(vincent, mia).
+sleep(4).
+all_likes(X, [Y,Z]), Y \== Z.
 */
