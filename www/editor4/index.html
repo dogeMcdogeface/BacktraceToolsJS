@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <title>Backtrace Tools GUI</title>
     <!-- Import CSS files ------------------------------------------------------------------------>
-    <link rel="stylesheet" href="/htmlComponents/codeArea.css">
-    <link rel="stylesheet" href="/htmlComponents/console-area.css">
-    <link rel="stylesheet" href="/htmlComponents/TabContainer.css">
-    <link rel="stylesheet" href="/htmlComponents/customDropdown.css">
+    <link rel="stylesheet" href="/htmlComponents/components.css">
+    <script type="module" src="/htmlComponents/components.js"></script>
     <link rel="stylesheet" href="grid.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -61,13 +59,10 @@
     </div>
 </div>
 <!-- Import JS files ----------------------------------------------------------------------------->
-<script src="/htmlComponents/codeArea.js"></script>
-<script src="/htmlComponents/console-area.js"></script>
-<script src="/htmlComponents/TabContainer.js"></script>
-<script src="/htmlComponents/customDropdown.js"></script>
-<script src="wasm/swipl-bundle.js"></script>
-<script src="api.js"></script>
 <script src="actions.js"></script>
 <script src="controls.js"></script>
+<script src="wasm/swipl-bundle.js" defer></script>
+<script src="api.js" defer></script>
+
 </body>
 </html>

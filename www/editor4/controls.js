@@ -57,6 +57,7 @@ function queryArea_enter() {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
 // Assigns an onclick event handler to each button on the page, using the appropriate handler from buttonHandlers
 for (const button of document.querySelectorAll("button")) {
    button.onclick = buttonHandlers[button.id] || unknownButton;
@@ -66,3 +67,5 @@ for (const button of document.querySelectorAll("button")) {
 queryArea.customKeyBehaviour("Enter", queryArea_enter);
 //queryArea.customKeyBehaviour('ctrl+Enter', () => queryArea.addNewLine())
 queryArea.addEventListener('input', isQueryAreaValid);
+}, false);
+
