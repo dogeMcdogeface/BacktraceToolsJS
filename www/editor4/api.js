@@ -1,6 +1,26 @@
+let Prolog;
+const Module = {
+ // Provide options for customization
+ arguments: ["-q"],
+ on_output: console.info,
+};
+
+SWIPL(Module).then((module) => {
+ Prolog = Module.prolog;
+
+ // Start using Prolog
+ /*Prolog.load_string("loves(ass, mia).\nloves(asts, mia).", "a1.pl");
+
+ Prolog.call("leash(-all).");
+ Prolog.call("trace.");*/
+});
+
+
+
 function canExecQuery() {
    return isQueryAreaValid() && queryNumb.checkValidity() && Prolog != null;
 }
+
 let queryOpen = false;
 async function executeQuery() {
    if (queryOpen) {     //code to stop the query?
