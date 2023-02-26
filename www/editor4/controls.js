@@ -8,6 +8,7 @@ const queryArea = document.getElementById("queryArea");
 const queryNumb = document.getElementById("answer-number-input")
 const consoleArea = document.getElementById("consoleArea");
 const traceText = document.getElementById("traceText");
+const examplesMenu = document.getElementById("examplesMenu");
 
 const buttonHandlers = {
    "answer-show-button": btn_showAnswer,

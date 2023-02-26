@@ -10,21 +10,22 @@ class CustomDropdown extends HTMLElement {
     dropButt.className = 'dropdown-button'; // Add a class to the button
 
     // Create a list to hold the dropdown items
-    const dropList = document.createElement('div');
-    dropList.className = 'dropdown-content';
+    this.dropList = document.createElement('div');
+    this.dropList.className = 'dropdown-content';
     // Loop through each child element of the custom dropdown element
-    for (let child of this.children){
-      // Create a button for each child element
-      const btn = document.createElement('button');
-      btn.textContent = child.textContent; // Use the child element's text as the button text
-      btn.id = "header-"+child.textContent+"-button"; // Add an ID to the button
-      dropList.appendChild(btn); // Add the button to the dropdown list
+    for (let child of Array.from(this.children)) {
+      child.id = "header-" + child.textContent + "-" + child.tagName;
+      this.dropList.appendChild(child);
     }
 
     this.innerHTML = ''; // Clear the contents of the custom dropdown element
     this.appendChild(dropButt); // Add the dropdown button to the custom dropdown element
-    this.appendChild(dropList); // Add the dropdown list to the custom dropdown element
+    this.appendChild(this.dropList); // Add the dropdown list to the custom dropdown element
   }
+  appendElement(child) {
+        child.id = "header-" + child.textContent + "-" + child.tagName;
+        this.dropList.appendChild(child);
+      }
 }
 
 // Register the custom element

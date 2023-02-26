@@ -85,3 +85,44 @@ function displayTrace(trace) {
       }, delay); // Multiply the delay by the index to stagger the display of each element
    });
 }
+
+const programFiles = ["example1.xml", "example2.xml", "example3.xml"];
+const storedPrograms = [];
+
+function displayProgram(program) {
+   console.log(program.title);
+   codeArea.value = program.program;
+   queryArea.value = program.query;
+}
+
+//populateExamples();
+function populateExamples() {
+   storedPrograms.sort((a, b) => a.title.localeCompare(b.title)); // sort storedPrograms alphabetically by title
+   storedPrograms.forEach((program) => {
+      const button = document.createElement("button");
+      button.textContent = program.title;
+      button.addEventListener("click", () => displayProgram(program));
+      examplesMenu.appendElement(button);
+   });
+}
+
+loadPrograms();
+async function loadPrograms() {
+   const folder = "../examples/";
+   const xmlParser = new DOMParser();
+   const programRequests = programFiles.map((file) =>
+      fetch(folder + file)
+         .then((response) => response.text())
+         .then((program) => xmlParser.parseFromString(program, "application/xml"))
+         .then((xml) => {
+            const title = xml.querySelector("title").textContent;
+            const programText = xml.querySelector("program").textContent;
+            const query = xml.querySelector("query").textContent;
+            storedPrograms.push({ title, program: programText, query });
+         })
+         .catch((error) => console.warn(error))
+   );
+   await Promise.all(programRequests);
+   console.log("Stored programs ", storedPrograms);
+   populateExamples();
+}

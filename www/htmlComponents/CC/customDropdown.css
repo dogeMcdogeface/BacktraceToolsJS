@@ -50,6 +50,7 @@ custom-dropdown:hover .dropdown-button {
    background-color: DimGray;
    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
    z-index: 1;
+   white-space: nowrap;
 }
 
 /* Show the dropdown content on hover */

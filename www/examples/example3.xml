@@ -1,0 +1,49 @@
+<example>
+    <title>3-Stress Test</title>
+    <program><![CDATA[ % Some more test cases
+likes(john, apple).
+likes(john, pear).
+likes(john, grapes).
+likes(bill, mango).
+likes(bill, apple).
+likes(bill, "Y").
+likes(bill, "Y").
+likes(bill, "Y").
+likes(bill, "Y").
+likes(bill, "3.
+164").
+likes(bill, 3.164).
+likes(john, 3.164).
+
+ % Complex declaration
+all_likes(_, []).
+all_likes(What, [X|Rest]) :-
+  likes(X, What),
+  all_likes(What, Rest).
+
+/** <examples>
+
+    likes(bill, cement).
+    //false
+
+    likes(bill, mango).
+    //true.
+
+    likes(bill, "Y").
+    //true true true...
+
+    likes(X, Y).
+    //X=john,Y=apple. X=john,Y=pear...
+
+    all_likes(X,[john, bill]).
+    //X=apple,3.16
+
+    all_likes(X, [Y,Z]), Y \== Z.
+    //results
+
+    all_likes(X, Y).
+    //infinite results. Test the Stop button
+
+*/]]></program>
+    <query>all_likes(X, [Y,Z]), Y \== Z.</query>
+</example>

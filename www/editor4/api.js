@@ -44,7 +44,7 @@ async function executeQuery() {
    const count = queryNumb.value.trim();
    const goal = queryArea.value.trim().replace(/\.$/, "");
    const tracedGoal = `(trace, (${goal}))`;
-
+    currentQuery.goal = goal;
    try {
       await Prolog.load_string(program, "program.pl"); // Load program
       let results = await queryTest(goal);
@@ -146,6 +146,8 @@ function displayAnswer(solutions) {
    //consoleArea.print("Query: ", responseObj.query, "Black");
    //consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
    const table = buildAnswerTable(solutions);
+   consoleArea.insert(document.createElement("br"));
+   consoleArea.write("Query: " + currentQuery.goal, "darkblue");
    consoleArea.insert(table);
 }
 

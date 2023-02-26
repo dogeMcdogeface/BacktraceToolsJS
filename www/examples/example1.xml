@@ -1,0 +1,5 @@
+<example>
+    <title>1-Sanity Check</title>
+    <program><![CDATA[]]></program>
+    <query>current_module(M)</query>
+</example>
