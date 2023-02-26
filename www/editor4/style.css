@@ -20,6 +20,7 @@ header {
    min-height: 100%;
    width: auto;
    height: auto;
+   padding-left: 10px;
 }
 
 #treeArea {

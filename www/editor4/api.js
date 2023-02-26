@@ -144,7 +144,7 @@ function parseAnswer(answers) {
 // Prints the solutions, builds a table from the solution data, and displays it in the console area
 function displayAnswer(solutions) {
    //consoleArea.print("Query: ", responseObj.query, "Black");
-   consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
+   //consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
    const table = buildAnswerTable(solutions);
    consoleArea.insert(table);
 }
