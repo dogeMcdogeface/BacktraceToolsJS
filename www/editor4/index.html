@@ -47,6 +47,7 @@
     <console-area id="consoleArea"></console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
+        <button id="stop-query-button" disabled>Stop</button>
         <button id="answer-show-button">Show</button>
         <input type="number" required value="10" min="1" id="answer-number-input"
                onfocusout="this.value = this.checkValidity() ? this.value : '10';"
@@ -56,6 +57,7 @@
     <div id="answer-display-area" class="answer-controls">
         <button id="clear-console-button">Clear</button>
         <button id="clear-trace-button">Clear Trace</button>
+        <div id="query-status-label"  align="right ">Query status: </div>
     </div>
 </div>
 <!-- Import JS files ----------------------------------------------------------------------------->

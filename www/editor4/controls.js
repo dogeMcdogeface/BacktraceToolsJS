@@ -13,6 +13,7 @@ const buttonHandlers = {
    "answer-show-button": btn_showAnswer,
    "clear-console-button": btn_clearConsole,
    "clear-trace-button": btn_clearTrace,
+   "stop-query-button": btn_stopQuery,
    "header-New-button": btn_headerNew,
    "header-Open-button": btn_headerOpen,
    "header-Save-button": btn_headerSave,
@@ -30,7 +31,12 @@ function btn_clearConsole() {
 
 function btn_clearTrace() {
    console.log("btn_clearTrace");
-   traceText.innerHTML="";
+    clearTrace();
+}
+
+function btn_stopQuery() {
+   console.log("btn_stopQuery");
+    currentQuery.stop = true;
 }
 
 function btn_headerNew() {
@@ -66,6 +72,6 @@ for (const button of document.querySelectorAll("button")) {
 // Assign a custom action to the query area. Pressing enter executes the query
 queryArea.customKeyBehaviour("Enter", queryArea_enter);
 //queryArea.customKeyBehaviour('ctrl+Enter', () => queryArea.addNewLine())
-queryArea.addEventListener('input', isQueryAreaValid);
+queryArea.addEventListener('input', updateGUI);
 }, false);
 

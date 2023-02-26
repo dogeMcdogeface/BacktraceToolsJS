@@ -44,8 +44,39 @@ function buildAnswerTable(data) {
 }
 
 
-function displayTrace(trace) {
+setInterval(updateGUI, 1000);
+function updateGUI(){
+
+    if(canExecQuery()){
+        document.getElementById("answer-show-button").disabled = false;
+    }else{
+        document.getElementById("answer-show-button").disabled = true;
+    }
+
+    if(currentQuery.open){
+    document.getElementById("stop-query-button").disabled = false;
+    }else{
+    document.getElementById("stop-query-button").disabled = true;
+    }
+    document.getElementById("query-status-label").innerText = "Query status: " +currentQuery.state;
+
+}
+
+
+function clearTrace(){
 traceText.innerHTML="";
+
+}
+
+function printToTrace(txt){
+        const div = document.createElement("div");
+        const textNode = document.createTextNode(txt);
+        div.appendChild(textNode);
+        traceText.appendChild(div);
+}
+
+function displayTrace(trace) {
+clearTrace();
     trace.forEach((element, index) => {
         const div = document.createElement("div");
         const textNode = document.createTextNode(element);
