@@ -13,7 +13,7 @@ SWIPL(Module).then((module) => {
 let currentQuery = {
    open: false,
    trace: [],
-         state:"Done",
+   state: "Done",
 };
 
 function prologOut(txt, err) {
@@ -36,9 +36,9 @@ async function executeQuery() {
    currentQuery = {
       open: true,
       trace: [],
-      state:"Loading Program",
+      state: "Loading Program",
    };
-        updateGUI();
+   updateGUI();
 
    const program = codeArea.value;
    const count = queryNumb.value.trim();
@@ -49,21 +49,22 @@ async function executeQuery() {
       await Prolog.load_string(program, "program.pl"); // Load program
       let results = await queryTest(goal);
       currentQuery.trace = [];
-         currentQuery.state = "Executing...";
-        updateGUI();
+      currentQuery.state = "Executing...";
+      updateGUI();
       clearTrace();
       results = await queryNAnswers(tracedGoal, count);
-        currentQuery.state = "Displaying Results...";
-        updateGUI();
+      currentQuery.state = "Displaying Results...";
+      updateGUI();
       console.log("results", results);
       displayAnswer(parseAnswer(results));
+      displayTraceTree(currentQuery.trace);
    } catch (error) {
       displayError(error);
       console.error(error);
    } finally {
       currentQuery.open = false;
       currentQuery.state = "Done";
-        updateGUI();
+      updateGUI();
       console.log("Query completed");
    }
 }
@@ -81,7 +82,7 @@ function queryNAnswers(goal, count, onAnswerReceived) {
             if (onAnswerReceived) {
                onAnswerReceived(answer);
             }
-            currentQuery.state = "Executing     " + answers.length + "  /   " +count;
+            currentQuery.state = "Executing     " + answers.length + "  /   " + count;
             if (answer.error && answer.error === true) {
                reject(new Error(answer.message));
             } else if (answer.done || answers.length >= count || currentQuery.stop) {
@@ -100,19 +101,19 @@ function queryNAnswers(goal, count, onAnswerReceived) {
 
 function queryTest(goal) {
    return new Promise((resolve, reject) => {
-   setTimeout(() => {
-      console.log("Testing query ", goal);
-      let query = Prolog.query(goal);
-      let result = query.next();
-      query.close();
-      console.log(result);
+      setTimeout(() => {
+         console.log("Testing query ", goal);
+         let query = Prolog.query(goal);
+         let result = query.next();
+         query.close();
+         console.log(result);
 
-      if (result.error && result.error === true) {
-         reject(new Error(result.message));
-      } else {
-         resolve(result);
-      }
-       }, 0);
+         if (result.error && result.error === true) {
+            reject(new Error(result.message));
+         } else {
+            resolve(result);
+         }
+      }, 0);
    });
 }
 
@@ -139,12 +140,18 @@ function parseAnswer(answers) {
    return parsedAnswers;
 }
 
+
 // Prints the solutions, builds a table from the solution data, and displays it in the console area
 function displayAnswer(solutions) {
    //consoleArea.print("Query: ", responseObj.query, "Black");
    consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
    const table = buildAnswerTable(solutions);
    consoleArea.insert(table);
+}
+
+
+function displayTraceTree(trace){
+    //console.info(trace);
 }
 
 function displayError(err) {
