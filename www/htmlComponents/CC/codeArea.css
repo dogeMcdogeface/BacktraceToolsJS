@@ -69,12 +69,12 @@ code-area.invalid textarea {
    outline: none !important;
 }
 
-code-area.invalid textarea {
+/*code-area.invalid textarea {
    transition: box-shadow 0.4s ease-out;
    clip-path: inset(0px -15px 0px -15px);
    outline: none !important;
-   animation: blink 1s 1;
-}
+   animation: blink 1s infinite;
+}*/
 
 @keyframes blink {
    0% {

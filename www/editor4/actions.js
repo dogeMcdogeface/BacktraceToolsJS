@@ -12,9 +12,9 @@ function btn_showAnswer_glow() {
 function isQueryAreaValid() {
    if (queryArea.value.trim() === "") {
       queryArea.classList.add("invalid");
-      queryArea.addEventListener("animationend", () => {
+      /*queryArea.addEventListener("animationend", () => {
          queryArea.classList.remove("invalid");
-      });
+      });*/
       return false;
    }
    queryArea.classList.remove("invalid");
