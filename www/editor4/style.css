@@ -59,21 +59,6 @@ header {
    padding: 3px;
 }
 
-/* Define styles for answer number input */
-.answer-controls textarea {
-   display: inline-block;
-   width: 6ch;
-   height: 30px;
-   padding: 5px;
-   font-size: 16px;
-   margin-left: 10px;
-   margin-right: 10px;
-   vertical-align: middle;
-   border: 1px solid #ccc;
-   border-radius: 5px;
-   resize: none;
-}
-
 /* Define styles for answer request button */
 .answer-controls button {
    display: inline-block;
@@ -81,7 +66,8 @@ header {
    padding: 5px;
    border: none;
    border-radius: 5px;
-   margin-left: 10px;
+   margin-left: 5px;
+   margin-right: 5px;
    vertical-align: middle;
    cursor: pointer;
    transition: box-shadow 0.4s ease-out;
@@ -98,7 +84,7 @@ header {
    height: 30px;
    padding: 5px;
    font-size: 16px;
-   margin-left: 10px;
+   margin-left: 5px;
    margin-right: 10px;
    vertical-align: middle;
    border: 1px solid #ccc;

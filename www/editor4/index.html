@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Backtrace Tools GUI</title>
     <!-- Import CSS files ------------------------------------------------------------------------>
-    <link rel="stylesheet" href="/htmlComponents/components.css">
+    <link rel="stylesheet" href="/htmlComponents/components.css" />
     <script type="module" src="/htmlComponents/components.js"></script>
-    <link rel="stylesheet" href="grid.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="grid.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -25,39 +25,35 @@
             <li>two</li>
             <li>3</li>
         </custom-dropdown>
-        <custom-dropdown title="Help">
-        </custom-dropdown>
+        <custom-dropdown title="Help"> </custom-dropdown>
         <text class="header-title">Backtrace Tools</text>
     </header>
     <!-- Define code editor section with line numbers and input textarea ------------------------->
     <code-area id="codeArea">Enter your program here...</code-area>
     <!-- Define the viewport for the trace/tree -------------------------------------------------->
-        <tab-container id ="traceArea">
-            <div id="Tree">
-                <div style="background-color: MintCream ; width: 100vw; height: 100vh;"></div>
-
-            </div>
-            <div id="Trace">
-                <div id="traceText" style="background-color: Cornsilk ; width: 100%; height: 100%;"></div>
-            </div>
-        </tab-container>
+    <tab-container id="traceArea">
+        <div id="Tree">
+            <div style="background-color: MintCream; width: 100vw; height: 100vh;"></div>
+        </div>
+        <div id="Trace">
+            <div id="traceText" style="background-color: Cornsilk; width: 100%; height: 100%;"></div>
+        </div>
+    </tab-container>
     <!-- Define a textarea to write queries into ------------------------------------------------->
     <code-area id="queryArea">Enter your query here...</code-area>
     <!-- Define a textarea which acts as a console ----------------------------------------------->
     <console-area id="consoleArea"></console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
-        <button id="stop-query-button" disabled>Stop</button>
         <button id="answer-show-button">Show</button>
-        <input type="number" required value="10" min="1" id="answer-number-input"
-               onfocusout="this.value = this.checkValidity() ? this.value : '10';"
-        />
+        <input type="number" required value="10" min="1" id="answer-number-input" onfocusout="this.value = this.checkValidity() ? this.value : '10';" />
     </div>
     <!-- Define answer request section with buttons ---------------------------------------------->
     <div id="answer-display-area" class="answer-controls">
         <button id="clear-console-button">Clear</button>
         <button id="clear-trace-button">Clear Trace</button>
-        <div id="query-status-label"  align="right ">Query status: </div>
+        <button id="stop-query-button" disabled>Stop</button>
+        <div id="query-status-label" align="right ">Query status:</div>
     </div>
 </div>
 <!-- Import JS files ----------------------------------------------------------------------------->
@@ -65,6 +61,5 @@
 <script src="controls.js"></script>
 <script src="wasm/swipl-bundle.js" defer></script>
 <script src="api.js" defer></script>
-
 </body>
 </html>
