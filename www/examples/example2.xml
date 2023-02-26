@@ -15,6 +15,7 @@ jealous(X, Y) :-
 
     loves(X, mia).
     jealous(X, Y).
+    jealous(X, Y), X \== Y.
 */]]></program>
     <query>jealous(X, Y).</query>
 </example>
