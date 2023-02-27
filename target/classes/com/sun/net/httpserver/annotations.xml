@@ -1,5 +1,0 @@
-<root>
-    <item name='com.sun.net.httpserver.HttpExchange com.sun.net.httpserver.Headers getResponseHeaders()'>
-        <annotation name='org.jetbrains.annotations.NonNls'/>
-    </item>
-</root>
