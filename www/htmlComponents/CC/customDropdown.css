@@ -1,20 +1,4 @@
 /* Define custom header element */
-.custom-header {
-   display: flex;
-   align-items: center;
-   justify-content: space-between; /* Add this line to space items out horizontally */
-   background-color: gray;
-   color: white;
-   font-size: 24px;
-   padding: 0 10px;
-   border-bottom: 1px solid silver;
-   user-select: none;
-}
-.header-title {
-   padding: 0px 0px;
-   margin: 0 0px;
-   margin-left: auto; /* Add this line to align the text to the right */
-}
 
 /* Define custom dropdown */
 custom-dropdown {
@@ -52,22 +36,33 @@ custom-dropdown:hover .dropdown-button {
    z-index: 1;
    white-space: nowrap;
 }
-
 /* Show the dropdown content on hover */
 custom-dropdown:hover .dropdown-content {
    display: block;
 }
 
+.dropdown-content > *{
+    font: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    display: block; /* Add this line to set items to display as blocks */
+    width: 100%; /* Add this line to set width to 100% */
+    text-align: left; /* Add this line to left-align text within items */
+    padding: 5px 50px 5px 10px;
+ }
+
+
 /* Style the buttons in the dropdown content */
-.dropdown-content button {
-   display: block; /* Add this line to set items to display as blocks */
-   width: 100%; /* Add this line to set width to 100% */
-   text-align: left; /* Add this line to left-align text within items */
+/*.dropdown-content button {
+   display: block;
+   width: 100%;
+   text-align: left;
    padding: 5px 50px 5px 10px;
-}
+}*/
 
 /* Style the buttons in the dropdown content on hover */
-.dropdown-content button:hover {
+.dropdown-content button:hover, a:hover {
+   transition: all 0.2s;
    background-color: CornflowerBlue;
    color: white;
 }
