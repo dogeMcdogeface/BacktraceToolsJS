@@ -5,20 +5,26 @@
    box-sizing: border-box;
 }
 
+body {
+   font: 16px Tahoma , sans-serif;
+}
+
 /* Define styles for header */
 .custom-header {
-   display: flex;
-   align-items: center;
-   justify-content: space-between; /* Add this line to space items out horizontally */
-   background-color: gray;
-   color: white;
-   padding: 0 10px;
-   border-bottom: 1px solid silver;
-   user-select: none;
-      transform: scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Add this line to space items out horizontally */
+    background-color: gray;
+    color: white;
+    padding: 0 10px;
+    border-bottom: 1px solid silver;
+    user-select: none;
+    transform: scale(1);
+    font-size:13px;
 }
 .header-title {
     color: inherit;
+    font-family:'Times new roman' ;
     font-size: 24px;
     text-decoration: inherit;
     padding: 0px 5px;
@@ -32,10 +38,6 @@
       transition: transform 0.2s;
       transform: scale(0.99);
 }
-/*.header-title:active{
-   transition: transform 0.2s;
-   transform: scale(0.98);
-}*/
 
 
 /* Define styles for code area */
@@ -44,6 +46,7 @@
 
 /* Define styles for trace area */
 #traceText {
+    font-family:Times New Roman;
    background-color: Cornsilk;
    min-width: 100%;
    min-height: 100%;
