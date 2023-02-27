@@ -14,7 +14,7 @@ public class TrayIcon {
 
     private static final ResourceBundle MESSAGES = ResourceBundle.getBundle("Messages");
 
-    public static void init() {
+    public static void init(int port) {
         System.out.println("Loading Tray Icon");
 
         //------    Detect System tray compatibility                        ------------------------------------//
@@ -38,7 +38,7 @@ public class TrayIcon {
         PopupMenu popup = new PopupMenu();
         //------    Add button to open browser GUI                          ------------//
         MenuItem GuiMenuItem = new MenuItem(MESSAGES.getString("Tray.OpenGUI"));
-        GuiMenuItem.addActionListener(e -> Browser.openWebGUI());
+        GuiMenuItem.addActionListener(e -> Browser.openWebGUI(port));
         popup.add(GuiMenuItem);
 
         //------    Add button to close program                             ------------//
@@ -64,7 +64,7 @@ public class TrayIcon {
         //------    Add double click action for tray icon                   ------------------------------------//
         ActionListener actionListener = e -> {
             trayIcon.displayMessage("BacktraceTools", MESSAGES.getString("Tray.OpeningGui"), java.awt.TrayIcon.MessageType.INFO);
-            Browser.openWebGUI();
+            Browser.openWebGUI(port);
         };
         trayIcon.addActionListener(actionListener);
 

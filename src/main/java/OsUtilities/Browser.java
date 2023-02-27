@@ -6,11 +6,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 class Browser {
-    static void openWebGUI() {
+    static void openWebGUI(int port) {
         try {
-            openDefaultBrowser(new URI("http://localhost:3636/editor/index.html"));
+            openDefaultBrowser(new URI("http://localhost:"+port+"/editor/index.html"));
         } catch (IOException | URISyntaxException e) {
-            throw new RuntimeException(e);
+            System.err.println(e);
         }
     }
 
@@ -19,12 +19,10 @@ class Browser {
             // windows
             Desktop desktop = Desktop.getDesktop();
             desktop.browse(uri);
-
         } else {
             // linux / mac
             Runtime runtime = Runtime.getRuntime();
             runtime.exec(new String[]{"xdg-open ", uri.toString()});
         }
     }
-
 }
