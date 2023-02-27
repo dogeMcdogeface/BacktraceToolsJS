@@ -47,3 +47,14 @@ header {
 #answer-display-area {
    grid-area: footer2;
 }
+
+#rightdragbar {
+	background-color: black;
+	grid-area: rightdragbar;
+	cursor: ew-resize;
+}
+#leftdragbar {
+	background-color: black;
+	grid-area: leftdragbar;
+	cursor: ew-resize;
+}
