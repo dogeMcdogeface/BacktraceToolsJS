@@ -9,7 +9,7 @@
    border: 0px;
    grid-template:
       "header   header"     min-content
-      "code     trace"      60%
+      "code     trace"      55%
       "query    consl"      minmax(0%, 1fr)
       "footer1  footer2"    min-content
      / 1fr      2fr;

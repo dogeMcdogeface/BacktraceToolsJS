@@ -146,9 +146,9 @@ function displayAnswer(solutions) {
    //consoleArea.print("Query: ", responseObj.query, "Black");
    //consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
    const table = buildAnswerTable(solutions);
-   consoleArea.insert(document.createElement("br"));
    consoleArea.write("Query: " + currentQuery.goal, "darkblue");
    consoleArea.insert(table);
+   consoleArea.insert(document.createElement("br"));
 }
 
 
