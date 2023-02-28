@@ -5,7 +5,7 @@
 
 # BacktraceToolsJS
 
-Un interprete PROLOG su browser. Prova la [versione live](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/)
+Un interprete PROLOG per browser. Prova la [versione live](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/)
 
 
 <!-- TABLE OF CONTENTS -->
