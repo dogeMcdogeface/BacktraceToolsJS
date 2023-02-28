@@ -144,3 +144,7 @@ body {
 #answer-number-input:valid {
    border: 2px solid black;
 }
+
+#query-status-label{
+    user-select: none;
+}
