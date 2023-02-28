@@ -1,7 +1,11 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](#general-information)
+[![it](https://img.shields.io/badge/lang-it%20🇮🇹-6c9e6c.svg)](https://github.com/dogeMcdogeface/BacktraceToolsJS/blob/master/Docs/READMEs/README.it.md)
+
+
+
 # BacktraceToolsJS
 
 A browser based PROLOG interpreter. Try the [Live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/)
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -50,6 +54,7 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 ## Usage
 Simply open the [editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) in your browser, write your Prolog program, write your query, and press `Enter`. A set of examples is provided for testing both the functionality and limits of the tool. Users can select the number of solutions to compute, and abort the process if necessary.
 
+![alt text](./Docs/Screenshots/Example1.png)
 
 ## Setup
 Only the [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) folder is required for the editor to work. A simple File Server in Java is included, but not required. Any other server may be used; The [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) for example uses [Github Pages](https://pages.github.com/) with no additional configuration.
@@ -63,7 +68,7 @@ Project is: _in progress_.
 
 
 ## Room for Improvement
-While the graphical interface of the tool is functional, its development has been largely independent of typical Prolog workflows. Feedback from experienced Prolog users would be appreciated to improve the tool's functionality and usability, especially in regards to conventional Prolog usages. This editor is not intended to compete with SWISH, and indeed does not implement a fraction of SWISH's functions. However, the tool's ease of use and real-time local execution of queries might provide a convenient alternative for users who find SWISH cumbersome.
+While the graphical interface of the tool is functional, its development has been largely independent of typical Prolog workflows. Feedback from experienced Prolog users would be appreciated to improve the tool's functionality and usability, especially in regards to conventional Prolog usages. This editor is not intended to compete with SWISH, nor does it offer a fraction of it's functions. However, the tool's ease of use and real-time local execution of queries might provide a convenient alternative for users who find SWISH cumbersome.
 
 
 
