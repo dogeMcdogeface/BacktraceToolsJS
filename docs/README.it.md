@@ -1,84 +1,83 @@
-[![en](https://img.shields.io/badge/lang-en-red.svg)](#general-information)
-[![it](https://img.shields.io/badge/lang-it%20🇮🇹-6c9e6c.svg)](https://github.com/dogeMcdogeface/BacktraceToolsJS/blob/master/Docs/READMEs/README.it.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](./README.md)
+[![it](https://img.shields.io/badge/lang-it%20🇮🇹-6c9e6c.svg)](./README.it.md)
 
 
 
 # BacktraceToolsJS
 
-A browser based PROLOG interpreter. Try the [Live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/)
+Un interprete PROLOG per browser. Prova la [versione live](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/)
 
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Sommario</summary>
 <ol>
-    <li><a href="#general-information">General Information</a></li>
-    <li><a href="#technologies-used">Technologies Used</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#room-for-improvement">Room for Improvement</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-    <li><a href="#project-status">Project Status</a></li>
-    <li><a href="#contacts">Contacts</a></li>
+    <li><a href="#informazioni-generali">Informazioni Generali</a></li>
+    <li><a href="#tecnologie-utilizzate">Tecnologie Usate</a></li>
+    <li><a href="#features">Funzionalità</a></li>
+    <li><a href="#utilizzo">Utilizzo</a></li>
+    <li><a href="#configurazione">Configurazione</a></li>
+    <li><a href="#possibili-miglioramenti">Possibili Miglioramenti</a></li>
+    <li><a href="#stato-del-progetto">Stato del Progetto</a></li>
+    <li><a href="#riconoscimenti">Riconoscimenti</a></li>
+    <li><a href="#contatti">Contatti</a></li>
 </ol>
-
-
 </details>
 
 
-## General Information
-This tool is a self-contained interpreter for the Prolog programming language. It allows users to write and query Prolog programs, tabulate the results, and trace the steps taken to reach a solution, all from within a browser. Unlike other [existing online interpreters](https://swish.swi-prolog.org/), this tool is entirely client-based, which means that all queries are executed on the user's machine.
-This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is designed to provide a Graphical User Interface (GUI) for the language.
+## Informazioni Generali
+Questo strumento è un interprete per il linguaggio di programmazione Prolog. Consente agli utenti di scrivere ed eseguire query su programmi Prolog, di tabulare i risultati e di tracciare i passaggi necessari per raggiungere una soluzione, tutto all'interno del browser. A differenza di altri [interpreti online esistenti](https://swish.swi-prolog.org/), questo strumento è interamente integrato nel client, il che significa che tutte le query vengono eseguite sulla macchina dell'utente.
+Questo strumento è basato su un port WebAssembly (WASM) di SWI-Prolog ed è progettato per fornire un'interfaccia grafica per l'uso del linguaggio.
 
-
-## Technologies Used
+## Tecnologie Utilizzate
 - [SWI-Prolog](https://www.swi-prolog.org/): A widely-used Prolog implementation.
 - [WebAssembly](https://webassembly.org/): A binary instruction format for a stack-based virtual machine.
 - [SWI-Prolog for the browser](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650): A WASM port of SWI-Prolog.
 
 
 ## Features
-- [x] Real-time editing and querying of Prolog programs.
-- [X] The code editors have all standard shortcuts, `ctrl-z`/`y`, `ctrl-c`/`x`/`v` ... `Enter` on queries executes them.
-- [x] Code and queries are persistent across page reloads. A set of examples are available as well.
-- [x] Automatic tabulation of results, with indication of whether more results are available.
-- [X] Automatic tracing of the steps taken to reach each solution.
-  - [ ] Display the steps taken in a graphical tree form.
-- [ ] Implement rich text features in the code editors and trace area, such as colored keywords...
-- [ ] Implement multi-threaded Prolog queries.
-  - [x] Long, non-blocking queries will not hang the interface.
-  - [ ] However, long *blocking* (`sleep(4)`) queries will.
-- [ ] User file loading and saving.
+- [x] Modifica e interrogazione in tempo reale di programmi Prolog.
+- [X] Gli editor di codice hanno tutte le scorciatoie standard, ctrl-z/y, ctrl-c/x/v ... Invio esegue le query.
+- [x] Il codice e le query sono persistenti attraverso i caricamenti della pagina. È disponibile anche un insieme di esempi.
+- [x] Tabulazione automatica dei risultati, con indicazione se ci sono altri risultati disponibili.
+- [X] Tracciamento automatico dei passaggi necessari per raggiungere ogni soluzione.
+  - [ ] Visualizza i passaggi in una forma di albero grafico.
+- [ ] Implementare funzionalità di testo formattato negli editor di codice e nell'area di traccia, come parole chiave colorate...
+- [ ] Implementare query Prolog multi-threaded.
+  - [x] Le interrogazioni lunghe e non bloccanti non bloccheranno l'interfaccia.
+  - [ ] Tuttavia, le interrogazioni lunghe *e bloccanti* (sleep(4)) lo faranno.
+- [ ] Caricamento e salvataggio di file utente.
 
 
-## Usage
-Simply open the [editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) in your browser, write your Prolog program, write your query, and press `Enter`. A set of examples is provided for testing both the functionality and limits of the tool. Users can select the number of solutions to compute, and abort the process if necessary.
+## Utilizzo
+Basta aprire l'[editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) nel browser, scrivere il programma Prolog, scrivere la query e premere Invio. Sono forniti alcuni esempi per testare sia la funzionalità che i limiti del tool. Gli utenti possono selezionare il numero di soluzioni da calcolare e interrompere il processo se necessario.
 
-![alt text](./Docs/Screenshots/Example1.png)
+![alt text](./Screenshots/Example1.png)
 
-## Setup
-Only the [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) folder is required for the editor to work. A simple File Server in Java is included, but not required. Any other server may be used; The [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) for example uses [Github Pages](https://pages.github.com/) with no additional configuration.
+## Configurazione
+Per avere una versione privata, è necessaria solo la cartella [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) per far funzionare l'editor. Nella repository è incluso un semplice File Server in Java, ma non è necessario. Qualsiasi altro server può essere utilizzato; ad esempio la [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) utilizza [Github Pages](https://pages.github.com/)senza alcuna configurazione aggiuntiva.
 
-
-If you wish to recompile SWI-Prolog for the browser, please read the [Wiki](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650).
-
-
-## Project Status
-Project is: _in progress_.
-
-
-## Room for Improvement
-While the graphical interface of the tool is functional, its development has been largely independent of typical Prolog workflows. Feedback from experienced Prolog users would be appreciated to improve the tool's functionality and usability, especially in regards to conventional Prolog usages. This editor is not intended to compete with SWISH, nor does it offer a fraction of it's functions. However, the tool's ease of use and real-time local execution of queries might provide a convenient alternative for users who find SWISH cumbersome.
+Se si desidera ricompilare SWI-Prolog per il browser, si prega di leggere la [Wiki](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650).
 
 
 
-## Acknowledgements
-Give credit where due.
-- Many tanks to the [individuals responsible](https://swi-prolog.discourse.group/t/wiki-discussion-swi-prolog-in-the-browser-using-wasm/5651) for getting Prolog running in the browser, and for troubleshooting the many issues that came with it.
+## Possibili Miglioramenti
+Sebbene l'interfaccia grafica dello strumento sia funzionale, lo sviluppo è stato in gran parte indipendente da reali progetti di Prolog. Si apprezzerebbero i feedback degli utenti esperti di Prolog per migliorare la funzionalità e l'usabilità dello strumento, soprattutto per quanto riguarda gli usi convenzionali di Prolog. Questo editor non è pensato per competere con SWISH, e non offre nemmeno una frazione delle sue funzioni. Tuttavia, la facilità d'uso dello strumento e l'esecuzione locale in tempo reale delle query potrebbero fornire un'alternativa comoda per alcuni utenti che trovano SWISH complicato.
+
+
+## Riconoscimenti
+
+Riconosciamo il merito delle seguenti persone.
+- Molte grazie agli [sviluppatori responsibli](https://swi-prolog.discourse.group/t/wiki-discussion-swi-prolog-in-the-browser-using-wasm/5651) dello sviluppo di Prolog nel browser.
 
 
 
-## Contacts
+## Stato del progetto
+Stato del progetto: _in corso_.
+
+
+
+## Contatti
 [Over here.](https://github.com/dogeMcdogeface)
 
 
