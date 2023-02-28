@@ -13,12 +13,13 @@ Un interprete PROLOG su browser. Prova la [versione live](https://dogemcdogeface
   <summary>Sommario</summary>
 <ol>
     <li><a href="#informazioni-generali">Informazioni Generali</a></li>
-    <li><a href="#tecnologie-usate">Tecnologie Usate</a></li>
-    <li><a href="#funzionalità">Funzionalità</a></li>
+    <li><a href="#tecnologie-utilizzate">Tecnologie Usate</a></li>
+    <li><a href="#features">Funzionalità</a></li>
     <li><a href="#utilizzo">Utilizzo</a></li>
-    <li><a href="#miglioramenti-possibili">Miglioramenti Possibili</a></li>
-    <li><a href="#riconoscimenti">Riconoscimenti</a></li>
+    <li><a href="#configurazione">Configurazione</a></li>
+    <li><a href="#possibili-miglioramenti">Possibili Miglioramenti</a></li>
     <li><a href="#stato-del-progetto">Stato del Progetto</a></li>
+    <li><a href="#riconoscimenti">Riconoscimenti</a></li>
     <li><a href="#contatti">Contatti</a></li>
 </ol>
 </details>
@@ -59,9 +60,6 @@ Per avere una versione privata, è necessaria solo la cartella [www/](https://gi
 Se si desidera ricompilare SWI-Prolog per il browser, si prega di leggere la [Wiki](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650).
 
 
-## Stato del progetto
-Stato del progetto: _in corso_.
-
 
 ## Possibili Miglioramenti
 Sebbene l'interfaccia grafica dello strumento sia funzionale, lo sviluppo è stato in gran parte indipendente da reali progetti di Prolog. Si apprezzerebbero i feedback degli utenti esperti di Prolog per migliorare la funzionalità e l'usabilità dello strumento, soprattutto per quanto riguarda gli usi convenzionali di Prolog. Questo editor non è pensato per competere con SWISH, e non offre nemmeno una frazione delle sue funzioni. Tuttavia, la facilità d'uso dello strumento e l'esecuzione locale in tempo reale delle query potrebbero fornire un'alternativa comoda per alcuni utenti che trovano SWISH complicato.
@@ -71,6 +69,11 @@ Sebbene l'interfaccia grafica dello strumento sia funzionale, lo sviluppo è sta
 
 Riconosciamo il merito delle seguenti persone.
 - Molte grazie agli [sviluppatori responsibli](https://swi-prolog.discourse.group/t/wiki-discussion-swi-prolog-in-the-browser-using-wasm/5651) dello sviluppo di Prolog nel browser.
+
+
+
+## Stato del progetto
+Stato del progetto: _in corso_.
 
 
 
