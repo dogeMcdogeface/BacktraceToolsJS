@@ -38,7 +38,7 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 
 
 ## Features
-- [x] Real-time editing and querying of Prolog programs.
+- [x] Real-time editing and querying of Prolog programs. 
 - [X] The code editors have all standard shortcuts, `ctrl-z`/`y`, `ctrl-c`/`x`/`v` ... `Enter` on queries executes them.
 - [x] Code and queries are persistent across page reloads. A set of examples are available as well.
 - [x] Automatic tabulation of results, with indication of whether more results are available.
@@ -47,7 +47,7 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 - [ ] Implement rich text features in the code editors and trace area, such as colored keywords...
 - [ ] Implement multi-threaded Prolog queries.
   - [x] Long, non-blocking queries will not hang the interface.
-  - [ ] However, long *blocking* (`sleep(4)`) queries will.
+  - [ ] However, long *blocking* (`sleep(4)`) queries will.  
 - [ ] User file loading and saving.
 
 
