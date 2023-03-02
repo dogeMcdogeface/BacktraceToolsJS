@@ -1,0 +1,60 @@
+
+/* Define grid layout */
+.grid-container {
+   display: grid;
+   height: 100vh;
+   width: 100vw;
+   max-width: 100vw;
+   max-height: 100vh;
+   border: 0px;
+   grid-template:
+      "header   header"     min-content
+      "code     trace"      55%
+      "query    consl"      minmax(0%, 1fr)
+      "footer1  footer2"    min-content
+     / 1fr      2fr;
+}
+
+.grid-container > *:nth-child(2) {
+    border-right: 4px ridge silver; /* Add a 5px red border */
+    border-bottom: 4px ridge silver; /* Add a 5px red border */
+}
+.grid-container > *:nth-child(3) {
+    border-bottom: 4px ridge silver; /* Add a 5px red border */
+}
+.grid-container > *:nth-child(4) {
+    border-right: 4px ridge silver; /* Add a 5px red border */
+}
+
+header {
+   grid-area: header;
+}
+#codeArea {
+   grid-area: code;
+}
+#traceArea {
+   grid-area: trace;
+}
+#queryArea {
+   grid-area: query;
+}
+#consoleArea {
+   grid-area: consl;
+}
+#answer-request-area {
+   grid-area: footer1;
+}
+#answer-display-area {
+   grid-area: footer2;
+}
+
+#rightdragbar {
+	background-color: black;
+	grid-area: rightdragbar;
+	cursor: ew-resize;
+}
+#leftdragbar {
+	background-color: black;
+	grid-area: leftdragbar;
+	cursor: ew-resize;
+}

@@ -1,0 +1,10 @@
+<example>
+    <title>4-Stress Test</title>
+    <program><![CDATA[ % Some more test cases
+
+a(p,q).
+a(X,Y):-a(X,Z),b(Z,Y).
+
+b(q,r).]]></program>
+    <query>a(p,X).</query>
+</example>
