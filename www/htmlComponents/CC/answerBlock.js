@@ -14,10 +14,10 @@ class AnswerBlock extends HTMLElement {
       this.labelElement.textContent = this.getAttribute("title") || "New Query";
       header.appendChild(this.labelElement);
 
-      const addButton = document.createElement("button");
-      addButton.textContent = "Stop";
-      addButton.addEventListener("click", this.addRow.bind(this));
-      header.appendChild(addButton);
+      const stopButton = document.createElement("button");
+      stopButton.textContent = "Stop";
+      this.stopButton = stopButton;
+      header.appendChild(stopButton);
 
       const hideButton = document.createElement("button");
       hideButton.id = "hideButton";
@@ -37,6 +37,7 @@ class AnswerBlock extends HTMLElement {
       table.appendChild(thead);
       table.appendChild(tbody);
       tableDiv.appendChild(table);
+      table.classList.add("hidden");
 
       // Save the table body for later use
       this.body = tableDiv;
@@ -75,6 +76,7 @@ class AnswerBlock extends HTMLElement {
             // headerRow.insertCell().textContent = key;
          }
          this.thead.appendChild(headerRow);
+         this.thead.parentNode.classList.remove("hidden");
       }
       const row = document.createElement("tr");
       row.insertCell().textContent = this.tbody.childElementCount + 1;

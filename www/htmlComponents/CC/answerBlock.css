@@ -81,7 +81,9 @@ answer-block table {
    border: 1px solid black;
    border-top: none;
 }
-
+answer-block table.hidden {
+  display: none;
+}
 
 answer-block th {
    background-color: LemonChiffon;

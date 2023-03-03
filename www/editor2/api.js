@@ -83,6 +83,11 @@ function executeQuery() {
       worker.terminate();
       handle_error({error:true, message:"Runtime error: Query timed out"});
    }
+    block.stopButton.onclick= function() {
+      worker.terminate();
+      handle_error({error:true, message:"Query manually stopped"});
+      };
+
 
    worker.postMessage(request);
 }
