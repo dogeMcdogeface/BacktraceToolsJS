@@ -26,45 +26,52 @@ class ConsoleArea extends HTMLElement {
       };
 
       const bottomer = document.createElement("div");
+         bottomer.classList.add("bottomer");
 
       this.insert = function (element) {
          this.appendChild(element);
          this.appendChild(bottomer);
-
-         //this.scrollToBottom();
       };
+
+      let isAtBottom = true;
+      this.addEventListener("scroll", () => {
+         isAtBottom = !(this.scrollHeight > this.clientHeight) || this.isInViewport(bottomer);
+         if(this.scrollHeight > this.clientHeight && isAtBottom){
+         bottomer.classList.add("expand");
+         }else{
+          bottomer.classList.remove("expand");
+         }
+         //console.log(isAtBottom);
+      });
+
 
       this.scrollToBottom = function () {
          this.scrollTo(0, this.scrollHeight);
       };
 
-
-
-let isAtBottom = true;
-this.addEventListener('scroll', () => {
-  isAtBottom = this.isInViewport(bottomer);
-  //console.log(isAtBottom);
-});
-
-
-const observer = new MutationObserver((mutationsList) => {
-  if (mutationsList.some((mutation) => mutation.type === 'childList' && isAtBottom)) {
-    this.scrollToBottom();
-  }
-});
+      const observer = new MutationObserver((mutationsList) => {
+         if (mutationsList.some((mutation) => mutation.type === "childList" && isAtBottom)) {
+            this.scrollToBottom();
+         }
+      });
       observer.observe(this, { childList: true, subtree: true });
-   }
 
+}
+   isInViewport(element)  {
+                           const parentRect = element.parentNode.getBoundingClientRect();
+                           const elementRect = element.getBoundingClientRect();
 
-   isInViewport(element) {
-       const rect = element.getBoundingClientRect();
-       return (
-           rect.top >= 0 &&
-           rect.left >= 0 &&
-           rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-           rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-       );
-   }
+                           // Check if the element is vertically visible within its parent
+                           const isVerticallyVisible = elementRect.top >= parentRect.top &&
+                                                       elementRect.bottom <= parentRect.bottom;
+
+                           // Check if the element is horizontally visible within its parent
+                           const isHorizontallyVisible = elementRect.left >= parentRect.left &&
+                                                         elementRect.right <= parentRect.right;
+
+                           // Return true if the element is both vertically and horizontally visible within its parent
+                           return isVerticallyVisible && isHorizontallyVisible;
+                         }
 }
 
 customElements.define("console-area", ConsoleArea);

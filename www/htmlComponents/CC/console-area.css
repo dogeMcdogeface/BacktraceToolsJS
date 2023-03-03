@@ -8,3 +8,17 @@ console-area {
   padding: 10px;
   padding-top:0;
 }
+
+.bottomer {
+  position: relative;
+  height: 2px;
+  background-color: blue;
+  transition: all 0.5s ease;
+  width: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottomer.expand {
+  width: calc(100% - 40px);
+  }
