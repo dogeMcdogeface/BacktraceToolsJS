@@ -1,24 +1,24 @@
 console-area {
-  display: block;
-  font-family: monospace;
-  font-size: 14px;
-  line-height: 1.4;
-  overflow: auto;
-  overflow-y: scroll;
-  padding: 10px;
-  padding-top:0;
+   display: block;
+   font-family: monospace;
+   font-size: 14px;
+   line-height: 1.4;
+   overflow: auto;
+   overflow-y: scroll;
+   padding: 10px;
+   padding-top: 0;
 }
 
 .bottomer {
-  position: relative;
-  height: 2px;
-  background-color: blue;
-  transition: all 0.5s ease;
-  width: 0px;
-  left: 50%;
-  transform: translateX(-50%);
+   position: relative;
+   height: 2px;
+   background-color: dodgerblue;
+   transition: all 0.25s ease-out;
+   width: 0px;
+   left: 50%;
+   transform: translateX(-50%);
 }
 
 .bottomer.expand {
-  width: calc(100% - 40px);
-  }
+   width: calc(100% - 20px);
+}
