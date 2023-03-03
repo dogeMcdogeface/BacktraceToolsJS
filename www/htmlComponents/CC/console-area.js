@@ -26,7 +26,7 @@ class ConsoleArea extends HTMLElement {
       };
 
       const bottomer = document.createElement("div");
-         bottomer.classList.add("bottomer");
+      bottomer.classList.add("bottomer");
 
       this.insert = function (element) {
          this.appendChild(element);
@@ -36,14 +36,13 @@ class ConsoleArea extends HTMLElement {
       let isAtBottom = true;
       this.addEventListener("scroll", () => {
          isAtBottom = !(this.scrollHeight > this.clientHeight) || this.isInViewport(bottomer);
-         if(this.scrollHeight > this.clientHeight && isAtBottom){
-         bottomer.classList.add("expand");
-         }else{
-          bottomer.classList.remove("expand");
+         if (this.scrollHeight > this.clientHeight && isAtBottom) {
+            bottomer.classList.add("expand");
+         } else {
+            bottomer.classList.remove("expand");
          }
          //console.log(isAtBottom);
       });
-
 
       this.scrollToBottom = function () {
          this.scrollTo(0, this.scrollHeight);
@@ -56,22 +55,35 @@ class ConsoleArea extends HTMLElement {
       });
       observer.observe(this, { childList: true, subtree: true });
 
-}
-   isInViewport(element)  {
-                           const parentRect = element.parentNode.getBoundingClientRect();
-                           const elementRect = element.getBoundingClientRect();
+      this.lastSelected;
+      this.addEventListener("click", function (event) {
+         if (event.button !== 0) return; // Check if it is a left click
+         let target = event.target.closest(".selectable");
+         this.selectElement(target);
+      });
+   }
 
-                           // Check if the element is vertically visible within its parent
-                           const isVerticallyVisible = elementRect.top >= parentRect.top &&
-                                                       elementRect.bottom <= parentRect.bottom;
+   selectElement(target) {
+      if (target?.classList.contains("selectable") && target !== this.lastSelected) {
+        this.lastSelected && (this.lastSelected.selected = false);
+         target.selected = true;
+         this.lastSelected = target;
+      }
+   }
 
-                           // Check if the element is horizontally visible within its parent
-                           const isHorizontallyVisible = elementRect.left >= parentRect.left &&
-                                                         elementRect.right <= parentRect.right;
+   isInViewport(element) {
+      const parentRect = element.parentNode.getBoundingClientRect();
+      const elementRect = element.getBoundingClientRect();
 
-                           // Return true if the element is both vertically and horizontally visible within its parent
-                           return isVerticallyVisible && isHorizontallyVisible;
-                         }
+      // Check if the element is vertically visible within its parent
+      const isVerticallyVisible = elementRect.top >= parentRect.top && elementRect.bottom <= parentRect.bottom;
+
+      // Check if the element is horizontally visible within its parent
+      const isHorizontallyVisible = elementRect.left >= parentRect.left && elementRect.right <= parentRect.right;
+
+      // Return true if the element is both vertically and horizontally visible within its parent
+      return isVerticallyVisible && isHorizontallyVisible;
+   }
 }
 
 customElements.define("console-area", ConsoleArea);

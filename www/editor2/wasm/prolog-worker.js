@@ -59,5 +59,6 @@ async function handleRequest(request) {
 }
 
 function passTrace(txt, err) {
+   if (txt.includes("wasm_call_string")) return;
   self.postMessage({ trace: txt });
 }

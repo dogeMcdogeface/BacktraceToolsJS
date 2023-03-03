@@ -1,8 +1,6 @@
 body {
-  counter-reset: answer-count;
+   counter-reset: answer-count;
 }
-
-
 
 answer-block {
    display: block;
@@ -11,8 +9,8 @@ answer-block {
    padding: 0;
 }
 
-answer-block:focus-within {
-   box-shadow: 0 0 10px DodgerBlue;
+answer-block.selected {
+   box-shadow: 0 0 10px lightGreen;
    clip-path: inset(0px 0px 0px -15px);
    outline: none !important;
 }
@@ -30,17 +28,39 @@ answer-block .header {
 }
 
 answer-block .header span {
-   margin: 0.5ch;
+    margin: 0.5ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-
-answer-block .header > span {
+answer-block .header  .titleLabel {
    flex: 1;
 }
+answer-block .header  .progressLabel {
+    min-width: 15ch;
+    max-width: 15ch;
+    }
+answer-block .header  .statusLabel {
+    min-width: 20ch;
+    max-width: 20ch;
+    }
 
-answer-block .header span::before {
-  counter-increment: answer-count;
-  content: counter(answer-count) ". ";
-  margin-right: 0.5ch;
+
+answer-block .header .titleLabel::before {
+   counter-increment: answer-count;
+   content: counter(answer-count) ". ";
+}
+
+answer-block .header .progressLabel::before {
+   content: "Steps:";
+   padding: 0.5ch;
+   border-left: 1px solid gray;
+}
+
+answer-block .header .statusLabel::before {
+   content: "Status:";
+   padding: 0.5ch;
+   border-left: 1px solid gray;
 }
 
 answer-block .header button {
@@ -56,6 +76,12 @@ answer-block #hideButton {
    display: inline-flex;
    align-items: center;
    justify-content: center;
+   border:none;
+   background-color: transparent;
+}
+
+answer-block #hideButton:hover {
+backdrop-filter: brightness(0.95);
 }
 
 answer-block.hidden #hideButton {
@@ -64,15 +90,15 @@ answer-block.hidden #hideButton {
 }
 
 answer-block .body {
-overflow-y: auto;
-overflow-x: none;
-max-height: 500px;
-/*transition: max-height 0.5s ease-in;*/
+   overflow-y: auto;
+   overflow-x: none;
+   max-height: 500px;
+   /*transition: max-height 0.5s ease-in;*/
 }
 answer-block.hidden .body {
-/*display: none;*/
-transition: max-height 0.25s ease-out;
-max-height: 0px !important;
+   /*display: none;*/
+   transition: max-height 0.25s ease-out;
+   max-height: 0px !important;
 }
 
 answer-block table {
@@ -82,7 +108,7 @@ answer-block table {
    border-top: none;
 }
 answer-block table.hidden {
-  display: none;
+   display: none;
 }
 
 answer-block th {
@@ -97,16 +123,16 @@ answer-block th {
 }
 
 answer-block th:nth-child(1) {
-  min-width: 5ch;
+   min-width: 5ch;
    /* your stuff here */
 }
 
-answer-block tr{
-   background-color: WhiteSmoke ;
+answer-block tr {
+   background-color: WhiteSmoke;
    /* your stuff here */
 }
 answer-block tr:nth-child(odd) {
-   background-color: white  ;
+   background-color: white;
    /* your stuff here */
 }
 

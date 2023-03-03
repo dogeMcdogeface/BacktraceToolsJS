@@ -5,14 +5,27 @@ class AnswerBlock extends HTMLElement {
 
    connectedCallback() {
       // Create the header bar with label and buttons
-      this.setAttribute("tabindex", "0");
+      this.classList.add("selectable");
 
       const header = document.createElement("div");
       header.classList.add("header");
 
-      this.labelElement = document.createElement("span");
-      this.labelElement.textContent = this.getAttribute("title") || "New Query";
-      header.appendChild(this.labelElement);
+      this.titleLabel = document.createElement("span");
+      this.titleLabel.textContent = this.getAttribute("title") || "New Query";
+      this.titleLabel.classList.add("titleLabel");
+      header.appendChild(this.titleLabel);
+
+         this.progressLabel = document.createElement("span");
+         this.progressLabel.textContent = "0";
+       this.progressLabel.classList.add("progressLabel");
+         header.appendChild(this.progressLabel);
+
+        this.statusLabel = document.createElement("span");
+        this.statusLabel.textContent = "Starting";
+      this.statusLabel.classList.add("statusLabel");
+        header.appendChild(this.statusLabel);
+
+
 
       const stopButton = document.createElement("button");
       stopButton.textContent = "Stop";
@@ -22,7 +35,10 @@ class AnswerBlock extends HTMLElement {
       const hideButton = document.createElement("button");
       hideButton.id = "hideButton";
       hideButton.textContent = "⌵";
-      hideButton.addEventListener("click", this.toggleTable.bind(this));
+      hideButton.addEventListener("click", (e) => {
+         const hidden = this.classList.toggle("hidden");
+         if (hidden) e.stopPropagation();
+      });
       header.appendChild(hideButton);
 
       this.appendChild(header);
@@ -61,8 +77,34 @@ class AnswerBlock extends HTMLElement {
    }
 
    set title(value) {
-      this.labelElement.textContent = value;
+      this.titleLabel.textContent = value;
    }
+   
+  set progress(value) {
+
+     this.progressLabel.textContent = Intl.NumberFormat('en-US', {
+                                        notation: "compact",
+                                        maximumFractionDigits: 1
+                                      }).format(value);
+  }
+    set status(value) {
+       this.statusLabel.textContent = value;
+    }
+
+set selected(val) {
+  if (val) {
+    this.classList.add("selected");
+    this.onSelected();
+  } else {
+    this.classList.remove("selected");
+  }
+}
+
+   get selected(){
+     return this.classList.contains("selected");
+   }
+
+     onSelected(){}
 
    addRow(data) {
       const keys = Object.keys(data);
@@ -85,12 +127,7 @@ class AnswerBlock extends HTMLElement {
          row.insertCell().textContent = txt;
       }
       this.tbody.appendChild(row);
-      this.body.style.maxHeight = (this.body.scrollHeight + 100)+"px";
-   }
-
-   toggleTable() {
-      const table = this.querySelector("table");
-      this.classList.toggle("hidden");
+      this.body.style.maxHeight = this.body.scrollHeight + 100 + "px";
    }
 }
 
