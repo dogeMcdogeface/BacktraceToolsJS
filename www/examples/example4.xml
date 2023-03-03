@@ -1,5 +1,5 @@
 <example>
-    <title>4-Stress Test</title>
+    <title>4-Timeout Test</title>
     <program><![CDATA[ % Some more test cases
 
 a(p,q).

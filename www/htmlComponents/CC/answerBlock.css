@@ -1,3 +1,9 @@
+body {
+  counter-reset: answer-count;
+}
+
+
+
 answer-block {
    display: block;
    border: 1px solid #ccc;
@@ -13,13 +19,14 @@ answer-block:focus-within {
 
 answer-block .header {
    background-color: #f7d874;
-
    margin: 0;
    padding: 0;
-
    display: flex;
    justify-content: space-between;
    align-items: stretch;
+   position: sticky;
+   top: 0;
+   z-index: 1;
 }
 
 answer-block .header span {
@@ -28,6 +35,12 @@ answer-block .header span {
 
 answer-block .header > span {
    flex: 1;
+}
+
+answer-block .header span::before {
+  counter-increment: answer-count;
+  content: counter(answer-count) ". ";
+  margin-right: 0.5ch;
 }
 
 answer-block .header button {
@@ -52,60 +65,53 @@ answer-block.hidden #hideButton {
 
 answer-block .body {
 overflow-y: auto;
+overflow-x: none;
+max-height: 500px;
+/*transition: max-height 0.5s ease-in;*/
 }
 answer-block.hidden .body {
-   display: none;
+/*display: none;*/
+transition: max-height 0.25s ease-out;
+max-height: 0px !important;
 }
 
 answer-block table {
-   background-color: #fbf7e6;
-   /*border-collapse: collapse;
-   width:100%;*/
    padding: 0px;
    padding-top: 0;
-
    border: 1px solid black;
    border-top: none;
-   overflow: auto;
 }
 
-answer-block thead td {
+
+answer-block th {
+   background-color: LemonChiffon;
    padding: 4px 4px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  min-width: 10ch;
-  text-align: center;
+   border-left: 1px solid black;
+   border-right: 1px solid black;
+   min-width: 10ch;
+   text-align: center;
+   position: sticky; /* set the position to sticky */
+   top: 0; /* specify the position where the header should stick */
 }
-answer-block thead td:nth-child(1) {
+
+answer-block th:nth-child(1) {
   min-width: 5ch;
    /* your stuff here */
 }
 
-answer-block tbody td {
-   border: 1px solid black;
-   padding: 10px 20px;
+answer-block tr{
+   background-color: WhiteSmoke ;
+   /* your stuff here */
 }
-
-answer-block tbody td:nth-child(1) {
-   background-color: white;
+answer-block tr:nth-child(odd) {
+   background-color: white  ;
    /* your stuff here */
 }
 
-/*.solutionTable {
-     border: 1px solid black;
-     overflow: auto;
-  }
-  .solutionTable thead tr {
-     position: sticky;
-     top: -10px;
-     background-color: LemonChiffon;
-  }
-
-  .solutionTable tbody th,
-  .solutionTable td {
-     border: 1px solid black;
-     padding: 10px;
-  }*/
+answer-block td {
+   border: 1px solid black;
+   padding: 10px 20px;
+}
 
 answer-block .errorlabel {
    color: red;
