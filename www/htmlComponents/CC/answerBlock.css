@@ -1,0 +1,113 @@
+answer-block {
+   display: block;
+   border: 1px solid #ccc;
+   margin: 15px 0px;
+   padding: 0;
+}
+
+answer-block:focus-within {
+   box-shadow: 0 0 10px DodgerBlue;
+   clip-path: inset(0px 0px 0px -15px);
+   outline: none !important;
+}
+
+answer-block .header {
+   background-color: #f7d874;
+
+   margin: 0;
+   padding: 0;
+
+   display: flex;
+   justify-content: space-between;
+   align-items: stretch;
+}
+
+answer-block .header span {
+   margin: 0.5ch;
+}
+
+answer-block .header > span {
+   flex: 1;
+}
+
+answer-block .header button {
+   margin-left: 10px;
+   padding: 0.5ch;
+}
+
+answer-block #hideButton {
+   min-width: 3ch;
+   max-width: 3ch;
+   min-height: 3ch;
+   padding: 0;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+}
+
+answer-block.hidden #hideButton {
+   writing-mode: sideways-lr;
+   text-orientation: mixed;
+}
+
+answer-block .body {
+overflow-y: auto;
+}
+answer-block.hidden .body {
+   display: none;
+}
+
+answer-block table {
+   background-color: #fbf7e6;
+   /*border-collapse: collapse;
+   width:100%;*/
+   padding: 0px;
+   padding-top: 0;
+
+   border: 1px solid black;
+   border-top: none;
+   overflow: auto;
+}
+
+answer-block thead td {
+   padding: 4px 4px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  min-width: 10ch;
+  text-align: center;
+}
+answer-block thead td:nth-child(1) {
+  min-width: 5ch;
+   /* your stuff here */
+}
+
+answer-block tbody td {
+   border: 1px solid black;
+   padding: 10px 20px;
+}
+
+answer-block tbody td:nth-child(1) {
+   background-color: white;
+   /* your stuff here */
+}
+
+/*.solutionTable {
+     border: 1px solid black;
+     overflow: auto;
+  }
+  .solutionTable thead tr {
+     position: sticky;
+     top: -10px;
+     background-color: LemonChiffon;
+  }
+
+  .solutionTable tbody th,
+  .solutionTable td {
+     border: 1px solid black;
+     padding: 10px;
+  }*/
+
+answer-block .errorlabel {
+   color: red;
+   margin: 1ch;
+}

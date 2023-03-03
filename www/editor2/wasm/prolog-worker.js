@@ -7,19 +7,23 @@ const Module = {
   on_output: passTrace, //console.info,
 };
 
-const loadPrologModule = async () => {
-  const module = await SWIPL(Module);
+
+const loadPrologModule = SWIPL(Module).then((module) => {
   Prolog = module.prolog;
   Prolog.call("leash(-all).");
-};
+});
+
 
 self.addEventListener("message", async (event) => {
   const request = event.data;
-  await loadPrologModule();
+  const startTime = new Date();
+  await loadPrologModule;
+  console.log("seconds" + ((new Date())-startTime)/1000  );
   const results = await handleRequest(request);
   //self.postMessage(results);
   self.close();
 });
+
 
 async function handleRequest(request) {
   console.log("Request:", request);

@@ -17,18 +17,21 @@ const buttonHandlers = {
    "answer-show-button": btn_showAnswer,
    "clear-console-button": btn_clearConsole,
    "clear-trace-button": btn_clearTrace,
-   "stop-query-button": btn_stopQuery,
-   "header-New-button": btn_headerNew,
-   "header-Open-button": btn_headerOpen,
-   "header-Save-button": btn_headerSave,
+   //"stop-query-button": btn_stopQuery,
+   //"header-New-button": btn_headerNew,
+   //"header-Open-button": btn_headerOpen,
+   //"header-Save-button": btn_headerSave,
 };
 
 
 document.addEventListener('input', validateInputs);
 queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom action to the query area. Pressing enter executes the query
 
-for (const button of document.querySelectorAll("button")) { // Assigns an onclick event handler to each button on the page, using the appropriate handler from buttonHandlers
-   button.onclick = buttonHandlers[button.id] || unknownButton;
+for (const elementId in buttonHandlers) {
+  const element = document.getElementById(elementId);
+  console.log(element, elementId);
+  const handler = buttonHandlers[elementId];
+  element.onclick = handler;
 }
 
 validateInputs();

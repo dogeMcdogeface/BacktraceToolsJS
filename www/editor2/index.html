@@ -48,7 +48,10 @@
     <!-- Define a textarea to write queries into ------------------------------------------------->
     <code-area id="queryArea">Enter your query here...</code-area>
     <!-- Define a textarea which acts as a console ----------------------------------------------->
-    <console-area id="consoleArea"></console-area>
+    <console-area id="consoleArea">
+        <answer-block></answer-block>
+
+    </console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
         <button id="answer-show-button">Show</button>
@@ -58,14 +61,14 @@
     <div id="answer-display-area" class="answer-controls">
         <button id="clear-console-button">Clear</button>
         <button id="clear-trace-button">Clear Trace</button>
-        <button id="stop-query-button" disabled>Stop</button>
-        <div id="query-status-label" align="right ">Query status:</div>
-    </div>
-    <div id="leftdragbar" onmousedown="StartLeftDrag()"></div>
-    <div id="rightdragbar" onmousedown="StartRightDrag()"></div>
+        <!-- <button id="stop-query-button" disabled>Stop</button>
+         <div id="query-status-label" align="right ">Query status:</div>-->
+     </div>
+     <div id="leftdragbar" onmousedown="StartLeftDrag()"></div>
+     <div id="rightdragbar" onmousedown="StartRightDrag()"></div>
 
-</div>
-<!-- Import JS files ----------------------------------------------------------------------------->
+ </div>
+ <!-- Import JS files ----------------------------------------------------------------------------->
 <script src="api.js" ></script>
 <script src="actions.js"></script>
 <script src="script.js" defer></script>

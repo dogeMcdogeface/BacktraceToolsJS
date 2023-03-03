@@ -9,9 +9,14 @@ function btn_showAnswer_glow() {
    window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
 }
 
+function createAnswerBlock(){
+   const block = document.createElement("answer-block");
+   consoleArea.insert(block);
+    return block;
+}
 
 // Builds an HTML table from the given data object
-function buildAnswerTable(data) {
+/* function buildAnswerTable(data) {
    const table = document.createElement("table");
    table.classList.add("solutionTable");
 
@@ -30,23 +35,8 @@ function buildAnswerTable(data) {
       }
    });
    return table;
-}
+}*/
 
-//setInterval(updateGUI, 500);
-function updateGUI() {
-   if (canExecQuery()) {
-      document.getElementById("answer-show-button").disabled = false;
-   } else {
-      document.getElementById("answer-show-button").disabled = true;
-   }
-
-   if (currentQuery.open) {
-      document.getElementById("stop-query-button").disabled = false;
-   } else {
-      document.getElementById("stop-query-button").disabled = true;
-   }
-   document.getElementById("query-status-label").innerText = "Query status: " + currentQuery.state;
-}
 
 function clearTrace() {
    traceText.innerHTML = "";
@@ -58,23 +48,6 @@ function printToTrace(txt) {
    div.appendChild(textNode);
    traceText.appendChild(div);
 }
-
-function displayTrace(trace) {
-   clearTrace();
-   trace.forEach((element, index) => {
-      const div = document.createElement("div");
-      const textNode = document.createTextNode(element);
-      div.appendChild(textNode);
-      div.style.display = "none"; // Set the div element to be hidden
-      traceText.appendChild(div);
-      //const delay = 50 * Math.min(10, index);
-      const delay = 500 / (1 + 1 / (index * 0.5));
-      setTimeout(() => {
-         div.style.display = "block"; // Set the div element to be visible after 50ms
-      }, delay); // Multiply the delay by the index to stagger the display of each element
-   });
-}
-
 
 function displayProgram(program) {
    console.log(program.title);
