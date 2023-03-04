@@ -1,161 +1,106 @@
-let Prolog;
-const Module = {
-   // Provide options for customization
-   arguments: ["-q"],
-   on_output: prologOut,
-};
-
-SWIPL(Module).then((module) => {
-   Prolog = Module.prolog;
-   Prolog.call("leash(-all).");
-});
-
-let currentQuery = {
-   open: false,
-   trace: [],
-   state: "Done",
-};
-
-function prologOut(txt, err) {
-   if (txt.includes("wasm_call_string")) return;
-   //console.log(txt);
-   printToTrace(txt);
-   currentQuery.trace.push(txt);
-}
+const workerTimeout = 10000;
 
 function canExecQuery() {
-   return isQueryAreaValid() && queryNumb.checkValidity() && Prolog != null && !currentQuery.open;
+   return validateInputs();
 }
 
-async function executeQuery() {
-   console.log("Starting query");
+getNextWorker();
+function getNextWorker() {
+   const currWorker = window.nextWorker;
+   window.nextWorker = new Worker("./wasm/prolog-worker.js");
+   return currWorker;
+}
+
+function executeQuery() {
+   console.log("Executing query");
+
    if (!canExecQuery()) {
       console.log("Cannot start query");
       return;
    }
-   currentQuery = {
-      open: true,
-      trace: [],
-      state: "Loading Program",
+
+   const request = {
+      program: codeArea.value,
+      goal: queryArea.value.trim().replace(/\.$/, ""),
+      count: queryNumb.value.trim(),
    };
-   updateGUI();
 
-   const program = codeArea.value;
-   const count = queryNumb.value.trim();
-   const goal = queryArea.value.trim().replace(/\.$/, "");
-   const tracedGoal = `(trace, (${goal}))`;
-    currentQuery.goal = goal;
-   try {
-      await Prolog.load_string(program, "program.pl"); // Load program
-      let results = await queryTest(goal);
-      currentQuery.trace = [];
-      currentQuery.state = "Executing...";
-      updateGUI();
+   const block = document.createElement("answer-block");
+   consoleArea.insert(block);
+
+   block.title = request.goal + ".";
+   block.status = "Starting.";
+   block.trace = [];
+   block.onSelected = () => {
       clearTrace();
-      results = await queryNAnswers(tracedGoal, count);
-      currentQuery.state = "Displaying Results...";
-      updateGUI();
-      console.log("results", results);
-      displayAnswer(parseAnswer(results));
-      displayTraceTree(currentQuery.trace);
-   } catch (error) {
-      displayError(error);
-      console.error(error);
-   } finally {
-      currentQuery.open = false;
-      currentQuery.state = "Done";
-      updateGUI();
-      console.log("Query completed");
-   }
-}
+      printToTrace(block.trace);
+   };
+   consoleArea.selectElement(block);
 
-//window.prompt = function (){console.error("Prompts are disabled on this page");return ""};
-function queryNAnswers(goal, count, onAnswerReceived) {
-   let query = Prolog.query(goal);
-   let answers = [];
+   //const worker = new Worker("./wasm/prolog-worker.js");
+   const worker = getNextWorker();
+   worker.addEventListener("message", handle_response);
+   worker.postMessage(request);
+   block.status = "Executing.";
 
-   return new Promise((resolve, reject) => {
-      function getNextAnswer() {
-         setTimeout(() => {
-            const answer = query.next();
-            answers.push(answer);
-            if (onAnswerReceived) {
-               onAnswerReceived(answer);
-            }
-            currentQuery.state = "Executing     " + answers.length + "  /   " + count;
-            if (answer.error && answer.error === true) {
-               reject(new Error(answer.message));
-            } else if (answer.done || answers.length >= count || currentQuery.stop) {
-               query.close();
-               Prolog.call("notrace.");
-               resolve(answers);
-            } else {
-               currentQuery.trace.push(answer); // optional, for debugging purposes
-               getNextAnswer();
-            }
-         }, 0);
-      }
-      getNextAnswer();
-   });
-}
-
-function queryTest(goal) {
-   return new Promise((resolve, reject) => {
-      setTimeout(() => {
-         console.log("Testing query ", goal);
-         let query = Prolog.query(goal);
-         let result = query.next();
-         query.close();
-         console.log(result);
-
-         if (result.error && result.error === true) {
-            reject(new Error(result.message));
-         } else {
-            resolve(result);
-         }
-      }, 0);
-   });
-}
-
-function parseAnswer(answers) {
-   let parsedAnswers = [];
-
-   if (answers[0].error) {
-      parsedAnswers = [{ Error: answers[0].message }];
-   } else if (answers[0].value === undefined) {
-      parsedAnswers = [{ "Has Solutions": false }];
-   } else {
-      parsedAnswers = answers
-         .filter((answer) => answer.value !== undefined)
-         .map((answer) => {
-            const { $tag, ...parsedAnswer } = answer.value;
-            return Object.keys(parsedAnswer).length === 0 ? { "Has Solutions": true } : parsedAnswer;
-         });
-      if (answers[answers.length - 1].done === false) {
-         parsedAnswers.push({ _: "Continues..." });
+   let timer = setTimeout(handle_timeout, workerTimeout);
+   function handle_response(response) {
+      const result = response.data;
+      // console.info("Worker says ", result);
+      if (result.error && result.error === true) {
+         handle_error(result);
+      } else if (result.done && result.done === true) {
+         handle_answer(result);
+         handle_done(result);
+      } else if (result.done === false) {
+         handle_answer(result);
+      } else if (result.trace) {
+         handle_trace(result);
       }
    }
 
-   console.log("parsedAnswers", parsedAnswers);
-   return parsedAnswers;
+   function handle_error(data) {
+      //console.warn("Error occurred:", data);
+      clearTimeout(timer); //Reset the hanged worker timeout
+      worker.terminate();
+      block.setError(data.message);
+      block.status = "Aborted.";
+      // Do something to handle the error
+   }
+
+   function handle_done(data) {
+      //console.info("Worker finished processing:", data);
+      clearTimeout(timer); //Reset the hanged worker timeout
+      worker.terminate();
+      block.status = "Finished.";
+   }
+
+   function handle_answer(data) {
+      //console.info("Worker returned answer:", data);
+      clearTimeout(timer); //Reset the hanged worker timeout
+      timer = setTimeout(handle_timeout, workerTimeout);
+
+      const { $tag, ...rowData } = data.value || {};
+      const hasSolutions = Object.keys(rowData).length === 0;
+      block.addRow(hasSolutions ? { "Has Solutions": !!data.value } : rowData);
+   }
+
+   request.traceCount = 0;
+   function handle_trace(data) {
+      block.trace.push(data.trace);
+      block.progress = request.traceCount++;
+      if (block.selected) printToTrace(data.trace);
+   }
+
+   function handle_timeout() {
+      console.warn("Worker timed out");
+      worker.terminate();
+      handle_error({ error: true, message: "Runtime error: Query timed out" });
+   }
+   block.stopButton.onclick = function () {
+      worker.terminate();
+      handle_error({ error: true, message: "Query manually stopped" });
+   };
 }
 
-
-// Prints the solutions, builds a table from the solution data, and displays it in the console area
-function displayAnswer(solutions) {
-   //consoleArea.print("Query: ", responseObj.query, "Black");
-   //consoleArea.print("Debug: Solutions=", solutions, "LightSteelBlue");
-   const table = buildAnswerTable(solutions);
-   consoleArea.write("Query: " + currentQuery.goal, "darkblue");
-   consoleArea.insert(table);
-   consoleArea.insert(document.createElement("br"));
-}
-
-
-function displayTraceTree(trace){
-    //console.info(trace);
-}
-
-function displayError(err) {
-   consoleArea.write(err, "red");
-}
+const uniqueID = () => Math.random().toString(36).substr(2, 12);
