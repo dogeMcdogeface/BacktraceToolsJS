@@ -16,7 +16,6 @@ const examplesMenu = document.getElementById("examplesMenu");
 const buttonHandlers = {
    "answer-show-button": btn_showAnswer,
    "clear-console-button": btn_clearConsole,
-   "clear-trace-button": btn_clearTrace,
    //"stop-query-button": btn_stopQuery,
    //"header-New-button": btn_headerNew,
    //"header-Open-button": btn_headerOpen,
@@ -50,6 +49,7 @@ function btn_showAnswer() {
 function btn_clearConsole() {
    console.log("btn_clearConsole");
    consoleArea.clear();
+   clearTrace();
 }
 
 function btn_clearTrace() {
