@@ -9,21 +9,21 @@ function btn_showAnswer_glow() {
    window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
 }
 
-
+clearTrace();
 function clearTrace() {
-   traceText.innerHTML = "";
+  traceText.textContent = '';
+  traceText.cont = document.createElement("div");
+  traceText.appendChild(traceText.cont);
 }
 
 function printToTrace(...txt) {
-  for (let t of txt.flat()) {
-    const div = document.createElement("div");
-    const textNode = document.createTextNode(t);
-    div.appendChild(textNode);
-    traceText.appendChild(div);
+   for (let t of txt.flat()) {
+      const div = document.createElement("div");
+      const textNode = document.createTextNode(t);
+      div.appendChild(textNode);
+      traceText.cont.appendChild(div);
+   }
 }
-}
-
-
 
 function displayProgram(program) {
    console.log(program.title);
@@ -42,5 +42,3 @@ function populateExamples() {
       examplesMenu.appendElement(button);
    });
 }
-
-

@@ -16,9 +16,9 @@ const loadPrologModule = SWIPL(Module).then((module) => {
 
 self.addEventListener("message", async (event) => {
   const request = event.data;
-  const startTime = new Date();
+  //const startTime = new Date();
   await loadPrologModule;
-  console.log("seconds" + ((new Date())-startTime)/1000  );
+  //console.log("seconds" + ((new Date())-startTime)/1000  );
   const results = await handleRequest(request);
   //self.postMessage(results);
   self.close();

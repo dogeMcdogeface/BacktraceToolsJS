@@ -10,7 +10,7 @@ answer-block {
 }
 
 answer-block.selected {
-   box-shadow: 0 0 10px lightGreen;
+box-shadow: 0 0 5px 5px lightgreen;
    clip-path: inset(0px 0px 0px -15px);
    outline: none !important;
 }
@@ -25,6 +25,11 @@ answer-block .header {
    position: sticky;
    top: 0;
    z-index: 1;
+    cursor: pointer;
+}
+
+answer-block.selected .header {
+background-color: #aed767;
 }
 
 answer-block .header span {

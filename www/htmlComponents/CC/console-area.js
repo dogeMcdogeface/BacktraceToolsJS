@@ -3,7 +3,8 @@ class ConsoleArea extends HTMLElement {
       super();
 
       this.clear = function () {
-         this.innerHTML = "";
+         //this.innerHTML = "";
+         while (this.firstChild) this.removeChild(this.firstChild);
       };
 
       this.write = function (text, color) {

@@ -15,17 +15,15 @@ class AnswerBlock extends HTMLElement {
       this.titleLabel.classList.add("titleLabel");
       header.appendChild(this.titleLabel);
 
-         this.progressLabel = document.createElement("span");
-         this.progressLabel.textContent = "0";
-       this.progressLabel.classList.add("progressLabel");
-         header.appendChild(this.progressLabel);
+      this.progressLabel = document.createElement("span");
+      this.progressLabel.textContent = "0";
+      this.progressLabel.classList.add("progressLabel");
+      header.appendChild(this.progressLabel);
 
-        this.statusLabel = document.createElement("span");
-        this.statusLabel.textContent = "Starting";
+      this.statusLabel = document.createElement("span");
+      this.statusLabel.textContent = "Starting";
       this.statusLabel.classList.add("statusLabel");
-        header.appendChild(this.statusLabel);
-
-
+      header.appendChild(this.statusLabel);
 
       const stopButton = document.createElement("button");
       stopButton.textContent = "Stop";
@@ -79,32 +77,31 @@ class AnswerBlock extends HTMLElement {
    set title(value) {
       this.titleLabel.textContent = value;
    }
-   
-  set progress(value) {
 
-     this.progressLabel.textContent = Intl.NumberFormat('en-US', {
-                                        notation: "compact",
-                                        maximumFractionDigits: 1
-                                      }).format(value);
-  }
-    set status(value) {
-       this.statusLabel.textContent = value;
-    }
-
-set selected(val) {
-  if (val) {
-    this.classList.add("selected");
-    this.onSelected();
-  } else {
-    this.classList.remove("selected");
-  }
-}
-
-   get selected(){
-     return this.classList.contains("selected");
+   set progress(value) {
+      this.progressLabel.textContent = Intl.NumberFormat("en-US", {
+         notation: "compact",
+         maximumFractionDigits: 1,
+      }).format(value);
+   }
+   set status(value) {
+      this.statusLabel.textContent = value;
    }
 
-     onSelected(){}
+   set selected(val) {
+      if (val) {
+         this.classList.add("selected");
+         setTimeout(() => this.onSelected(), 0);
+      } else {
+         this.classList.remove("selected");
+      }
+   }
+
+   get selected() {
+      return this.classList.contains("selected");
+   }
+
+   onSelected() {}
 
    addRow(data) {
       const keys = Object.keys(data);
