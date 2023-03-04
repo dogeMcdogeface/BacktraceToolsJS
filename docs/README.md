@@ -46,9 +46,7 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 - [X] Automatic tracing of the steps taken to reach each solution.
   - [ ] Display the steps taken in a graphical tree form.
 - [ ] Implement rich text features in the code editors and trace area, such as colored keywords...
-- [ ] Implement multi-threaded Prolog queries.
-  - [x] Long, non-blocking queries will not hang the interface.
-  - [ ] However, long *blocking* (`sleep(4)`) queries will.  
+- [x] Implement multi-threaded Prolog queries.
 - [ ] User file loading and saving.
 
 
