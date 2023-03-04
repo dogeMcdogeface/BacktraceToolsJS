@@ -1,0 +1,152 @@
+body {
+   counter-reset: answer-count;
+}
+
+answer-block {
+   display: block;
+   border: 1px solid #ccc;
+   margin: 15px 0px;
+   padding: 0;
+}
+
+answer-block.selected {
+box-shadow: 0 0 5px 5px lightgreen;
+   clip-path: inset(0px 0px 0px -15px);
+   outline: none !important;
+}
+
+answer-block .header {
+   background-color: #f7d874;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   justify-content: space-between;
+   align-items: stretch;
+   position: sticky;
+   top: 0;
+   z-index: 1;
+    cursor: pointer;
+}
+
+answer-block.selected .header {
+background-color: #aed767;
+}
+
+answer-block .header span {
+    margin: 0.5ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+answer-block .header  .titleLabel {
+   flex: 1;
+}
+answer-block .header  .progressLabel {
+    min-width: 15ch;
+    max-width: 15ch;
+    }
+answer-block .header  .statusLabel {
+    min-width: 20ch;
+    max-width: 20ch;
+    }
+
+
+answer-block .header .titleLabel::before {
+   counter-increment: answer-count;
+   content: counter(answer-count) ". ";
+}
+
+answer-block .header .progressLabel::before {
+   content: "Steps:";
+   padding: 0.5ch;
+   border-left: 1px solid gray;
+}
+
+answer-block .header .statusLabel::before {
+   content: "Status:";
+   padding: 0.5ch;
+   border-left: 1px solid gray;
+}
+
+answer-block .header button {
+   margin-left: 10px;
+   padding: 0.5ch;
+}
+
+answer-block #hideButton {
+   min-width: 3ch;
+   max-width: 3ch;
+   min-height: 3ch;
+   padding: 0;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   border:none;
+   background-color: transparent;
+}
+
+answer-block #hideButton:hover {
+backdrop-filter: brightness(0.95);
+}
+
+answer-block.hidden #hideButton {
+   writing-mode: sideways-lr;
+   text-orientation: mixed;
+}
+
+answer-block .body {
+   overflow-y: auto;
+   overflow-x: none;
+   max-height: 500px;
+   /*transition: max-height 0.5s ease-in;*/
+}
+answer-block.hidden .body {
+   /*display: none;*/
+   transition: max-height 0.25s ease-out;
+   max-height: 0px !important;
+}
+
+answer-block table {
+   padding: 0px;
+   padding-top: 0;
+   border: 1px solid black;
+   border-top: none;
+}
+answer-block table.hidden {
+   display: none;
+}
+
+answer-block th {
+   background-color: LemonChiffon;
+   padding: 4px 4px;
+   border-left: 1px solid black;
+   border-right: 1px solid black;
+   min-width: 10ch;
+   text-align: center;
+   position: sticky; /* set the position to sticky */
+   top: 0; /* specify the position where the header should stick */
+}
+
+answer-block th:nth-child(1) {
+   min-width: 5ch;
+   /* your stuff here */
+}
+
+answer-block tr {
+   background-color: WhiteSmoke;
+   /* your stuff here */
+}
+answer-block tr:nth-child(odd) {
+   background-color: white;
+   /* your stuff here */
+}
+
+answer-block td {
+   border: 1px solid black;
+   padding: 10px 20px;
+}
+
+answer-block .errorlabel {
+   color: red;
+   margin: 1ch;
+}

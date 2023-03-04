@@ -32,7 +32,7 @@ class CodeArea extends HTMLElement {
       this.ol.innerHTML = `<li></li>`.repeat(lines);
    }
 
-   addNewLine() {
+   /*addNewLine() {
       const currentPos = this.textarea.selectionStart;
       const currentValue = this.textarea.value;
       this.textarea.value = currentValue.substring(0, currentPos) + "\n" + currentValue.substring(currentPos, currentValue.length);
@@ -40,7 +40,7 @@ class CodeArea extends HTMLElement {
       this.textarea.selectionEnd = currentPos + 1;
       this.textarea.dispatchEvent(new Event('change', { bubbles: true }));
       this.autoResize();
-   }
+   }*/
 
 customKeyBehaviour(keys, callback) {
   const keysArray = keys.split("+").map(key => key.trim().toLowerCase());
@@ -69,6 +69,7 @@ customKeyBehaviour(keys, callback) {
    set value(value) {
       this.textarea.value = value;
       this.autoResize();
+      document.dispatchEvent(new Event("input"));
    }
 }
 
