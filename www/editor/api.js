@@ -73,6 +73,7 @@ function executeQuery() {
       clearTimeout(timer); //Reset the hanged worker timeout
       worker.terminate();
       block.status = "Finished.";
+      parseTrace(block.trace);
    }
 
    function handle_answer(data) {
