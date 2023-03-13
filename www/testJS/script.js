@@ -1,11 +1,4 @@
-const button = document.getElementById("myButton");
-const message = document.getElementById("message");
 
-button.addEventListener("click", function() {
-  message.innerHTML = "Hello, world!";
-  console.log(hm_callPadre);
-  console.log(vetstr);
-});
 
 /******     Classe Nodo     ******/
 
@@ -14,7 +7,7 @@ class Nodo  {
   constructor(riga){
     this.istruzione = "";
     this.scope = "";
-    this.valore = ""; 
+    this.valore = "";
     this.genitore = null; //TODO: possibile non serva
     this.nd_str = [];
     // TODO: nel caso istruzione sia Fail, mettere un boolean true per poi usarlo per cambiare font al nodo albero ********************
@@ -114,7 +107,7 @@ let tmpNodo = new Nodo(vetstr[0]);
 console.log(tmpNodo);
 
 //*salvo padre per campo primo elemento hashmap callPadre
-padre_ass=tmpNodo.valore+'#'+next();     
+padre_ass=tmpNodo.valore+'#'+next();
 console.log('PRIMO - salvo padre per campo primo elemento hashmap callPadre: '+padre_ass);
 padre_att=padre_ass;      //imposto padre attuale per dopo il primo nodo
 hm_padri.set(padre_ass, new Padre(padre_ass));   //salvo in hm_padri il nome padre e un oggetto padre a cui assegnerò i figli (altri nodi)
@@ -131,7 +124,7 @@ for(let i=1; i<vetstr.length;i++){
     //*salvo call(key) per campo primo elemento hashmap callPadre
     val_call = tmpNodo.valore;
     console.log('PRIMO - salvo call per campo primo elemento hashmap callPadre: '+val_call);
-    break; 
+    break;
   }
 }
 
@@ -192,6 +185,128 @@ console.log("DEBUG FINALE -");
 console.log(hm_callPadre);
 console.log(hm_padri);
 console.log(vetPadri);
+
+/*** PARTE CREAZIONE ALBERO ***/
+
+var config = {
+        container: "#basic-example",
+
+        connectors: {
+            type: 'straight'
+        },
+        node: {
+            HTMLclass: 'nodeExample1'
+        }
+    },
+
+
+
+
+
+
+    ceo = {
+        text: {
+            name: "Mark Hill",
+            title: "Chief executive officer",
+            contact: "Tel: 01 213 123 134",
+        },
+        image: "../headshots/2.jpg"
+    },
+
+    cto = {
+        parent: ceo,
+        text:{
+            name: "Joe Linux",
+            title: "Chief Technology Officer",
+        },
+        stackChildren: true,
+        image: "../headshots/1.jpg"
+    },
+    cbo = {
+        parent: ceo,
+        stackChildren: true,
+        text:{
+            name: "Linda May",
+            title: "Chief Business Officer",
+        },
+        image: "../headshots/5.jpg"
+    },
+    cdo = {
+        parent: ceo,
+        text:{
+            name: "John Green",
+            title: "Chief accounting officer",
+            contact: "Tel: 01 213 123 134",
+        },
+        image: "../headshots/6.jpg"
+    },
+    cio = {
+        parent: cto,
+        text:{
+            name: "Ron Blomquist",
+            title: "Chief Information Security Officer"
+        },
+        image: "../headshots/8.jpg"
+    },
+    ciso = {
+        parent: cto,
+        text:{
+            name: "Michael Rubin",
+            title: "Chief Innovation Officer",
+            contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
+        },
+        image: "../headshots/9.jpg"
+    },
+    cio2 = {
+        parent: cdo,
+        text:{
+            name: "Erica Reel",
+            title: "Chief Customer Officer"
+        },
+        link: {
+            href: "http://www.google.com"
+        },
+        image: "../headshots/10.jpg"
+    },
+    ciso2 = {
+        parent: cbo,
+        text:{
+            name: "Alice Lopez",
+            title: "Chief Communications Officer"
+        },
+        image: "../headshots/7.jpg"
+    },
+    ciso3 = {
+        parent: cbo,
+        text:{
+            name: "Mary Johnson",
+            title: "Chief Brand Officer"
+        },
+        image: "../headshots/4.jpg"
+    },
+    ciso4 = {
+        parent: cbo,
+        text:{
+            name: "Kirk Douglas",
+            title: "Chief Business Development Officer"
+        },
+        image: "../headshots/11.jpg"
+    }
+
+    chart_config = [
+        config,
+        ceo,
+        cto,
+        cbo,
+        cdo,
+        cio,
+        ciso,
+        cio2,
+        ciso2,
+        ciso3,
+        ciso4
+    ];
+
 
 
 
