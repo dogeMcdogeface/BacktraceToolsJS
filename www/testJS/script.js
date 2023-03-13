@@ -8,13 +8,13 @@ class Nodo  {
     this.istruzione = "";
     this.scope = "";
     this.valore = "";
-    this.genitore = null; //TODO: possibile non serva
+    this.genitore = null; //TODO: CANCELLA CHE NON SERVE, vedere se serve  vetPadri
     this.nd_str = [];
-    // TODO: nel caso istruzione sia Fail, mettere un boolean true per poi usarlo per cambiare font al nodo albero ********************
+
 
     // prende riga input e la divide assegnandola ai campi del nodo
     this.nd_str = riga.split(": (");
-    this.istruzione = this.nd_str[0]; // TODO:attenzione a possibili spazi prima della prima Call se fanno danni
+    this.istruzione = this.nd_str[0]; //
     console.debug(`NODO - assegno istruzione: ${this.istruzione}`);
 
     this.nd_str = this.nd_str[1].split(") ");
@@ -33,15 +33,16 @@ function next(){
 }
 /******      Classe Padre  ******/
 
-class Padre{
+class Elemento{
   constructor(nome){
     this.nome = nome;
-    this.figli = [];
+    this.genitore = "";
+    this.colore = false;
   }
 }
 
 
-/******     Parser input    ******/     //TODO: STARE ATTENTI AI \ E FAR SI CE NE SIANO 2 (\\)
+/******     Parser input    ******/
 console.log("Inizializza Programma");
 let input = `   Call: (1) jealous(_25826, _25828)
 Unify: (1) jealous(_25826, _25828)
@@ -93,7 +94,7 @@ Fail: (1) jealous(_25826, _25828)`
 ;
 
 const hm_callPadre = new Map();
-const hm_padri = new Map();
+const vetElem = [];
 let val_call = null;
 let padre_ass = null;
 
@@ -110,8 +111,11 @@ console.log(tmpNodo);
 padre_ass=tmpNodo.valore+'#'+next();
 console.log('PRIMO - salvo padre per campo primo elemento hashmap callPadre: '+padre_ass);
 padre_att=padre_ass;      //imposto padre attuale per dopo il primo nodo
-hm_padri.set(padre_ass, new Padre(padre_ass));   //salvo in hm_padri il nome padre e un oggetto padre a cui assegnerò i figli (altri nodi)
-console.log(hm_padri);
+
+
+//crea oggetto Elemento per il primo e lo salva in vetElem(non ha un genitore)
+vetElem.push( new Elemento(padre_ass));
+console.log(vetElem);
 
 vetPadri.push(padre_att);
 console.log(vetPadri);
@@ -139,14 +143,19 @@ for(i=1;i<vetstr.length;i++){
   if(tmpNodo.istruzione == 'Exit'){
     padre_ass=tmpNodo.valore+"#"+next();
     //debug console.log("EXIT - "+padre_ass);
-    hm_padri.get(padre_att).figli.push(padre_ass);
-    //debug console.log(hm_padri.get(padre_att).figli);
+
+    //credo oggetto elemento con nome e gli assegno come genitore padre_ass e poi lo inserisco in vetElem
+    tmpElem = new Elemento(padre_ass);
+    tmpElem.genitore = padre_att;
+    vetElem.push(tmpElem);
+    console.log(vetElem);
+
+
     padre_att=padre_ass;
 
     vetPadri.push(padre_att);
 
-    hm_padri.set(padre_ass, new Padre(padre_ass));
-    //debug console.log('HM_PADRI - '); console.log(hm_padri);
+
 
     for(let j=i+1;j<vetstr.length;j++){
       tmpNodo = new Nodo(vetstr[j]);
@@ -165,14 +174,21 @@ for(i=1;i<vetstr.length;i++){
   }
   if(tmpNodo.istruzione == 'Fail'){
     padre_ass=tmpNodo.valore+"#"+next();
-    hm_padri.get(padre_att).figli.push(padre_ass);
+
+
+    tmpElem = new Elemento(padre_ass);
+    tmpElem.genitore = padre_att;
+    tmpElem.colore = true;
+    vetElem.push(tmpElem);
+    console.log(vetElem);
+
     padre_att=padre_ass;
 
     vetPadri.push(padre_att);
 
-    hm_padri.set(padre_ass, new Padre(padre_ass));
+
     console.log("FAIL - trovata");
-    console.log(hm_padri);
+
   }
 
   if(tmpNodo.istruzione == 'Redo'){
@@ -183,10 +199,12 @@ for(i=1;i<vetstr.length;i++){
 }
 console.log("DEBUG FINALE -");
 console.log(hm_callPadre);
-console.log(hm_padri);
+console.log(vetElem);
 console.log(vetPadri);
 
 /*** PARTE CREAZIONE ALBERO ***/
+
+
 
 var config = {
         container: "#basic-example",
