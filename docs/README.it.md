@@ -43,9 +43,7 @@ Questo strumento è basato su un port WebAssembly (WASM) di SWI-Prolog ed è pro
 - [X] Tracciamento automatico dei passaggi necessari per raggiungere ogni soluzione.
   - [ ] Visualizza i passaggi in una forma di albero grafico.
 - [ ] Implementare funzionalità di testo formattato negli editor di codice e nell'area di traccia, come parole chiave colorate...
-- [ ] Implementare query Prolog multi-threaded.
-  - [x] Le interrogazioni lunghe e non bloccanti non bloccheranno l'interfaccia.
-  - [ ] Tuttavia, le interrogazioni lunghe *e bloccanti* (sleep(4)) lo faranno.
+- [x] Implementare query Prolog multi-threaded.
 - [ ] Caricamento e salvataggio di file utente.
 
 
