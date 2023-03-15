@@ -8,13 +8,13 @@ class Nodo  {
     this.istruzione = "";
     this.scope = "";
     this.valore = "";
-    this.genitore = null; //TODO: CANCELLA CHE NON SERVE, vedere se serve  vetPadri
+    this.genitore = null; //TODO: possibile non serva
     this.nd_str = [];
-
+    // TODO: nel caso istruzione sia Fail, mettere un boolean true per poi usarlo per cambiare font al nodo albero ********************
 
     // prende riga input e la divide assegnandola ai campi del nodo
     this.nd_str = riga.split(": (");
-    this.istruzione = this.nd_str[0]; //
+    this.istruzione = this.nd_str[0]; // TODO:attenzione a possibili spazi prima della prima Call se fanno danni
     console.debug(`NODO - assegno istruzione: ${this.istruzione}`);
 
     this.nd_str = this.nd_str[1].split(") ");
@@ -33,16 +33,15 @@ function next(){
 }
 /******      Classe Padre  ******/
 
-class Elemento{
+class Padre{
   constructor(nome){
     this.nome = nome;
-    this.genitore = "";
-    this.colore = false;
+    this.figli = [];
   }
 }
 
 
-/******     Parser input    ******/
+/******     Parser input    ******/     //TODO: STARE ATTENTI AI \ E FAR SI CE NE SIANO 2 (\\)
 console.log("Inizializza Programma");
 let input = `   Call: (1) jealous(_25826, _25828)
 Unify: (1) jealous(_25826, _25828)
@@ -94,7 +93,7 @@ Fail: (1) jealous(_25826, _25828)`
 ;
 
 const hm_callPadre = new Map();
-const vetElem = [];
+const hm_padri = new Map();
 let val_call = null;
 let padre_ass = null;
 
@@ -111,11 +110,8 @@ console.log(tmpNodo);
 padre_ass=tmpNodo.valore+'#'+next();
 console.log('PRIMO - salvo padre per campo primo elemento hashmap callPadre: '+padre_ass);
 padre_att=padre_ass;      //imposto padre attuale per dopo il primo nodo
-
-
-//crea oggetto Elemento per il primo e lo salva in vetElem(non ha un genitore)
-vetElem.push( new Elemento(padre_ass));
-console.log(vetElem);
+hm_padri.set(padre_ass, new Padre(padre_ass));   //salvo in hm_padri il nome padre e un oggetto padre a cui assegnerò i figli (altri nodi)
+console.log(hm_padri);
 
 vetPadri.push(padre_att);
 console.log(vetPadri);
@@ -143,19 +139,14 @@ for(i=1;i<vetstr.length;i++){
   if(tmpNodo.istruzione == 'Exit'){
     padre_ass=tmpNodo.valore+"#"+next();
     //debug console.log("EXIT - "+padre_ass);
-
-    //credo oggetto elemento con nome e gli assegno come genitore padre_ass e poi lo inserisco in vetElem
-    tmpElem = new Elemento(padre_ass);
-    tmpElem.genitore = padre_att;
-    vetElem.push(tmpElem);
-    console.log(vetElem);
-
-
+    hm_padri.get(padre_att).figli.push(padre_ass);
+    //debug console.log(hm_padri.get(padre_att).figli);
     padre_att=padre_ass;
 
     vetPadri.push(padre_att);
 
-
+    hm_padri.set(padre_ass, new Padre(padre_ass));
+    //debug console.log('HM_PADRI - '); console.log(hm_padri);
 
     for(let j=i+1;j<vetstr.length;j++){
       tmpNodo = new Nodo(vetstr[j]);
@@ -174,21 +165,14 @@ for(i=1;i<vetstr.length;i++){
   }
   if(tmpNodo.istruzione == 'Fail'){
     padre_ass=tmpNodo.valore+"#"+next();
-
-
-    tmpElem = new Elemento(padre_ass);
-    tmpElem.genitore = padre_att;
-    tmpElem.colore = true;
-    vetElem.push(tmpElem);
-    console.log(vetElem);
-
+    hm_padri.get(padre_att).figli.push(padre_ass);
     padre_att=padre_ass;
 
     vetPadri.push(padre_att);
 
-
+    hm_padri.set(padre_ass, new Padre(padre_ass));
     console.log("FAIL - trovata");
-
+    console.log(hm_padri);
   }
 
   if(tmpNodo.istruzione == 'Redo'){
@@ -199,135 +183,8 @@ for(i=1;i<vetstr.length;i++){
 }
 console.log("DEBUG FINALE -");
 console.log(hm_callPadre);
-console.log(vetElem);
+console.log(hm_padri);
 console.log(vetPadri);
 
-/*** PARTE CREAZIONE ALBERO ***/
-
-
-
-var config = {
-        container: "#basic-example",
-
-        connectors: {
-            type: 'straight'
-        },
-        node: {
-            HTMLclass: 'nodeExample1'
-        }
-    },
-
-
-
-
-
-
-    ceo = {
-        text: {
-            name: "Mark Hill",
-            title: "Chief executive officer",
-            contact: "Tel: 01 213 123 134",
-        },
-        image: "../headshots/2.jpg"
-    },
-
-    cto = {
-        parent: ceo,
-        text:{
-            name: "Joe Linux",
-            title: "Chief Technology Officer",
-        },
-        stackChildren: true,
-        image: "../headshots/1.jpg"
-    },
-    cbo = {
-        parent: ceo,
-        stackChildren: true,
-        text:{
-            name: "Linda May",
-            title: "Chief Business Officer",
-        },
-        image: "../headshots/5.jpg"
-    },
-    cdo = {
-        parent: ceo,
-        text:{
-            name: "John Green",
-            title: "Chief accounting officer",
-            contact: "Tel: 01 213 123 134",
-        },
-        image: "../headshots/6.jpg"
-    },
-    cio = {
-        parent: cto,
-        text:{
-            name: "Ron Blomquist",
-            title: "Chief Information Security Officer"
-        },
-        image: "../headshots/8.jpg"
-    },
-    ciso = {
-        parent: cto,
-        text:{
-            name: "Michael Rubin",
-            title: "Chief Innovation Officer",
-            contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
-        },
-        image: "../headshots/9.jpg"
-    },
-    cio2 = {
-        parent: cdo,
-        text:{
-            name: "Erica Reel",
-            title: "Chief Customer Officer"
-        },
-        link: {
-            href: "http://www.google.com"
-        },
-        image: "../headshots/10.jpg"
-    },
-    ciso2 = {
-        parent: cbo,
-        text:{
-            name: "Alice Lopez",
-            title: "Chief Communications Officer"
-        },
-        image: "../headshots/7.jpg"
-    },
-    ciso3 = {
-        parent: cbo,
-        text:{
-            name: "Mary Johnson",
-            title: "Chief Brand Officer"
-        },
-        image: "../headshots/4.jpg"
-    },
-    ciso4 = {
-        parent: cbo,
-        text:{
-            name: "Kirk Douglas",
-            title: "Chief Business Development Officer"
-        },
-        image: "../headshots/11.jpg"
-    }
-
-    chart_config = [
-        config,
-        ceo,
-        cto,
-        cbo,
-        cdo,
-        cio,
-        ciso,
-        cio2,
-        ciso2,
-        ciso3,
-        ciso4
-    ];
-
-
-
-
- 
 
 

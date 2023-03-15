@@ -1,6 +1,6 @@
 var config = {
         container: "#basic-example",
-        
+
         connectors: {
             type: 'step'
         },
@@ -9,11 +9,10 @@ var config = {
         }
     },
     ceo = {
-        text: {
-            name: "Mark Hill",
-            title: "Chief executive officer",
-            contact: "Tel: 01 213 123 134",
-        },
+
+            text: "Mark Hill",
+
+
         image: "../headshots/2.jpg"
     },
 

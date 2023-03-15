@@ -30,8 +30,7 @@ var config = {
     },
     cbo = {
         parent: ceo,
-        childrenDropLevel: 2,
-        HTMLclass: 'blue',
+                HTMLclass: 'blue',
         text:{
             name: "Linda May",
             title: "Chief Business Officer",
