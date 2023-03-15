@@ -88,6 +88,13 @@ function parseTrace(trace) {
    chart = {
       container: "#tree-simple",
       rootOrientation: "NORTH",
+      connectors: {
+                  type: 'step',
+                   style: {
+                              "stroke-width": 5,
+                              "stroke": "#606060" // Set the stroke color to red
+                          }
+              },
    };
 
    console.log("root", root);

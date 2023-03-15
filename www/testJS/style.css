@@ -1,16 +1,17 @@
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
 
 
-body { background: #fff; }
+body { background: #ffffff; }
 
 /* optional Container STYLES */
 .chart { min-height: 100%; width: 100%; margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; }
-.node { color: #9CB5ED; border: 2px solid #C8C8C8; border-radius: 3px; }
+.node { color: #404040; background: #b3d9ff ; box-shadow: 0 0 10px gray; border: 2px solid #C8C8C8; border-radius: 5px; }
 .node p { font-size: 20px; line-height: 20px; height: 20px; font-weight: bold; padding: 3px; margin: 0; }
 .fail {
     border: 3px solid  red;
+    background: #ff5050;
+    box-shadow: 0 0 10px red;
     }
 
 #tree-simple {
-    background-color: lightblue;
 }
