@@ -1,6 +1,3 @@
-setTimeout(function () {
-   location.reload();
-}, 3000);
 
 var trace = [
    "   Call: (3) jealous(_17586, _17588)\n",
@@ -41,104 +38,46 @@ var trace = [
    "   Fail: (3) jealous(_17586, _17588)\n",
 ];
 
-/******     Classe Nodo     ******/
-
-class Nodo {
-   constructor(riga) {
-      this.istruzione = "";
-      this.scope = "";
-      this.valore = "";
-      this.genitore = null; //TODO: possibile non serva
-      this.nd_str = [];
-      // TODO: nel caso istruzione sia Fail, mettere un boolean true per poi usarlo per cambiare font al nodo albero ********************
-
-      // prende riga input e la divide assegnandola ai campi del nodo
-      this.nd_str = riga.trim().split(": (");
-      this.istruzione = this.nd_str[0];
-      console.debug(`NODO - assegno istruzione: ${this.istruzione}`);
-
-      this.nd_str = this.nd_str[1].split(") ");
-      this.scope = this.nd_str[0];
-      console.debug(`NODO - assegno scope: ${this.scope}`);
-      this.valore = this.nd_str[1];
-      console.debug(`NODO - assegno valore: ${this.valore}`);
-   }
-}
-
 function parseTrace(trace) {
    console.log("parsing trace", trace);
+   if (trace.length < 1) return;
 
-
-   //***   estraggo stringhe per prima coppia hashmap callPadre  ***/
-
-   let tmpNodo = new Nodo(trace[0]); // TODO:attenzione a possibili spazi prima della prima Call se fanno danni
-   console.log(tmpNodo);
+   const [istruzione, scope, valore] = trace[0]
+      .trim()
+      .match(/^(.+):\s\(([^)]+)\)\s(.+)$/)
+      .slice(1);
 
    let cntNodi = 1;
 
-   //*salvo padre per campo primo elemento hashmap callPadre
-
-   root = {
-      text: { name: tmpNodo.valore, desc: cntNodi },
-      cnt: cntNodi,
-      children: [],
-   };
-
-   for (let i = 1; i < trace.length; i++) {
-      tmpNodo = new Nodo(trace[i]);
-      if (tmpNodo.istruzione === "Call") {
-         //*salvo call(key) per campo primo elemento hashmap callPadre
-         root.call = tmpNodo.valore;
-         break;
-      }
-   }
-
-   //*creo ed inserisco prima coppia hashmap
+   root = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [] };
 
    let currNode = root;
+   let currExit = root;
 
-   /*** estrae stringhe successive alla prima per riempire tutta hashmap ***/
-   let i;
-   for (i = 1; i < trace.length; i++) {
-      tmpNodo = new Nodo(trace[i]);
-      if (tmpNodo.istruzione == "Exit") {
-         const newNode = { text: { name: tmpNodo.valore }, children: [] };
-         currNode.children.push(newNode);
-         currNode = newNode;
+   for (let i = 1; i < trace.length; i++) {
+      const [istruzione, scope, valore] = trace[i]
+         .trim()
+         .match(/^(.+):\s\(([^)]+)\)\s(.+)$/)
+         .slice(1);
 
-         //debug console.log('HM_PADRI - '); console.log(hm_padri);
+      switch (istruzione) {
+         case "Call":
+            currExit.call = valore;
+            break;
 
-         for (let j = i + 1; j < trace.length; j++) {
-            tmpNodo = new Nodo(trace[j]);
-            if (tmpNodo.istruzione == "Exit") {
-               console.log("BREAK - secondo Exit di fila");
-               break;
+         case "Redo":
+            currNode = root;
+            while (currNode.children.length && currNode.call !== valore) {
+               currNode = currNode.children[currNode.children.length - 1];
             }
-            if (tmpNodo.istruzione == "Call") {
-               currNode.call = tmpNodo.valore;
-               console.log("CALL - trovata");
-               break;
-            }
-         }
-      }
-      if (tmpNodo.istruzione == "Fail") {
-         const newNode = { text: { name: tmpNodo.valore }, children: [] };
-         currNode.children.push(newNode);
-         currNode = newNode;
-
-         console.log("FAIL - trovata");
-      }
-
-      if (tmpNodo.istruzione == "Redo") {
-         currNode = root;
-
-         while (currNode.children.length > 0) {
-            if (currNode.call === tmpNodo.valore) {
-               break;
-            }
-
-            currNode = currNode.children[currNode.children.length - 1];
-         }
+            break;
+         case "Exit":
+         case "Fail":
+            const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [] };
+            currNode.children.push(newNode);
+            currNode = newNode;
+            currExit = istruzione === "Exit" ? currNode : currExit;
+            break;
       }
    }
 
