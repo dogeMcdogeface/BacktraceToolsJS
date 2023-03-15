@@ -73,10 +73,14 @@ function parseTrace(trace) {
             break;
          case "Exit":
          case "Fail":
-            const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [] };
+            const newNode = {text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [] };
             currNode.children.push(newNode);
             currNode = newNode;
-            currExit = istruzione === "Exit" ? currNode : currExit;
+            if(istruzione === "Exit"){
+             currExit = currNode;
+            }else{
+            currNode.HTMLclass =  'fail';
+            }
             break;
       }
    }
@@ -88,6 +92,7 @@ function parseTrace(trace) {
 
    console.log("root", root);
    var my_chart = new Treant({ chart: chart, nodeStructure: root });
+   return root;
 }
 
 parseTrace(trace);
