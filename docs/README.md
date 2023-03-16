@@ -56,6 +56,7 @@ Simply open the [editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/e
 
 ![alt text](./Screenshots/Example1.png)
 ![alt text](./Screenshots/Example2.png)
+![alt text](./Screenshots/ExampleTimeout.png)
 
 ## Setup
 Only the [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) folder is required for the editor to work. A simple File Server in Java is included, but not required. Any other server may be used; The [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) for example uses [Github Pages](https://pages.github.com/) with no additional configuration.
