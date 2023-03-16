@@ -3,7 +3,7 @@
     eg pressing buttons, keyboard shortcuts...
 */
 
-const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml"];
+const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml"];
 
 
 const codeArea = document.getElementById("codeArea");
