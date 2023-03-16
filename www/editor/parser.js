@@ -5,13 +5,12 @@ function parseTrace(trace) {
    let cntNodi = 1;
    let root = null;
 
-   for (let i = 0; i < trace.length; i++) {
+for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
       let cleaned = trace[i].replace(/^(\^ )?/, "").trim();
       let match = cleaned.match(/^(.*):\s*\((\d+)\)\s*(.*)$/);
       let istruzione = match[1];
       let scope = match[2];
       let valore = match[3];
-
       // console.log("-", istruzione, "-", scope, "-", valore, "-");
       const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, HTMLclass: istruzione, children: [] };
 
@@ -20,7 +19,6 @@ function parseTrace(trace) {
       } else {
          currNode.children.push(newNode);
       }
-
       switch (istruzione) {
          default:
          case "Call":
@@ -36,8 +34,5 @@ function parseTrace(trace) {
             break;
       }
    }
-
-   console.log("root", root);
-
    return root;
 }

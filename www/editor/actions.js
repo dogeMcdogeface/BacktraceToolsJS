@@ -3,6 +3,8 @@
     Write to/ clear the console, etc
 */
 
+let treeMaxNodes = 500;
+
 var treeChart;
 const treeConfig = {
    container: "#treeArea",
@@ -64,7 +66,7 @@ function onTreeLoaded() {
    let pcenterX = pElem.offsetLeft + pElem.offsetWidth / 2;
    let pcenterY = pElem.offsetTop + pElem.offsetHeight / 2;
 
-   makeSquare(treeArea);
+   //makeSquare(treeArea);
 
    panzoom.setOptions({ startX: -centerX + pcenterX });
 

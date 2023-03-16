@@ -35,7 +35,7 @@ function executeQuery() {
    block.onSelected = () => {
       clearTrace();
       printToTrace(block.trace);
-       printToTree(block.trace);
+      printToTree(block.trace);
    };
    consoleArea.selectElement(block);
 
@@ -63,8 +63,7 @@ function executeQuery() {
 
    function handle_error(data) {
       //console.warn("Error occurred:", data);
-      clearTimeout(timer); //Reset the hanged worker timeout
-      worker.terminate();
+      handle_done(data);
       block.setError(data.message);
       block.status = "Aborted.";
       // Do something to handle the error
@@ -98,11 +97,9 @@ function executeQuery() {
 
    function handle_timeout() {
       console.warn("Worker timed out");
-      worker.terminate();
       handle_error({ error: true, message: "Runtime error: Query timed out" });
    }
    block.stopButton.onclick = function () {
-      worker.terminate();
       handle_error({ error: true, message: "Query manually stopped" });
    };
 }
