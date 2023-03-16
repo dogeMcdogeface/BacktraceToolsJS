@@ -8,6 +8,11 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 .node p { font-size: 20px; line-height: 20px; height: 20px; font-weight: bold; padding: 3px; margin: 0; }
 
 
+.node.Root {
+    border: 3px solid   #b3d9ff;
+    background:  #b3d9ff;
+    box-shadow: 0 0 10px  #b3d9ff;
+    }
 .node.Call {
     border: 3px solid  gray;
     background: gray;

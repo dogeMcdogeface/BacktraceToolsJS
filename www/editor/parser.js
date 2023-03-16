@@ -8,30 +8,25 @@ function parseTrace(trace) {
       .slice(1);
 
    let cntNodi = 1;
+   let root = null;
 
-   root = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [], HTMLid: "treeRoot" };
-
-   let currNode = root;
-   let currExit = root;
-
-   for (let i = 1; i < trace.length; i++) {
+   for (let i = 0; i < trace.length; i++) {
       let [istruzione, scope, valore] = trace[i]
          .trim()
          .replace(/^\^?\s*|\s*:/g, "")
          .split(" ");
 
-      /*const [istruzione, scope, valore] = trace[i]
-         .trim()
-         .match(/^(.+):\s\(([^)]+)\)\s(.+)$/)
-         .slice(1);*/
+      //console.log("-", istruzione, "-", scope, "-", valore, "-");
+      const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, HTMLclass: istruzione, children: [] };
 
-      const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [] };
-      newNode.HTMLclass = istruzione;
-      currNode.children.push(newNode);
-
-      console.log("-", istruzione, "-", scope, "-", valore, "-");
+      if (i === 0) {
+         root = { ...newNode, HTMLid: "treeRoot", HTMLclass: "Root" };
+      } else {
+         currNode.children.push(newNode);
+      }
 
       switch (istruzione) {
+         default:
          case "Call":
          case "Exit":
          case "Fail":
@@ -40,33 +35,10 @@ function parseTrace(trace) {
          case "Redo":
             currNode = root;
             while (currNode.children.length && currNode.text.name !== valore) {
-            console.log(currNode.call, valore);
                currNode = currNode.children[currNode.children.length - 1];
             }
             break;
       }
-
-      /*switch (istruzione) {
-         case "Call":
-            currExit.call = valore;
-            break;
-         case "Redo":
-            currNode = root;
-            while (currNode.children.length && currNode.call !== valore) {
-               currNode = currNode.children[currNode.children.length - 1];
-            }
-            break;
-         case "Exit":
-         case "Fail":
-
-            currNode = newNode;
-            if (istruzione === "Exit") {
-               currExit = currNode;
-            } else {
-               currNode.HTMLclass = "fail";
-            }
-            break;
-      }*/
    }
 
    console.log("root", root);

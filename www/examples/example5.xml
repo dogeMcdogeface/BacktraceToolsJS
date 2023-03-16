@@ -16,7 +16,6 @@ soldier(snake).
 tool(hammer).
 
 animal(X):- mammal(X).
-animal(X):- reptile(X).
 animal(X):- bird(X).
 animal(X):- reptile(X), not(soldier(X)).]]></program>
     <query>animal(Animals).</query>
