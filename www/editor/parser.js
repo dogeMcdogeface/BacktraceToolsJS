@@ -9,7 +9,7 @@ function parseTrace(trace) {
 
    let cntNodi = 1;
 
-   root = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [] };
+   root = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, children: [], HTMLid : "treeRoot" };
 
    let currNode = root;
    let currExit = root;
