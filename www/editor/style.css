@@ -59,8 +59,9 @@ body {
    background-color: MintCream;
    min-width: 100%;
    min-height: 100%;
-   width: 100vw;
-   height: 100vh;
+      width: 1vw;
+      height: 1vw;
+   overflow: visible !important;
 }
 
 /* Define styles for query area */
