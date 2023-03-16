@@ -36,7 +36,8 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 - [SWI-Prolog](https://www.swi-prolog.org/): A widely-used Prolog implementation.
 - [WebAssembly](https://webassembly.org/): A binary instruction format for a stack-based virtual machine.
 - [SWI-Prolog for the browser](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650): A WASM port of SWI-Prolog.
-
+- [Treant-js](https://fperucic.github.io/treant-js/) A graph drawing library.
+- [panzoom library](https://github.com/timmywil/panzoom) For navigating the tree chart.
 
 ## Features
 - [x] Real-time editing and querying of Prolog programs. 
