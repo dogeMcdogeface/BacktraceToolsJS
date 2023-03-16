@@ -31,7 +31,7 @@ function btn_showAnswer_glow() {
 clearTrace();
 function clearTrace() {
 treeArea.innerHTML = "";
-treeChart = {};
+treeChart = null;
    traceArea.textContent = "";
    traceArea.cont = document.createElement("div");
    traceArea.appendChild(traceArea.cont);
