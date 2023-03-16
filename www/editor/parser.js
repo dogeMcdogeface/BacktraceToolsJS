@@ -2,21 +2,17 @@ function parseTrace(trace) {
    console.log("parsing trace", trace, !trace, trace.length, !trace || trace.length < 1);
    if (!trace || trace.length < 1) return;
 
-   const [istruzione, scope, valore] = trace[0]
-      .trim()
-      .match(/^(.+):\s\(([^)]+)\)\s(.+)$/)
-      .slice(1);
-
    let cntNodi = 1;
    let root = null;
 
    for (let i = 0; i < trace.length; i++) {
-      let [istruzione, scope, valore] = trace[i]
-         .trim()
-         .replace(/^\^?\s*|\s*:/g, "")
-         .split(" ");
+      let cleaned = trace[i].replace(/^(\^ )?/, "").trim();
+      let match = cleaned.match(/^(.*):\s*\((\d+)\)\s*(.*)$/);
+      let istruzione = match[1];
+      let scope = match[2];
+      let valore = match[3];
 
-      //console.log("-", istruzione, "-", scope, "-", valore, "-");
+      // console.log("-", istruzione, "-", scope, "-", valore, "-");
       const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, HTMLclass: istruzione, children: [] };
 
       if (i === 0) {

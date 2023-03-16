@@ -28,12 +28,15 @@ self.addEventListener("message", async (event) => {
 async function handleRequest(request) {
   console.log("Request:", request);
 
+  const gcdebug = ":- set_prolog_flag(gc,off). ";
+
   const program = request.program;
   const count = parseInt(request.count);
   const goal = request.goal;
   const tracedGoal = `(trace, (${goal}))`;
 
   //----------------------------------------- LOAD PROGRAM ---------------------------------------------------------
+  await Prolog.load_string(gcdebug, "debug.pl"); // Disable garbage collection
   await Prolog.load_string(program, "program.pl"); // Load program
 
   //----------------------------------------- TEST GOAL ------------------------------------------------------------
