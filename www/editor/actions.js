@@ -49,42 +49,32 @@ function printToTrace(...txt) {
 function printToTree(trace) {
    const root = parseTrace(trace);
    if (!root) return;
-   console.log("root", root);
-       treeArea.style.minHeight  = ``;
-       treeArea.style.minWidth = ``;
+   treeArea.style.minHeight  = ``;
+   treeArea.style.minWidth = ``;
    treeChart = new Treant({ chart: treeConfig, nodeStructure: root });
 }
 
-function onTreeLoaded(){
+function onTreeLoaded() {
+   const elem = document.getElementById("treeRoot");
+   const pElem = treeArea.parentElement;
 
+   let centerX = elem.offsetLeft + elem.offsetWidth / 2;
+   let centerY = elem.offsetTop + elem.offsetHeight / 2;
 
+   let pcenterX = pElem.offsetLeft + pElem.offsetWidth / 2;
+   let pcenterY = pElem.offsetTop + pElem.offsetHeight / 2;
 
-       const elem = document.getElementById("treeRoot");
-       const pElem = treeArea.parentElement;
+   makeSquare(treeArea);
 
-        let centerX = elem.offsetLeft + elem.offsetWidth / 2;
-        let centerY = elem.offsetTop + elem.offsetHeight / 2;
+   panzoom.setOptions({ startX: -centerX + pcenterX });
 
-        let pcenterX = pElem.offsetLeft + pElem.offsetWidth / 2;
-        let pcenterY = pElem.offsetTop + pElem.offsetHeight / 2;
-
-
-        makeSquare(treeArea);
-
-       console.log(centerX, centerY,pcenterX,pcenterY);
-        panzoom.setOptions({ startX:(-centerX+pcenterX) })
-
-
-
-    panzoom.zoom(1);
-      // panzoom.reset();
-       setTimeout(() => panzoom.reset({ animate: false }));
-        //panzoom.setOptions({ focal: {x:-centerX,y:-centerY} })
-        //setTimeout(() => panzoom.pan(-centerX+pcenterX, -centerY+pcenterY/2, { animate: true }),600);
- if (!isVisible(treeArea)) treeArea.innerHTML = "";
-
-
+   panzoom.zoom(1);
+   // panzoom.reset();
+   setTimeout(() => panzoom.reset({ animate: false }));
+   //setTimeout(() => panzoom.pan(-centerX+pcenterX, -centerY+pcenterY/2, { animate: true }),600);
+   if (!isVisible(treeArea)) treeArea.innerHTML = "";
 }
+
 
 
 
@@ -93,27 +83,21 @@ const observer = new IntersectionObserver(([entry]) => {
    if (entry.target === treeArea && entry.isIntersecting && !!treeChart && treeArea.innerHTML === "") {
    treeChart.tree.reload();
    }
-
 });
 observer.observe(treeArea);
 
 
 const elem = document.getElementById("treeArea");
 const panzoom = Panzoom(treeArea, {
-duration:500,
+duration:200,
    contain:"outside",
    maxScale: 1.1,
-   minScale: 0.01,
    canvas:true
 });
-/*panzoom.pan(10, 10);
-panzoom.zoom(1, { animate: true });*/
+
 
 elem.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
 
-elem.addEventListener('panzoomchange', (event) => {
-  console.log(event.detail) // => { x: 0, y: 0, scale: 1 }
-})
 
 function makeSquare(elem) {
 

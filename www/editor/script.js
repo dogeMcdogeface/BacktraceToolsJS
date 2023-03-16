@@ -29,7 +29,7 @@ queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom actio
 
 for (const elementId in buttonHandlers) {
   const element = document.getElementById(elementId);
-  console.log(element, elementId);
+  //console.log(element, elementId);
   const handler = buttonHandlers[elementId];
   element.onclick = handler;
 }
