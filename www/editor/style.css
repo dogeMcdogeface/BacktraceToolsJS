@@ -45,7 +45,7 @@ body {
 }
 
 /* Define styles for trace area */
-#traceText {
+#traceArea {
     font-family:Times New Roman;
    background-color: Cornsilk;
    min-width: 100%;

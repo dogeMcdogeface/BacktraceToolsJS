@@ -30,9 +30,11 @@ function btn_showAnswer_glow() {
 
 clearTrace();
 function clearTrace() {
-   traceText.textContent = "";
-   traceText.cont = document.createElement("div");
-   traceText.appendChild(traceText.cont);
+treeArea.innerHTML = "";
+treeChart = {};
+   traceArea.textContent = "";
+   traceArea.cont = document.createElement("div");
+   traceArea.appendChild(traceArea.cont);
 }
 
 function printToTrace(...txt) {
@@ -40,7 +42,7 @@ function printToTrace(...txt) {
       const div = document.createElement("div");
       const textNode = document.createTextNode(t);
       div.appendChild(textNode);
-      traceText.cont.appendChild(div);
+      traceArea.cont.appendChild(div);
    }
 }
 
