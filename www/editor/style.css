@@ -59,8 +59,8 @@ body {
    background-color: MintCream;
    min-width: 100%;
    min-height: 100%;
-      width: 1vw;
-      height: 1vw;
+width: fit-content;
+height: fit-content;
    overflow: visible !important;
 }
 

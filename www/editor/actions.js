@@ -3,6 +3,25 @@
     Write to/ clear the console, etc
 */
 
+var treeChart;
+const treeConfig = {
+   container: "#treeArea",
+   rootOrientation: "NORTH",
+   siblingSeparation: 300,
+   connectors: {
+      type: "step",
+      style: {
+         "stroke-width": 5,
+         stroke: "#606060", // Set the stroke color to red
+      },
+   },
+   callback: {
+      onTreeLoaded: function () {
+         if (!isVisible(treeArea)) treeArea.innerHTML = "";
+      },
+   },
+};
+
 function btn_showAnswer_glow() {
    document.getElementById("answer-show-button").classList.add("pressed");
    if (window.timerId) clearTimeout(window.timerId);
@@ -11,9 +30,9 @@ function btn_showAnswer_glow() {
 
 clearTrace();
 function clearTrace() {
-  traceText.textContent = '';
-  traceText.cont = document.createElement("div");
-  traceText.appendChild(traceText.cont);
+   traceText.textContent = "";
+   traceText.cont = document.createElement("div");
+   traceText.appendChild(traceText.cont);
 }
 
 function printToTrace(...txt) {
@@ -24,6 +43,20 @@ function printToTrace(...txt) {
       traceText.cont.appendChild(div);
    }
 }
+
+function printToTree(trace) {
+   const root = parseTrace(trace);
+   if (!root) return;
+   console.log("root", root);
+   treeChart = new Treant({ chart: treeConfig, nodeStructure: root });
+}
+
+const isVisible = (element) => !!element && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+const observer = new IntersectionObserver(([entry]) => {
+   if (entry.target === treeArea && entry.isIntersecting && !!treeChart && treeArea.innerHTML === "") treeChart.tree.reload();
+});
+observer.observe(treeArea);
+
 
 function displayProgram(program) {
    console.log(program.title);

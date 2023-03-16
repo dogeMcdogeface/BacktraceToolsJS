@@ -11,6 +11,7 @@ const queryArea = document.getElementById("queryArea");
 const queryNumb = document.getElementById("answer-number-input")
 const consoleArea = document.getElementById("consoleArea");
 const traceText = document.getElementById("traceText");
+const treeArea = document.getElementById('treeArea');
 const examplesMenu = document.getElementById("examplesMenu");
 
 const buttonHandlers = {

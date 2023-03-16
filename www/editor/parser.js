@@ -1,6 +1,6 @@
 function parseTrace(trace) {
-   console.log("parsing trace", trace);
-   if (trace.length < 1) return;
+   console.log("parsing trace", trace, !trace,trace.length,!trace || trace.length < 1 );
+   if (!trace || trace.length < 1) return;
 
    const [istruzione, scope, valore] = trace[0]
       .trim()
@@ -45,20 +45,7 @@ function parseTrace(trace) {
       }
    }
 
-   chart = {
-      container: "#treeArea",
-      scrollbar: "resize",
-      rootOrientation: "NORTH",
-      connectors: {
-         type: "step",
-         style: {
-            "stroke-width": 5,
-            stroke: "#606060", // Set the stroke color to red
-         },
-      },
-   };
-
    console.log("root", root);
-   var my_chart = new Treant({ chart: chart, nodeStructure: root });
+
    return root;
 }
