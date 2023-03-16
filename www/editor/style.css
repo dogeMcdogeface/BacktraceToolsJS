@@ -45,7 +45,7 @@ body {
 }
 
 /* Define styles for trace area */
-#traceText {
+#traceArea {
     font-family:Times New Roman;
    background-color: Cornsilk;
    min-width: 100%;
@@ -59,8 +59,9 @@ body {
    background-color: MintCream;
    min-width: 100%;
    min-height: 100%;
-   width: 100vw;
-   height: 100vh;
+width: fit-content;
+height: fit-content;
+   overflow: visible !important;
 }
 
 /* Define styles for query area */

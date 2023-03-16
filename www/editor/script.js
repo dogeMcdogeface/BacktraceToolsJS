@@ -3,14 +3,15 @@
     eg pressing buttons, keyboard shortcuts...
 */
 
-const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml"];
+const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml"];
 
 
 const codeArea = document.getElementById("codeArea");
 const queryArea = document.getElementById("queryArea");
 const queryNumb = document.getElementById("answer-number-input")
 const consoleArea = document.getElementById("consoleArea");
-const traceText = document.getElementById("traceText");
+const traceArea = document.getElementById("traceArea");
+const treeArea = document.getElementById('treeArea');
 const examplesMenu = document.getElementById("examplesMenu");
 
 const buttonHandlers = {
@@ -28,7 +29,7 @@ queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom actio
 
 for (const elementId in buttonHandlers) {
   const element = document.getElementById(elementId);
-  console.log(element, elementId);
+  //console.log(element, elementId);
   const handler = buttonHandlers[elementId];
   element.onclick = handler;
 }

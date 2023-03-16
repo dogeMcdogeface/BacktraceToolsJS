@@ -32,7 +32,7 @@ header {
 #codeArea {
    grid-area: code;
 }
-#traceArea {
+#traceContainer {
    grid-area: trace;
 }
 #queryArea {

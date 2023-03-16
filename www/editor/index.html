@@ -7,6 +7,8 @@
     <!-- Import CSS files ------------------------------------------------------------------------>
     <link rel="stylesheet" href="../htmlComponents/components.css" />
     <script type="module" src="../htmlComponents/components.js"></script>
+    <link rel="stylesheet" href="../treant-js-master/Treant.css" />
+    <link rel="stylesheet" href="tree.css" />
     <link rel="stylesheet" href="grid.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -32,17 +34,18 @@
         </custom-dropdown>
 
         <a class="header-title" href="https://github.com/dogeMcdogeface/BacktraceToolsJS" target="_blank">Backtrace Tools JS</a>
-
     </header>
     <!-- Define code editor section with line numbers and input textarea ------------------------->
     <code-area id="codeArea">Enter your program here...</code-area>
     <!-- Define the viewport for the trace/tree -------------------------------------------------->
-    <tab-container id="traceArea">
+    <tab-container id="traceContainer">
         <div id="Trace">
-            <div id="traceText"></div>
+            <div id="traceArea"></div>
         </div>
         <div id="Tree">
-            <div id="treeArea"></div>
+
+                <div id="treeArea"></div>
+
         </div>
     </tab-container>
     <!-- Define a textarea to write queries into ------------------------------------------------->
@@ -50,7 +53,7 @@
     <!-- Define a textarea which acts as a console ----------------------------------------------->
     <console-area id="consoleArea">
         <!--  <answer-block></answer-block>
-        <answer-block></answer-block>-->
+    <answer-block></answer-block>-->
     </console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
@@ -61,14 +64,17 @@
     <div id="answer-display-area" class="answer-controls">
         <button id="clear-console-button">Clear</button>
         <!-- <button id="stop-query-button" disabled>Stop</button>
-         <div id="query-status-label" align="right ">Query status:</div>-->
-     </div>
-     <div id="leftdragbar" onmousedown="StartLeftDrag()"></div>
-     <div id="rightdragbar" onmousedown="StartRightDrag()"></div>
-
- </div>
- <!-- Import JS files ----------------------------------------------------------------------------->
-<script src="api.js" ></script>
+     <div id="query-status-label" align="right ">Query status:</div>-->
+    </div>
+    <div id="leftdragbar" onmousedown="StartLeftDrag()"></div>
+    <div id="rightdragbar" onmousedown="StartRightDrag()"></div>
+</div>
+<!-- Import JS files ----------------------------------------------------------------------------->
+<script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+<script src="../treant-js-master/vendor/raphael.js"></script>
+<script src="../treant-js-master/Treant.js"></script>
+<script src="parser.js"></script>
+<script src="api.js"></script>
 <script src="actions.js"></script>
 <script src="script.js" defer></script>
 <script src="wasm/swipl-bundle.js" defer></script>

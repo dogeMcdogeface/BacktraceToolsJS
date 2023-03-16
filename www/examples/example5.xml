@@ -1,0 +1,22 @@
+<example>
+    <title>5-Animals</title>
+    <program><![CDATA[ % Some more test cases
+mammal(fox) .
+mammal( whale ) .
+mammal( bat ) .
+
+bird(crow).
+bird(pidgeon).
+
+reptile(snake).
+reptile(crock).
+
+soldier(snake).
+
+tool(hammer).
+
+animal(X):- mammal(X).
+animal(X):- bird(X).
+animal(X):- reptile(X), not(soldier(X)).]]></program>
+    <query>animal(Animals).</query>
+</example>
