@@ -30,30 +30,34 @@ Questo strumento è un interprete per il linguaggio di programmazione Prolog. Co
 Questo strumento è basato su un port WebAssembly (WASM) di SWI-Prolog ed è progettato per fornire un'interfaccia grafica per l'uso del linguaggio.
 
 ## Tecnologie Utilizzate
-- [SWI-Prolog](https://www.swi-prolog.org/): A widely-used Prolog implementation.
-- [WebAssembly](https://webassembly.org/): A binary instruction format for a stack-based virtual machine.
-- [SWI-Prolog for the browser](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650): A WASM port of SWI-Prolog.
+- [SWI-Prolog](https://www.swi-prolog.org/): Un'implementazione Prolog ampiamente utilizzata.
+- [WebAssembly](https://webassembly.org/): Un formato di istruzioni binarie per una virtual machine stack-based.
+- [SWI-Prolog for the browser](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650): Un port WASM di SWI-Prolog.
+- [Treant-js](https://fperucic.github.io/treant-js/) Una libreria per disegnare grafi.
+- [panzoom library](https://github.com/timmywil/panzoom) Per navigare nel grafico ad albero.
 
 
 ## Features
 - [x] Modifica e interrogazione in tempo reale di programmi Prolog.
-- [X] Gli editor di codice hanno tutte le scorciatoie standard, ctrl-z/y, ctrl-c/x/v ... Invio esegue le query.
+- [X] Gli editor di codice hanno tutte le scorciatoie standard, `ctrl-z`/`y`, `ctrl-c`/`x`/`v` ... `Invio` esegue le query.
 - [x] Il codice e le query sono persistenti attraverso i caricamenti della pagina. È disponibile anche un insieme di esempi.
 - [x] Tabulazione automatica dei risultati, con indicazione se ci sono altri risultati disponibili.
 - [X] Tracciamento automatico dei passaggi necessari per raggiungere ogni soluzione.
-  - [ ] Visualizza i passaggi in una forma di albero grafico.
+  - [X] Visualizza i passaggi in una forma di albero grafico.
 - [ ] Implementare funzionalità di testo formattato negli editor di codice e nell'area di traccia, come parole chiave colorate...
 - [x] Implementare query Prolog multi-threaded.
 - [ ] Caricamento e salvataggio di file utente.
 
 
 ## Utilizzo
-Basta aprire l'[editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) nel browser, scrivere il programma Prolog, scrivere la query e premere Invio. Sono forniti alcuni esempi per testare sia la funzionalità che i limiti del tool. Gli utenti possono selezionare il numero di soluzioni da calcolare e interrompere il processo se necessario.
+Basta aprire l'[editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) nel browser, scrivere il programma Prolog, scrivere la query e premere `Invio`. Sono forniti alcuni esempi per testare sia la funzionalità che i limiti del tool. Gli utenti possono selezionare il numero di soluzioni da calcolare e interrompere il processo se necessario.
 
 ![alt text](./Screenshots/Example1.png)
+![alt text](./Screenshots/Example2.png)
+![alt text](./Screenshots/ExampleTimeout.png)
 
 ## Configurazione
-Per avere una versione privata, è necessaria solo la cartella [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) per far funzionare l'editor. Nella repository è incluso un semplice File Server in Java, ma non è necessario. Qualsiasi altro server può essere utilizzato; ad esempio la [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) utilizza [Github Pages](https://pages.github.com/)senza alcuna configurazione aggiuntiva.
+Per avere una versione privata, è necessaria solo la cartella [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) per far funzionare l'editor. Nella repository è incluso un semplice File Server in Java, ma non è necessario. Qualsiasi altro server può essere utilizzato; ad esempio la [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) utilizza [Github Pages](https://pages.github.com/) senza alcuna configurazione aggiuntiva.
 
 Se si desidera ricompilare SWI-Prolog per il browser, si prega di leggere la [Wiki](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650).
 
@@ -66,7 +70,7 @@ Sebbene l'interfaccia grafica dello strumento sia funzionale, lo sviluppo è sta
 ## Riconoscimenti
 
 Riconosciamo il merito delle seguenti persone.
-- Molte grazie agli [sviluppatori responsibli](https://swi-prolog.discourse.group/t/wiki-discussion-swi-prolog-in-the-browser-using-wasm/5651) dello sviluppo di Prolog nel browser.
+- Molte grazie agli [sviluppatori responsabili](https://swi-prolog.discourse.group/t/wiki-discussion-swi-prolog-in-the-browser-using-wasm/5651) dello sviluppo di Prolog nel browser, e per aver risolto i numerosi problemi che ne derivano.
 
 
 
