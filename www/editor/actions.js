@@ -32,7 +32,7 @@ function btn_showAnswer_glow() {
 
 function clearTrace() {
    treeArea.innerHTML = "";
-      treeArea.title = "";
+      treeArea.header = "";
       downloadButtons.forEach(button => button.disabled = true);
 
    treeChart = null;
@@ -53,7 +53,7 @@ function printToTrace(...txt) {
 function printToTree(trace, title) {
    const root = parseTrace(trace);
    if (!root) return;
-   treeArea.title = title;
+   treeArea.header = title;
    treeArea.style.minHeight  = ``;
    treeArea.style.minWidth = ``;
    treeChart = new Treant({ chart: treeConfig, nodeStructure: root });

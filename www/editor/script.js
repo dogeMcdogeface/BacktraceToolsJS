@@ -14,7 +14,6 @@ const treeArea = document.getElementById("treeArea");
 const examplesMenu = document.getElementById("examplesMenu");
 const downloadButtons = document.querySelectorAll('.download-btn');
 
-clearTrace();
 
 const buttonHandlers = {
    "answer-show-button": btn_showAnswer,
@@ -40,15 +39,16 @@ for (const elementId in buttonHandlers) {
 
 validateInputs();
 loadPrograms();
+clearTrace();
 
 //-------------------------------------------- BUTTON FUNCTIONS ------------------------------------------------------//
 
 function btn_saveTree(ext) {
    console.log("btn_downloadTree");
-   saveAsImg("treeArea", treeArea.title, ext);
+   saveAsImg("treeArea", treeArea.header, ext);
 }
 
-function saveAsImg(id, title, format) {
+function saveAsImg(id, filename, format) {
   treeArea.classList.remove("pan");
   var options = {
     style: {
@@ -61,7 +61,7 @@ function saveAsImg(id, title, format) {
   toImage(document.getElementById(id), options)
     .then(function (dataUrl) {
       treeArea.classList.add("pan");
-      saveAs(dataUrl, title.replace(/\./g, "") );
+      saveAs(dataUrl, filename.replace(/\./g, "") );
     });
 }
 

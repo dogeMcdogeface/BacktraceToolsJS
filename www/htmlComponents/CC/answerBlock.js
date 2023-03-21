@@ -10,10 +10,10 @@ class AnswerBlock extends HTMLElement {
     const header = document.createElement("div");
     header.classList.add("header");
 
-    this.titleLabel = document.createElement("span");
-    this.titleLabel.textContent = this.getAttribute("title") || "New Query";
-    this.titleLabel.classList.add("titleLabel");
-    header.appendChild(this.titleLabel);
+    this.headerLabel = document.createElement("span");
+    this.headerLabel.textContent = this.getAttribute("header") || "New Query";
+    this.headerLabel.classList.add("headerLabel");
+    header.appendChild(this.headerLabel);
 
     this.progressLabel = document.createElement("span");
     this.progressLabel.textContent = "0";
@@ -78,11 +78,11 @@ class AnswerBlock extends HTMLElement {
     this.errorLabel.textContent = value;
   }
 
-  set title(value) {
-    this.titleLabel.textContent = value;
+  set header(value) {
+    this.headerLabel.textContent = value;
   }
-    get title() {
-      return this.titleLabel.textContent;
+    get header() {
+      return this.headerLabel.textContent;
     }
 
   set progress(value) {

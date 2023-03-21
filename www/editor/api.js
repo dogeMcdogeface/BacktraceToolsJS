@@ -28,13 +28,13 @@ function executeQuery() {
 
    const block = document.createElement("answer-block");
    consoleArea.insert(block);
-   block.title = request.goal + ".";
+   block.header = request.goal + ".";
    block.status = "Starting.";
   block.trace = [];
    block.onSelected = () => {
       clearTrace();
       printToTrace(block.trace);
-      printToTree(block.trace, block.title);
+      printToTree(block.trace, block.header);
    };
    consoleArea.selectElement(block);
 
@@ -73,7 +73,7 @@ function executeQuery() {
       clearTimeout(timer); //Reset the hanged worker timeout
       worker.terminate();
       block.status = "Finished.";
-      if (block.selected )       printToTree(block.trace, block.title);
+      if (block.selected )       printToTree(block.trace, block.header);
    }
 
    function handle_answer(data) {
@@ -91,7 +91,7 @@ function executeQuery() {
       block.trace.push(data.trace);
       block.progress = request.traceCount++;
       if (block.selected) printToTrace(data.trace);
-      if (block.selected && animateTree)       printToTree(block.trace, block.title);
+      if (block.selected && animateTree)       printToTree(block.trace, block.header);
    }
 
    function handle_timeout() {

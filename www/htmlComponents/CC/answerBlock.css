@@ -38,7 +38,7 @@ answer-block .header span {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-answer-block .header  .titleLabel {
+answer-block .header  .headerLabel {
    flex: 1;
 }
 answer-block .header  .progressLabel {
@@ -51,7 +51,7 @@ answer-block .header  .statusLabel {
     }
 
 
-answer-block .header .titleLabel::before {
+answer-block .header .headerLabel::before {
    counter-increment: answer-count;
    content: counter(answer-count) ". ";
 }
