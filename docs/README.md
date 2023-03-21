@@ -38,6 +38,7 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 - [SWI-Prolog for the browser](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650): A WASM port of SWI-Prolog.
 - [Treant-js](https://fperucic.github.io/treant-js/) A graph drawing library.
 - [panzoom library](https://github.com/timmywil/panzoom) For navigating the tree chart.
+- [html-to-image](https://github.com/bubkoo/html-to-image) To download the tree as a picture or SVG.
 
 ## Features
 - [x] Real-time editing and querying of Prolog programs. 

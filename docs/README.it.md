@@ -35,6 +35,7 @@ Questo strumento è basato su un port WebAssembly (WASM) di SWI-Prolog ed è pro
 - [SWI-Prolog for the browser](https://swi-prolog.discourse.group/t/swi-prolog-in-the-browser-using-wasm/5650): Un port WASM di SWI-Prolog.
 - [Treant-js](https://fperucic.github.io/treant-js/) Una libreria per disegnare grafi.
 - [panzoom library](https://github.com/timmywil/panzoom) Per navigare nel grafico ad albero.
+- [html-to-image](https://github.com/bubkoo/html-to-image) Per scaricare l'albero come immagine o SVG.
 
 
 ## Features
