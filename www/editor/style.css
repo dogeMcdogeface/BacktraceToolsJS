@@ -149,3 +149,21 @@ height: fit-content;
 #query-status-label{
     user-select: none;
 }
+
+.zoom-btn{
+   width: 3ch;
+   height: 3ch;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 2px;
+}
+
+.zoom-btn-container{
+  list-style: none;
+    position: absolute;
+   z-index: 3;
+   right: 0.5em;
+   bottom: 0.5em;
+
+}

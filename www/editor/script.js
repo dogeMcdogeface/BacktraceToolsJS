@@ -21,6 +21,8 @@ const buttonHandlers = {
    "clear-console-button": btn_clearConsole,
    "save-tree-svg-button": () => btn_saveTree("svg"),
    "save-tree-png-button": () => btn_saveTree("png"),
+   "zoom-in-btn": () => zoom_tree(1),
+      "zoom-out-btn": () =>  zoom_tree(-1),
    //"header-New-button": btn_headerNew,
    //"header-Open-button": btn_headerOpen,
    //"header-Save-button": btn_headerSave,
@@ -153,4 +155,14 @@ async function loadPrograms() {
    await Promise.all(programRequests);
    console.log("Stored programs ", storedPrograms);
    populateExamples();
+}
+
+function  zoom_tree(val) {
+    console.log("zoom_tree",val);
+    if(val>0){
+        panzoom.zoomIn();
+       }else{
+        panzoom.zoomOut();
+        }
+
 }
