@@ -30,9 +30,11 @@ function btn_showAnswer_glow() {
    window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
 }
 
-clearTrace();
 function clearTrace() {
    treeArea.innerHTML = "";
+      treeArea.title = "";
+      downloadButtons.forEach(button => button.disabled = true);
+
    treeChart = null;
    traceArea.textContent = "";
    traceArea.cont = document.createElement("div");
@@ -48,12 +50,14 @@ function printToTrace(...txt) {
    }
 }
 
-function printToTree(trace) {
+function printToTree(trace, title) {
    const root = parseTrace(trace);
    if (!root) return;
+   treeArea.title = title;
    treeArea.style.minHeight  = ``;
    treeArea.style.minWidth = ``;
    treeChart = new Treant({ chart: treeConfig, nodeStructure: root });
+downloadButtons.forEach(button => button.disabled = false);
 }
 
 function onTreeLoaded() {
@@ -89,16 +93,16 @@ const observer = new IntersectionObserver(([entry]) => {
 observer.observe(treeArea);
 
 
-const elem = document.getElementById("treeArea");
 const panzoom = Panzoom(treeArea, {
 duration:200,
    contain:"outside",
    maxScale: 1.1,
-   canvas:true
+   canvas:true,
+   cursor:"auto"
 });
 
-
-elem.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
+treeArea.classList.add("pan");
+treeArea.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
 
 
 function makeSquare(elem) {

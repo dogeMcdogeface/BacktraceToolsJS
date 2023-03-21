@@ -81,6 +81,9 @@ class AnswerBlock extends HTMLElement {
   set title(value) {
     this.titleLabel.textContent = value;
   }
+    get title() {
+      return this.titleLabel.textContent;
+    }
 
   set progress(value) {
     this.progressLabel.textContent = Intl.NumberFormat("en-US", {

@@ -43,9 +43,7 @@
             <div id="traceArea"></div>
         </div>
         <div id="Tree">
-
-                <div id="treeArea"></div>
-
+            <div id="treeArea"></div>
         </div>
     </tab-container>
     <!-- Define a textarea to write queries into ------------------------------------------------->
@@ -63,6 +61,8 @@
     <!-- Define answer request section with buttons ---------------------------------------------->
     <div id="answer-display-area" class="answer-controls">
         <button id="clear-console-button">Clear</button>
+        <button id="save-tree-svg-button" class="download-btn">Download Tree</button>
+        <button id="save-tree-png-button" class="download-btn">Download Tree as Image</button>
         <!-- <button id="stop-query-button" disabled>Stop</button>
      <div id="query-status-label" align="right ">Query status:</div>-->
     </div>
@@ -70,6 +70,8 @@
     <div id="rightdragbar" onmousedown="StartRightDrag()"></div>
 </div>
 <!-- Import JS files ----------------------------------------------------------------------------->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.9.0/html-to-image.js"></script>
 <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
 <script src="../treant-js-master/vendor/raphael.js"></script>
 <script src="../treant-js-master/Treant.js"></script>
