@@ -1,6 +1,6 @@
-@import url('./CC/codeArea.css');
-@import url('./CC/TabContainer.css');
-@import url('./CC/console-area.css');
-@import url('./CC/customDropdown.css');
-@import url('./CC/answerBlock.css');
+@import url('/htmlComponents/CC/codeArea.css');
+@import url('/htmlComponents/CC/TabContainer.css');
+@import url('/htmlComponents/CC/console-area.css');
+@import url('/htmlComponents/CC/customDropdown.css');
+@import url('/htmlComponents/CC/answerBlock.css');
 /* and so on... */

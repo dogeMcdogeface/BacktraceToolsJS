@@ -52,6 +52,7 @@ function saveAsImg(id, title, format) {
     style: {
       transform: "none",
       cursor: "default",
+      skipFonts :true,
     },
   };
   var toImage = format === "svg" ? htmlToImage.toSvg : htmlToImage.toPng;
