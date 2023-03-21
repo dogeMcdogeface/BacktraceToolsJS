@@ -45,7 +45,7 @@ clearTrace();
 
 function btn_saveTree(ext) {
    console.log("btn_downloadTree");
-   saveAsImg("treeArea", treeArea.header, ext);
+   saveAsImg("treeArea", treeArea.name, ext);
 }
 
 function saveAsImg(id, filename, format) {

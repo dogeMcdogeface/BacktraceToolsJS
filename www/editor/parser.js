@@ -15,7 +15,7 @@ for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
       const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, HTMLclass: istruzione, children: [] };
 
       if (i === 0) {
-         root = { ...newNode, HTMLid: "treeRoot", HTMLclass: "Root" };
+         root = { ...newNode, HTMLid: "treeRoot", HTMLclass: "Root", name: valore };
       } else {
          currNode.children.push(newNode);
       }

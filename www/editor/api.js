@@ -34,7 +34,7 @@ function executeQuery() {
    block.onSelected = () => {
       clearTrace();
       printToTrace(block.trace);
-      printToTree(block.trace, block.header);
+      printToTree(block.trace);
    };
    consoleArea.selectElement(block);
 
@@ -73,7 +73,7 @@ function executeQuery() {
       clearTimeout(timer); //Reset the hanged worker timeout
       worker.terminate();
       block.status = "Finished.";
-      if (block.selected )       printToTree(block.trace, block.header);
+      if (block.selected )       printToTree(block.trace);
    }
 
    function handle_answer(data) {
@@ -91,7 +91,7 @@ function executeQuery() {
       block.trace.push(data.trace);
       block.progress = request.traceCount++;
       if (block.selected) printToTrace(data.trace);
-      if (block.selected && animateTree)       printToTree(block.trace, block.header);
+      if (block.selected && animateTree)       printToTree(block.trace);
    }
 
    function handle_timeout() {
