@@ -3,8 +3,6 @@
     Write to/ clear the console, etc
 */
 
-let treeMaxNodes = 500;
-
 var treeChart;
 const treeConfig = {
    container: "#treeArea",
@@ -40,6 +38,37 @@ function clearTrace() {
    traceArea.cont = document.createElement("div");
    traceArea.appendChild(traceArea.cont);
 }
+
+
+let currentTarget;
+
+consoleArea.onSelected = (target) => {
+  console.log('SELECTED', target);
+
+  if (currentTarget) {
+    currentTarget.removeEventListener('updatedTrace', updatedTrace);
+    currentTarget.removeEventListener('finished', finishedTrace);
+  }
+
+  clearTrace();
+  if(target === null) return;
+  target.addEventListener('updatedTrace', updatedTrace);
+  target.addEventListener('finished', finishedTrace);
+  currentTarget = target;
+  finishedTrace();
+}
+
+function updatedTrace(e) {
+  printToTrace(e.detail);
+}
+
+function finishedTrace(e) {
+  clearTrace();
+  printToTrace(currentTarget.trace);
+  printToTree(currentTarget.trace);
+}
+
+
 
 function printToTrace(...txt) {
    for (let t of txt.flat()) {
@@ -135,10 +164,9 @@ function displayProgram(program) {
    document.dispatchEvent(new Event("input"));
 }
 
-const storedPrograms = [];
-function populateExamples() {
-   storedPrograms.sort((a, b) => a.title.localeCompare(b.title)); // sort storedPrograms alphabetically by title
-   storedPrograms.forEach((program) => {
+function populateExamples(programs) {
+   programs.sort((a, b) => a.title.localeCompare(b.title)); // sort programs alphabetically by title
+   programs.forEach((program) => {
       const button = document.createElement("button");
       button.textContent = program.title;
       button.addEventListener("click", () => displayProgram(program));

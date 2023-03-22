@@ -1,5 +1,3 @@
-const workerTimeout = 10000;
-const animateTree = false;
 
 function canExecQuery() {
    return validateInputs();
@@ -30,12 +28,7 @@ function executeQuery() {
    consoleArea.insert(block);
    block.header = request.goal + ".";
    block.status = "Starting.";
-  block.trace = [];
-   block.onSelected = () => {
-      clearTrace();
-      printToTrace(block.trace);
-      printToTree(block.trace);
-   };
+   block.trace = [];
    consoleArea.selectElement(block);
 
    //const worker = new Worker("./wasm/prolog-worker.js");
@@ -73,7 +66,8 @@ function executeQuery() {
       clearTimeout(timer); //Reset the hanged worker timeout
       worker.terminate();
       block.status = "Finished.";
-      if (block.selected )       printToTree(block.trace);
+      block.finished();
+      if (block.selected) block.onSelected();
    }
 
    function handle_answer(data) {
@@ -88,10 +82,8 @@ function executeQuery() {
 
    request.traceCount = 0;
    function handle_trace(data) {
-      block.trace.push(data.trace);
+      block.addTraceLine(data.trace);
       block.progress = request.traceCount++;
-      if (block.selected) printToTrace(data.trace);
-      if (block.selected && animateTree)       printToTree(block.trace);
    }
 
    function handle_timeout() {
@@ -102,5 +94,3 @@ function executeQuery() {
       handle_error({ error: true, message: "Query manually stopped" });
    };
 }
-
-const uniqueID = () => Math.random().toString(36).substr(2, 12);

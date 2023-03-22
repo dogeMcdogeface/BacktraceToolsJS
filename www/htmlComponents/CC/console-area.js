@@ -4,6 +4,7 @@ class ConsoleArea extends HTMLElement {
 
       this.clear = function () {
          //this.innerHTML = "";
+         this.selectElement(null);
          while (this.firstChild) this.removeChild(this.firstChild);
       };
 
@@ -65,12 +66,15 @@ class ConsoleArea extends HTMLElement {
    }
 
    selectElement(target) {
-      if (target?.classList.contains("selectable") && target !== this.lastSelected) {
-        this.lastSelected && (this.lastSelected.selected = false);
-         target.selected = true;
+      if (target === null || (target?.classList.contains("selectable") && target !== this.lastSelected)) {
+         this.lastSelected && (this.lastSelected.selected = false);
+         target && (target.selected = true);
          this.lastSelected = target;
+         setTimeout(() => this.onSelected(target), 0);
       }
    }
+
+   onSelected(target) {}
 
    isInViewport(element) {
       const parentRect = element.parentNode.getBoundingClientRect();

@@ -3,7 +3,12 @@
     eg pressing buttons, keyboard shortcuts...
 */
 
+//-------------------------------------------- CONSTANTS AND ELEMENTS ------------------------------------------------//
+
 const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml"];
+
+const workerTimeout = 10000;
+const treeMaxNodes  = 500;
 
 const codeArea = document.getElementById("codeArea");
 const queryArea = document.getElementById("queryArea");
@@ -12,30 +17,20 @@ const consoleArea = document.getElementById("consoleArea");
 const traceArea = document.getElementById("traceArea");
 const treeArea = document.getElementById("treeArea");
 const examplesMenu = document.getElementById("examplesMenu");
-const downloadButtons = document.querySelectorAll('.download-btn');
+const downloadButtons = document.querySelectorAll(".download-btn");
 
 
-const buttonHandlers = {
-   "answer-show-button": btn_showAnswer,
-   "clear-console-button": btn_clearConsole,
-   "save-tree-svg-button": () => btn_saveTree("svg"),
-   "save-tree-png-button": () => btn_saveTree("png"),
-   "zoom-in-btn": () => zoom_tree(1),
-      "zoom-out-btn": () =>  zoom_tree(-1),
-   //"header-New-button": btn_headerNew,
-   //"header-Open-button": btn_headerOpen,
-   //"header-Save-button": btn_headerSave,
-};
-
+//-------------------------------------------- LISTENERS -------------------------------------------------------------//
 document.addEventListener("input", validateInputs);
-queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom action to the query area. Pressing enter executes the query
 
-for (const elementId in buttonHandlers) {
-   const element = document.getElementById(elementId);
-   //console.log(element, elementId);
-   const handler = buttonHandlers[elementId];
-   element.onclick = handler;
-}
+document.getElementById("answer-show-button").onclick = btn_showAnswer;
+document.getElementById("clear-console-button").onclick = btn_clearConsole;
+document.getElementById("save-tree-svg-button").onclick = () => btn_saveTree("svg");
+document.getElementById("save-tree-png-button").onclick = () => btn_saveTree("png");
+document.getElementById("zoom-in-btn").onclick = () => btn_zoomTree(1);
+document.getElementById("zoom-out-btn").onclick = () => btn_zoomTree(-1);
+
+queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom action to the query area. Pressing enter executes the query
 
 validateInputs();
 loadPrograms();
@@ -45,49 +40,21 @@ clearTrace();
 
 function btn_saveTree(ext) {
    console.log("btn_downloadTree");
-   saveAsImg("treeArea", treeArea.name, ext);
-}
-
-function saveAsImg(id, filename, format) {
-  treeArea.classList.remove("pan");
-  var options = {
-    style: {
-      transform: "none",
-      cursor: "default",
-      skipFonts :true,
-    },
-  };
-  var toImage = format === "svg" ? htmlToImage.toSvg : htmlToImage.toPng;
-  toImage(document.getElementById(id), options)
-    .then(function (dataUrl) {
-      treeArea.classList.add("pan");
-      saveAs(dataUrl, filename.replace(/\./g, "") );
-    });
-}
-
-function saveAs(uri, filename) {
-   var link = document.createElement("a");
-
-   if (typeof link.download === "string") {
-      link.href = uri;
-      link.download = filename;
-
-      //Firefox requires the link to be in the body
-      document.body.appendChild(link);
-
-      //simulate click
-      link.click();
-
-      //remove the link when done
-      document.body.removeChild(link);
-   } else {
-      window.open(uri);
-   }
+   saveTreeAs(treeArea.name, ext);
 }
 
 function btn_showAnswer() {
    console.log("btn_showAnswer");
    executeQuery();
+}
+
+function btn_zoomTree(val) {
+   console.log("btn_zoomTree", val);
+   if (val > 0) {
+      panzoom.zoomIn();
+   } else {
+      panzoom.zoomOut();
+   }
 }
 
 function btn_clearConsole() {
@@ -128,6 +95,8 @@ function queryArea_enter() {
    btn_showAnswer();
 }
 
+//-------------------------------------------- DATA UTILITY FUNCTIONS ------------------------------------------------//
+
 function validateInputs() {
    const validQuery = queryArea.value.trim() !== "";
    queryArea.classList.toggle("invalid", !validQuery);
@@ -138,6 +107,7 @@ function validateInputs() {
 }
 
 async function loadPrograms() {
+   const storedPrograms = [];
    const folder = "../examples/";
    const xmlParser = new DOMParser();
    const programRequests = programFiles.map((file) =>
@@ -154,15 +124,18 @@ async function loadPrograms() {
    );
    await Promise.all(programRequests);
    console.log("Stored programs ", storedPrograms);
-   populateExamples();
+   populateExamples(storedPrograms);
 }
 
-function  zoom_tree(val) {
-    console.log("zoom_tree",val);
-    if(val>0){
-        panzoom.zoomIn();
-       }else{
-        panzoom.zoomOut();
-        }
-
+function saveTreeAs(filename, format) {
+   if (treeArea.innerHTML === "") return;
+   treeArea.classList.remove("pan");
+   const options = { style: { transform: "none", cursor: "default", skipFonts: true } };
+   const toImage = format === "svg" ? htmlToImage.toSvg : htmlToImage.toPng;
+   toImage(treeArea, options).then((dataUrl) => {
+      treeArea.classList.add("pan");
+      const link = Object.assign(document.createElement("a"), { href: dataUrl, download: filename.replace(/\./g, "") });
+      document.body.appendChild(link).click();
+      link.remove();
+   });
 }
