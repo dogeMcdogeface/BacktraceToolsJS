@@ -3,6 +3,55 @@
     Write to/ clear the console, etc
 */
 
+//-------------------------------------------- CONSOLE UTILITY FUNCTIONS ---------------------------------------------//
+
+let currentTarget;
+consoleArea.onSelected = (target) => {
+  console.log('SELECTED', target);
+
+  if (currentTarget) {
+    currentTarget.removeEventListener('updatedTrace', updatedTrace);
+    currentTarget.removeEventListener('finished', finishedTrace);
+  }
+
+  clearTrace();
+  if(target === null) return;
+  target.addEventListener('updatedTrace', updatedTrace);
+  target.addEventListener('finished', finishedTrace);
+  currentTarget = target;
+  finishedTrace();
+}
+
+//-------------------------------------------- TRACE DISPLAY FUNCTIONS -----------------------------------------------//
+
+
+function updatedTrace(e) {
+  printToTrace(e.detail);
+}
+
+function finishedTrace() {
+  clearTrace();
+  printToTrace(currentTarget.trace);
+  printToTree(currentTarget.trace);
+}
+
+function printToTrace(...txt) {
+  txt.flat().forEach(t => traceArea.cont.appendChild(document.createElement("div")).appendChild(document.createTextNode(t)));
+  traceArea.parentNode.scrollTop = traceArea.parentNode.scrollHeight;
+}
+
+
+function clearTrace() {
+   treeChart = null;
+   treeArea.name = "";
+   treeArea.innerHTML = "";
+   downloadButtons.forEach(button => button.disabled = true);
+
+   traceArea.textContent = "";
+   traceArea.cont = traceArea.appendChild(document.createElement("div"));
+}
+
+//-------------------------------------------- TREE DISPLAY FUNCTIONS ------------------------------------------------//
 var treeChart;
 const treeConfig = {
    container: "#treeArea",
@@ -22,62 +71,6 @@ const treeConfig = {
    },
 };
 
-function btn_showAnswer_glow() {
-   document.getElementById("answer-show-button").classList.add("pressed");
-   if (window.timerId) clearTimeout(window.timerId);
-   window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
-}
-
-function clearTrace() {
-   treeArea.innerHTML = "";
-      treeArea.name = "";
-      downloadButtons.forEach(button => button.disabled = true);
-
-   treeChart = null;
-   traceArea.textContent = "";
-   traceArea.cont = document.createElement("div");
-   traceArea.appendChild(traceArea.cont);
-}
-
-
-let currentTarget;
-
-consoleArea.onSelected = (target) => {
-  console.log('SELECTED', target);
-
-  if (currentTarget) {
-    currentTarget.removeEventListener('updatedTrace', updatedTrace);
-    currentTarget.removeEventListener('finished', finishedTrace);
-  }
-
-  clearTrace();
-  if(target === null) return;
-  target.addEventListener('updatedTrace', updatedTrace);
-  target.addEventListener('finished', finishedTrace);
-  currentTarget = target;
-  finishedTrace();
-}
-
-function updatedTrace(e) {
-  printToTrace(e.detail);
-}
-
-function finishedTrace(e) {
-  clearTrace();
-  printToTrace(currentTarget.trace);
-  printToTree(currentTarget.trace);
-}
-
-
-
-function printToTrace(...txt) {
-   for (let t of txt.flat()) {
-      const div = document.createElement("div");
-      const textNode = document.createTextNode(t);
-      div.appendChild(textNode);
-      traceArea.cont.appendChild(div);
-   }
-}
 
 function printToTree(trace) {
    const root = parseTrace(trace);
@@ -89,6 +82,7 @@ function printToTree(trace) {
    treeChart = new Treant({ chart: treeConfig, nodeStructure: root });
 downloadButtons.forEach(button => button.disabled = false);
 }
+
 
 function onTreeLoaded() {
    const elem = document.getElementById("treeRoot");
@@ -112,8 +106,6 @@ function onTreeLoaded() {
 }
 
 
-
-
 const isVisible = (element) => !!element && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
 const observer = new IntersectionObserver(([entry]) => {
    if (entry.target === treeArea && entry.isIntersecting && !!treeChart && treeArea.innerHTML === "") {
@@ -121,6 +113,9 @@ const observer = new IntersectionObserver(([entry]) => {
    }
 });
 observer.observe(treeArea);
+
+
+//-------------------------------------------- PAN AND ZOOM FUNCTIONS ------------------------------------------------//
 
 
 const panzoom = Panzoom(treeArea, {
@@ -135,7 +130,7 @@ treeArea.classList.add("pan");
 treeArea.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
 
 
-function makeSquare(elem) {
+/*function makeSquare(elem) {
 
   const parent = elem.parentElement;
   const parentWidth = parent.offsetWidth;
@@ -153,9 +148,10 @@ function makeSquare(elem) {
     elem.style.minHeight  = `${height}px`;
     elem.style.minWidth = `${height * parentRatio}px`;
   }
-}
+}*/
 
 
+//-------------------------------------------- EXAMPLE PROGRAMS FUNCTIONS --------------------------------------------//
 
 function displayProgram(program) {
    console.log(program.title);
@@ -172,4 +168,12 @@ function populateExamples(programs) {
       button.addEventListener("click", () => displayProgram(program));
       examplesMenu.appendElement(button);
    });
+}
+
+//-------------------------------------------- DECORATION FUNCTIONS --------------------------------------------------//
+
+function btn_showAnswer_glow() {
+   document.getElementById("answer-show-button").classList.add("pressed");
+   if (window.timerId) clearTimeout(window.timerId);
+   window.timerId = setTimeout(() => document.getElementById("answer-show-button").classList.remove("pressed"), 200);
 }
