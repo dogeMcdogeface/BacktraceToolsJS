@@ -79,3 +79,8 @@ custom-dropdown:hover .dropdown-content {
    transition: all 0.2s;
    filter: brightness(90%);
 }
+
+.dropdown-content button:disabled{
+    color: silver;
+    filter: saturate(10%);
+}
