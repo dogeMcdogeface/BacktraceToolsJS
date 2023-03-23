@@ -24,6 +24,7 @@ const downloadButtons = document.querySelectorAll(".download-btn");
 //-------------------------------------------- LISTENERS -------------------------------------------------------------//
 document.addEventListener("input", validateInputs);
 
+document.getElementById("header-New-BUTTON").onclick = btn_headerNew;
 document.getElementById("answer-show-button").onclick = btn_showAnswer;
 document.getElementById("clear-console-button").onclick = btn_clearConsole;
 document.getElementById("save-tree-svg-button").onclick = () => btn_saveTree("svg");
@@ -76,6 +77,7 @@ function btn_stopQuery() {
 
 function btn_headerNew() {
    console.log("btn_headerNew");
+   displayProgram({program: "", query: ""});
 }
 
 function btn_headerOpen() {
