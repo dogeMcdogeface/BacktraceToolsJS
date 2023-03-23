@@ -82,5 +82,5 @@ custom-dropdown:hover .dropdown-content {
 
 .dropdown-content button:disabled{
     color: silver;
-    filter: saturate(10%);
+    filter: brightness(90%) saturate(10%);
 }
