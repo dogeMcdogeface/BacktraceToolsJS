@@ -32,15 +32,10 @@
 .node.Call .instruction {
     background: Gray;
 }
-.node.Call .instruction {
-       box-shadow: 0 0 10px Gray;
-}
 .node.Exit .instruction {
     background: Green;
 }
-.node.Exit {
-    box-shadow: 0 0 10px  Green;
-}
+
 
 .node.Fail .instruction {
     background: orangered;
