@@ -16,6 +16,7 @@ const queryNumb = document.getElementById("answer-number-input");
 const consoleArea = document.getElementById("consoleArea");
 const traceArea = document.getElementById("traceArea");
 const treeArea = document.getElementById("treeArea");
+const treeHolder = document.getElementById("treeHolder");
 const examplesMenu = document.getElementById("examplesMenu");
 const downloadButtons = document.querySelectorAll(".download-btn");
 
@@ -128,12 +129,13 @@ async function loadPrograms() {
 }
 
 function saveTreeAs(filename, format) {
-   if (treeArea.innerHTML === "") return;
-   treeArea.classList.remove("pan");
+   const treeElement = treeHolder;
+   if (treeElement.innerHTML === "") return;
+   //treeElement.classList.remove("pan");
    const options = { style: { transform: "none", cursor: "default", skipFonts: true } };
    const toImage = format === "svg" ? htmlToImage.toSvg : htmlToImage.toPng;
-   toImage(treeArea, options).then((dataUrl) => {
-      treeArea.classList.add("pan");
+   toImage(treeElement, options).then((dataUrl) => {
+      //treeElement.classList.add("pan");
       const link = Object.assign(document.createElement("a"), { href: dataUrl, download: filename.replace(/\./g, "") });
       document.body.appendChild(link).click();
       link.remove();

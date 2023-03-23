@@ -40,7 +40,6 @@ function printToTrace(...txt) {
 }
 
 function clearTrace() {
-    treeChart = null;
     treeArea.name = "";
     treeArea.innerHTML = "";
     downloadButtons.forEach((button) => (button.disabled = true));
@@ -50,11 +49,11 @@ function clearTrace() {
 }
 
 //-------------------------------------------- TREE DISPLAY FUNCTIONS ------------------------------------------------//
-var treeChart;
 const treeConfig = {
-    container: "#treeArea",
+    container: "#treeHolder",
     rootOrientation: "NORTH",
     siblingSeparation: 300,
+    subTeeSeparation: 30,
     connectors: {
         type: "step",
         style: {
@@ -62,52 +61,33 @@ const treeConfig = {
             stroke: "#606060", // Set the stroke color to red
         },
     },
-    callback: {
-        onTreeLoaded: function () {
-            onTreeLoaded();
-        },
-    },
 };
 
 function printToTree(trace) {
     const root = parseTrace(trace);
     if (!root) return;
-    console.log(root);
     treeArea.name = root.name;
-    treeArea.style.minHeight = ``;
-    treeArea.style.minWidth = ``;
-    treeChart = new Treant({ chart: treeConfig, nodeStructure: root });
+    new Treant({ chart: treeConfig, nodeStructure: root });
+    const cloneHolder = treeHolder.cloneNode(true);
+
+
+    cloneHolder.observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+            const { offsetLeft: eX, offsetWidth: eW, offsetTop: eY, offsetHeight: eH } = document.getElementById("treeRoot");
+            const { offsetLeft: pX, offsetWidth: pW, offsetTop: pY, offsetHeight: pH } = treeArea.parentElement;
+            panzoom.setOptions({ startX:  pX - eX + (pW - eW) / 2 , startY:  pY - eY + (pH - eH) / 2 });
+
+            //panzoom.zoom(0.1, { animate: false });
+            panzoom.zoom(1, { animate: false });
+            setTimeout(() => panzoom.reset({ animate: true }));
+        }
+    });
+    cloneHolder.observer.observe(cloneHolder);
+    treeArea.appendChild(cloneHolder);
     downloadButtons.forEach((button) => (button.disabled = false));
 }
 
-function onTreeLoaded() {
-    const elem = document.getElementById("treeRoot");
-    const pElem = treeArea.parentElement;
 
-    let centerX = elem.offsetLeft + elem.offsetWidth / 2;
-    let centerY = elem.offsetTop + elem.offsetHeight / 2;
-
-    let pcenterX = pElem.offsetLeft + pElem.offsetWidth / 2;
-    let pcenterY = pElem.offsetTop + pElem.offsetHeight / 2;
-
-    //makeSquare(treeArea);
-
-    panzoom.setOptions({ startX: -centerX + pcenterX });
-
-    panzoom.zoom(1);
-    // panzoom.reset();
-    setTimeout(() => panzoom.reset({ animate: false }));
-    //setTimeout(() => panzoom.pan(-centerX+pcenterX, -centerY+pcenterY/2, { animate: true }),600);
-    if (!isVisible(treeArea)) treeArea.innerHTML = "";
-}
-
-const isVisible = (element) => !!element && !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
-const observer = new IntersectionObserver(([entry]) => {
-    if (entry.target === treeArea && entry.isIntersecting && !!treeChart && treeArea.innerHTML === "") {
-        treeChart.tree.reload();
-    }
-});
-observer.observe(treeArea);
 
 /*function makeSquare(elem) {
 
@@ -135,8 +115,8 @@ const panzoom = Panzoom(treeArea, {
     duration: 200,
     contain: "outside",
     maxScale: 1.1,
-    canvas: true,
-    cursor: "auto",
+    //canvas: true,
+    //cursor: "auto",
 });
 
 treeArea.classList.add("pan");

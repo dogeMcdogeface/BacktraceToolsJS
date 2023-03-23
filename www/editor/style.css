@@ -1,12 +1,13 @@
 /* Reset default margin and padding for all elements */
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-   font: 16px Tahoma , sans-serif;
+    font: 16px Tahoma, sans-serif;
+    overflow: clip;
 }
 
 /* Define styles for header */
@@ -20,11 +21,11 @@ body {
     border-bottom: 1px solid silver;
     user-select: none;
     transform: scale(1);
-    font-size:13px;
+    font-size: 13px;
 }
 .header-title {
     color: inherit;
-    font-family:'Times new roman' ;
+    font-family: "Times new roman";
     font-size: 24px;
     text-decoration: inherit;
     padding: 0px 5px;
@@ -32,13 +33,12 @@ body {
     margin-left: auto; /* Add this line to align the text to the right */
 }
 
-.header-title:hover{
-   transition: background-color 0.2s;
-   background-color: cornflowerBlue;
-      transition: transform 0.2s;
-      transform: scale(0.99);
+.header-title:hover {
+    transition: background-color 0.2s;
+    background-color: cornflowerBlue;
+    transition: transform 0.2s;
+    transform: scale(0.99);
 }
-
 
 /* Define styles for code area */
 #codeArea {
@@ -46,48 +46,49 @@ body {
 
 /* Define styles for trace area */
 #traceArea {
-    font-family:Times New Roman;
-   background-color: Cornsilk;
-   min-width: 100%;
-   min-height: 100%;
-   width: auto;
-   height: auto;
-   padding-left: 10px;
+    font-family: Times New Roman;
+    background-color: Cornsilk;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    padding-left: 10px;
 }
 
 #treeArea {
-   background-color: MintCream;
-   min-width: 100%;
-   min-height: 100%;
-width: fit-content;
-height: fit-content;
-   overflow: visible !important;
+    background-color: MintCream;
+    min-width: 100%;
+    min-height: 100%;
+    width: fit-content;
+    height: fit-content;
+    overflow: visible !important;
 }
 
 /* Define styles for query area */
 #queryArea {
-   --side-text-value: "?-" counter(linenumbers);
-   --side-text-color: black;
+    --side-text-value: "?-" counter(linenumbers);
+    --side-text-color: black;
 }
 
 /* Define styles for console area */
 #consoleArea {
+    background: white;
 }
 
 .solutionTable {
-   border: 1px solid black;
-   overflow: auto;
+    border: 1px solid black;
+    overflow: auto;
 }
 .solutionTable thead tr {
-   position: sticky;
-   top: -10px;
-   background-color: LemonChiffon;
+    position: sticky;
+    top: -10px;
+    background-color: LemonChiffon;
 }
 
 .solutionTable tbody th,
 .solutionTable td {
-   border: 1px solid black;
-   padding: 10px;
+    border: 1px solid black;
+    padding: 10px;
 }
 
 /* Define styles for footer areas */
@@ -99,71 +100,81 @@ height: fit-content;
 
 /* Define styles for answer request area */
 .answer-controls {
-   display: flex;
-   align-items: center;
-   background-color: Silver;
-   font-size: 16px;
-   padding: 3px;
+    display: flex;
+    align-items: center;
+    background-color: Silver;
+    font-size: 16px;
+    padding: 3px;
 }
 
 /* Define styles for answer request button */
 .answer-controls button {
-   display: inline-block;
-   font-size: 16px;
-   padding: 5px;
-   border: none;
-   border-radius: 5px;
-   margin-left: 5px;
-   margin-right: 5px;
-   vertical-align: middle;
-   cursor: pointer;
-   transition: box-shadow 0.4s ease-out;
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: box-shadow 0.4s ease-out;
 }
 .answer-controls button.pressed {
-   transition: box-shadow 0s;
-   /*filter: brightness(80%);*/
-   box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
+    transition: box-shadow 0s;
+    /*filter: brightness(80%);*/
+    box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
 }
 
 #answer-number-input {
-   display: inline-block;
-   width: 8ch;
-   height: 30px;
-   padding: 5px;
-   font-size: 16px;
-   margin-left: 5px;
-   margin-right: 10px;
-   vertical-align: middle;
-   border: 1px solid #ccc;
-   border-radius: 5px;
-   resize: none;
+    display: inline-block;
+    width: 8ch;
+    height: 30px;
+    padding: 5px;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
 }
 #answer-number-input:invalid {
-   border: 2px dashed red;
+    border: 2px dashed red;
 }
 
 #answer-number-input:valid {
-   border: 2px solid black;
+    border: 2px solid black;
 }
 
-#query-status-label{
+#query-status-label {
     user-select: none;
 }
 
-.zoom-btn{
-   width: 3ch;
-   height: 3ch;
-   display: inline-flex;
-   align-items: center;
-   justify-content: center;
-   margin-bottom: 2px;
+.zoom-btn {
+    width: 3ch;
+    height: 3ch;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
 }
 
-.zoom-btn-container{
-  list-style: none;
+.zoom-btn-container {
+    list-style: none;
     position: absolute;
-   z-index: 3;
-   right: 0.5em;
-   bottom: 0.5em;
+    z-index: 3;
+    right: 0.5em;
+    bottom: 0.5em;
+}
 
+.tree-holder {
+    min-width: 10000px;
+    overflow-x: auto;
+    position: absolute;
+    z-index: -13;
+    /*right: 100%;*/
+}
+#treeArea .tree-holder {
+    position: relative;
 }
