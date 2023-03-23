@@ -55,6 +55,10 @@ body {
     padding-left: 10px;
 }
 
+
+#Tree {
+    background-color: MintCream;
+}
 #treeArea {
     background-color: MintCream;
     min-width: 100%;
@@ -63,6 +67,11 @@ body {
     height: fit-content;
     overflow: visible !important;
 }
+#treeArea .tree-holder {
+    position: relative;
+}
+
+
 
 /* Define styles for query area */
 #queryArea {
@@ -174,7 +183,4 @@ body {
     position: absolute;
     z-index: -13;
     /*right: 100%;*/
-}
-#treeArea .tree-holder {
-    position: relative;
 }
