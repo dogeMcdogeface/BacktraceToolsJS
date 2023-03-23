@@ -47,6 +47,7 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 - [x] Automatic tabulation of results, with indication of whether more results are available.
 - [X] Automatic tracing of the steps taken to reach each solution.
   - [X] Display the steps taken in a graphical tree form.
+  - [X] Download trees as PNG or SVG.
 - [ ] Implement rich text features in the code editors and trace area, such as colored keywords...
 - [x] Implement multi-threaded Prolog queries.
 - [ ] User file loading and saving.
