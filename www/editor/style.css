@@ -178,7 +178,7 @@ body {
 }
 
 .tree-holder {
-    min-width: 10000px;
+    min-width: 1000px;
     overflow-x: auto;
     position: absolute;
     z-index: -13;
