@@ -1,38 +1,59 @@
-
-
-
-.pan{
-cursor:move;
+/* optional Container STYLES */
+.chart {
+    min-height: 100%;
+    width: 100%;
+    margin: 5px;
+    margin: 5px auto;
+    border: 3px solid #ddd;
+    border-radius: 3px;
 }
 
-/* optional Container STYLES */
-.chart { min-height: 100%; width: 100%; margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; }
-.node { color: #404040; background: #b3d9ff ;padding: 1ch; border: 2px solid #C8C8C8; border-radius: 5px; }
-.node p { font-size: 20px; line-height: 20px; height: 20px; font-weight: bold; padding: 3px; margin: 0; }
+.node {
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    border: none !important;
+    display: flex !important;
+    align-items: stretch;
+    background: WhiteSmoke;
+}
 
+.instruction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    border-radius: 5px 0 0 5px;
+}
+.node.Root .instruction {
+    background: LightSkyBlue;
+}
+.node.Call .instruction {
+    background: Gray;
+}
+.node.Exit .instruction {
+    background: Green;
+}
+.node.Fail .instruction {
+    background: orangered;
+}
+.node.Redo .instruction {
+    background: orange;
+}
 
-.node.Root {
-    border: 3px solid   #b3d9ff;
-    background:  #b3d9ff;
-    }
-.node.Call {
-    border: 3px solid  gray;
-    background: gray;
-    }
-.node.Exit {
-    border: 3px solid  gray;
-    background: green;
-    }
-.node.Fail {
-    border: 3px solid  red;
-    background: #ff5050;
-    }
-.node.Redo {
-    border: 3px solid  yellow;
-    background: yellow;
-    }
+.instruction p {
+    text-transform: Uppercase;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
 
-
-
-#tree-simple {
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 1ch;
+    padding: 1ch;
+    align-items: flex-start;
 }

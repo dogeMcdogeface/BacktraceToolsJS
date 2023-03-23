@@ -1,13 +1,40 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
 
 
-body { background: #fff; }
+.rectangle {
+border: 2px solid #C8C8C8;
+border-radius: 5px;
+  display: flex;
+  align-items: stretch;
+height: fit-content;
+width: fit-content;
+}
 
-/* optional Container STYLES */
-.chart { height: 159px; width: 332px; margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; }
-.node { color: #9CB5ED; border: 2px solid #C8C8C8; border-radius: 3px; }
-.node p { font-size: 20px; line-height: 20px; height: 20px; font-weight: bold; padding: 3px; margin: 0; }
+.fail {
+background-color: red;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100%;
+padding: 0 1ch;
+}
 
-#tree-simple {
-    background-color: lightblue;
+.fail p {
+  text-transform: Uppercase;
+  color: white;
+font-weight: bold;
+margin: 0;
+writing-mode: vertical-rl;
+text-orientation: upright;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.text p {
+  margin: 1ch;
+  padding: 0;
 }

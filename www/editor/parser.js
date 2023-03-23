@@ -12,7 +12,10 @@ for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
       let scope = match[2];
       let valore = match[3];
       // console.log("-", istruzione, "-", scope, "-", valore, "-");
-      const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, HTMLclass: istruzione, children: [] };
+      //const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, name: valore, HTMLclass: istruzione, children: [] };
+
+      const newNode = { innerHTML : ` <div class="instruction"><p>${istruzione}</p></div><div class="text"><p>${valore}</p><p>Scope: ${scope}</p><p>Step:${cntNodi++}</p></div>`, name: valore, HTMLclass: istruzione, children: [] };
+
 
       if (i === 0) {
          root = { ...newNode, HTMLid: "treeRoot", HTMLclass: "Root", name: valore };
@@ -28,7 +31,7 @@ for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
             break;
          case "Redo":
             currNode = root;
-            while (currNode.children.length && currNode.text.name !== valore) {
+            while (currNode.children.length && currNode.name !== valore) {
                currNode = currNode.children[currNode.children.length - 1];
             }
             break;

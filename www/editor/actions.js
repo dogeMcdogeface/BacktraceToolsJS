@@ -73,6 +73,7 @@ function printToTree(trace) {
 
     cloneHolder.observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
+              cloneHolder.observer.disconnect();
             const { offsetLeft: eX, offsetWidth: eW, offsetTop: eY, offsetHeight: eH } = document.getElementById("treeRoot");
             const { offsetLeft: pX, offsetWidth: pW, offsetTop: pY, offsetHeight: pH } = treeArea.parentElement;
             panzoom.setOptions({ startX:  pX - eX + (pW - eW) / 2 , startY:  pY - eY + (pH - eH) / 2 });
@@ -119,7 +120,6 @@ const panzoom = Panzoom(treeArea, {
     //cursor: "auto",
 });
 
-treeArea.classList.add("pan");
 treeArea.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
 
 //-------------------------------------------- EXAMPLE PROGRAMS FUNCTIONS --------------------------------------------//
