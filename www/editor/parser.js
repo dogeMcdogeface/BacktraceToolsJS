@@ -14,7 +14,16 @@ for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
       // console.log("-", istruzione, "-", scope, "-", valore, "-");
       //const newNode = { text: { name: valore, desc: cntNodi++, title: scope, class: istruzione }, name: valore, HTMLclass: istruzione, children: [] };
 
-      const newNode = { innerHTML : ` <div class="instruction"><p>${istruzione}</p></div><div class="text"><p>${valore}</p><p>Scope: ${scope}</p><p>Step:${cntNodi++}</p></div>`, name: valore, HTMLclass: istruzione, children: [] };
+      const newNode = { innerHTML : `
+        <div class="instruction">
+            <p>${istruzione}</p>
+        </div>
+        <div class="text">
+            <p>${valore}</p>
+            <p>Scope: ${scope}</p>
+            <p>Step:${cntNodi++}</p>
+        </div>`
+        , name: valore, HTMLclass: istruzione, children: [] };
 
 
       if (i === 0) {

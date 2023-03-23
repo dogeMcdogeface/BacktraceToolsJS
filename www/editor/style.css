@@ -60,6 +60,7 @@ body {
     background-color: MintCream;
 }
 #treeArea {
+    padding: 100px;
     background-color: MintCream;
     min-width: 100%;
     min-height: 100%;
@@ -178,6 +179,7 @@ body {
 }
 
 .tree-holder {
+
     min-width: 1000px;
     overflow-x: auto;
     position: absolute;
