@@ -69,26 +69,22 @@ function printToTree(trace) {
     treeArea.name = root.name;
     new Treant({ chart: treeConfig, nodeStructure: root });
     const cloneHolder = treeHolder.cloneNode(true);
-
+    treeArea.appendChild(cloneHolder);
 
     cloneHolder.observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
-              cloneHolder.observer.disconnect();
+            cloneHolder.observer.disconnect();
             const { offsetLeft: eX, offsetWidth: eW, offsetTop: eY, offsetHeight: eH } = document.getElementById("treeRoot");
             const { offsetLeft: pX, offsetWidth: pW, offsetTop: pY, offsetHeight: pH } = treeArea.parentElement;
-            panzoom.setOptions({ startX:  pX - eX + (pW - eW) / 2 , startY:  pY - eY + (pH - eH) / 2 });
-
+            panzoom.setOptions({ startX: pX - eX + (pW - eW) / 2, startY: pY - eY + (pH - eH) / 2 });
             //panzoom.zoom(0.1, { animate: false });
             panzoom.zoom(1, { animate: false });
             setTimeout(() => panzoom.reset({ animate: true }));
         }
     });
     cloneHolder.observer.observe(cloneHolder);
-    treeArea.appendChild(cloneHolder);
     downloadButtons.forEach((button) => (button.disabled = false));
 }
-
-
 
 /*function makeSquare(elem) {
 
