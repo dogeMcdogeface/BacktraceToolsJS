@@ -83,7 +83,7 @@ function printToTree(trace) {
             const { offsetLeft: pX, offsetWidth: pW, offsetTop: pY, offsetHeight: pH } = treeArea.parentElement;
             panzoom.setOptions({ startX: pX - eX + (pW - eW) / 2, startY: pY - eY + (pH - eH) / 2 });
             panzoom.zoom(1, { animate: false });
-            panzoom.pan(pX - eX + (pW - eW) / 2, pY - eY + (pH - eH) / 2, { animate: true });
+            setTimeout(() => panzoom.reset({ animate: true }));
         }
     });
     cloneHolder.observer.observe(cloneHolder);
