@@ -67,6 +67,7 @@ const treeConfig = {
 function printToTree(trace) {
     const scope = parseInt(scopeNum.value.trim());
     const root = parseTrace(trace, scope);
+    console.log("Requested Scope",  parseInt(scopeNum.value.trim()))
     if (!root) return;
     treeArea.name = root.name;
     treeArea.scope = root.maxScope;

@@ -103,9 +103,10 @@ function queryArea_enter() {
 
 let inpScopeTimer;
 function inp_scopeNum(){
+    if(scopeNum.value === '0') scopeNum.value = '';
     if (inpScopeTimer) clearTimeout(inpScopeTimer);
+    if(!scopeNum.checkValidity()) return;
     inpScopeTimer = setTimeout(finishedTrace, 400);
-
 }
 
 //-------------------------------------------- DATA UTILITY FUNCTIONS ------------------------------------------------//

@@ -65,7 +65,7 @@
     <div id="answer-display-area" class="answer-controls">
         <button id="clear-console-button">Clear</button>
         <p>Node Scope:</p>
-        <input type="number" id="tree-scope-input" required value="10" min="0" onfocusout="this.value = this.checkValidity() ? this.value : '0t';" />
+        <input type="number" id="tree-scope-input" value="10" min="0" placeholder="All" onfocusout="this.value = this.checkValidity() ? this.value : '';" />
         <button id="save-tree-svg-button" class="download-btn">Download Tree</button>
         <button id="save-tree-png-button" class="download-btn">Download Tree as Image</button>
         <!-- <button id="stop-query-button" disabled>Stop</button>

@@ -3,8 +3,9 @@ const dashConnectors = { style: { stroke: "#bbb", "stroke-dasharray": "-" } };
 
 function parseTrace(trace, maxScope) {
     //console.log("parsing trace", trace, maxScope, !trace, trace.length, !trace || trace.length < 1);
-    if (!trace || trace.length < 1 || isNaN(maxScope)) return;
+    if (!trace || trace.length < 1) return;
 
+    if(isNaN(maxScope)) maxScope = 0;
     let cntNodi = 1;
     let initialScope = -1;
     let root = null;
