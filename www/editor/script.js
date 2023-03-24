@@ -12,7 +12,8 @@ const treeMaxNodes  = 500;
 
 const codeArea = document.getElementById("codeArea");
 const queryArea = document.getElementById("queryArea");
-const queryNumb = document.getElementById("answer-number-input");
+const queryNum = document.getElementById("answer-number-input");
+const scopeNum = document.getElementById("tree-scope-input");
 const consoleArea = document.getElementById("consoleArea");
 const traceArea = document.getElementById("traceArea");
 const treeArea = document.getElementById("treeArea");
@@ -23,6 +24,8 @@ const downloadButtons = document.querySelectorAll(".download-btn");
 
 //-------------------------------------------- LISTENERS -------------------------------------------------------------//
 document.addEventListener("input", validateInputs);
+scopeNum.addEventListener("input", inp_scopeNum);
+
 
 document.getElementById("header-New-BUTTON").onclick = btn_headerNew;
 document.getElementById("answer-show-button").onclick = btn_showAnswer;
@@ -98,12 +101,19 @@ function queryArea_enter() {
    btn_showAnswer();
 }
 
+let inpScopeTimer;
+function inp_scopeNum(){
+    if (inpScopeTimer) clearTimeout(inpScopeTimer);
+    inpScopeTimer = setTimeout(finishedTrace, 400);
+
+}
+
 //-------------------------------------------- DATA UTILITY FUNCTIONS ------------------------------------------------//
 
 function validateInputs() {
    const validQuery = queryArea.value.trim() !== "";
    queryArea.classList.toggle("invalid", !validQuery);
-   const validNumber = queryNumb.checkValidity();
+   const validNumber = queryNum.checkValidity();
    const valid = validQuery && validNumber;
    document.getElementById("answer-show-button").disabled = !valid;
    return valid;

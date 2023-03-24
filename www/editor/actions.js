@@ -29,6 +29,7 @@ function updatedTrace(e) {
 }
 
 function finishedTrace() {
+    if(!currentTarget)return;
     clearTrace();
     printToTrace(currentTarget.trace);
     printToTree(currentTarget.trace);
@@ -64,9 +65,11 @@ const treeConfig = {
 };
 
 function printToTree(trace) {
-    const root = parseTrace(trace);
+    const scope = parseInt(scopeNum.value.trim());
+    const root = parseTrace(trace, scope);
     if (!root) return;
     treeArea.name = root.name;
+    treeArea.scope = root.maxScope;
     new Treant({ chart: treeConfig, nodeStructure: root });
     const cloneHolder = treeHolder.cloneNode(true);
     treeArea.appendChild(cloneHolder);

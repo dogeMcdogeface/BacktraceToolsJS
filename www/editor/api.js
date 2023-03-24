@@ -21,7 +21,7 @@ function executeQuery() {
    const request = {
       program: codeArea.value,
       goal: queryArea.value.trim().replace(/\.$/, ""),
-      count: queryNumb.value.trim(),
+      count: queryNum.value.trim(),
    };
 
    const block = document.createElement("answer-block");
