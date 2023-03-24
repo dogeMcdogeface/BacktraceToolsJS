@@ -106,6 +106,10 @@ body {
 }
 
 #answer-display-area {
+  justify-content: flex-end;
+}
+#answer-display-area :first-child {
+  margin-right: auto;
 }
 
 /* Define styles for answer request area */
@@ -136,7 +140,7 @@ body {
     box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
 }
 
-#answer-number-input {
+.answer-controls input[type=number] {
     display: inline-block;
     width: 8ch;
     height: 30px;
@@ -149,13 +153,19 @@ body {
     border-radius: 5px;
     resize: none;
 }
-#answer-number-input:invalid {
-    border: 2px dashed red;
+
+
+.answer-controls input[type=number]:valid {
+   /* border: 2px solid black;*/
+}
+.answer-controls input[type=number]:invalid {
+    transition: box-shadow 0.4s ease-out;
+    box-shadow: 0 0 10px red;
+}
+.answer-controls input[type=number]:invalid:focus-visible {
+    outline: 1px solid dodgerblue;
 }
 
-#answer-number-input:valid {
-    border: 2px solid black;
-}
 
 #query-status-label {
     user-select: none;
