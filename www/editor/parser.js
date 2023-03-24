@@ -8,6 +8,7 @@ function parseTrace(trace) {
 for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
       let cleaned = trace[i].replace(/^(\^ )?/, "").trim();
       let match = cleaned.match(/^(.*):\s*\((\d+)\)\s*(.*)$/);
+      if (!match) continue;
       let istruzione = match[1];
       let scope = match[2];
       let valore = match[3];
@@ -25,8 +26,7 @@ for (let i = 0; i < trace.length && i < treeMaxNodes; i++) {
         </div>`
         , name: valore, HTMLclass: istruzione, children: [] };
 
-
-      if (i === 0) {
+      if (!root) {
          root = { ...newNode, HTMLid: "treeRoot", HTMLclass: "Root", name: valore };
       } else {
          currNode.children.push(newNode);
