@@ -5,7 +5,7 @@
 
 //-------------------------------------------- CONSTANTS AND ELEMENTS ------------------------------------------------//
 
-const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml"];
+const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml", "example6.xml"];
 
 const workerTimeout = 10000;
 const treeMaxNodes  = 500;

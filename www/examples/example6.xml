@@ -1,0 +1,8 @@
+<example>
+    <title>6-Cut!</title>
+    <program><![CDATA[ % Some more test cases
+temp(X,'normale'):- X<37,!.
+temp(X,'febbre'):-X<39,!.
+temp(X,'alta'):-!.]]></program>
+    <query>temp(40,X).</query>
+</example>
