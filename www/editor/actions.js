@@ -74,32 +74,16 @@ function printToTree(trace) {
     new Treant({ chart: treeConfig, nodeStructure: root });
     const cloneHolder = treeHolder.cloneNode(true);
     treeArea.appendChild(cloneHolder);
-            panzoom.zoom(1, { animate: false });
 
+    panzoom.zoom(1, { animate: false });
     cloneHolder.observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
             cloneHolder.observer.disconnect();
             const { offsetLeft: eX, offsetWidth: eW, offsetTop: eY, offsetHeight: eH } = document.getElementById("treeRoot");
             const { offsetLeft: pX, offsetWidth: pW, offsetTop: pY, offsetHeight: pH } = treeArea.parentElement;
             panzoom.setOptions({ startX: pX - eX + (pW - eW) / 2, startY: pY - eY + (pH - eH) / 2 });
-            //panzoom.zoom(0.1, { animate: false });
-            console.log("zoomin1", panzoom.getScale(), panzoom.getPan());
             panzoom.zoom(1, { animate: false });
-            console.log("zoomin2", panzoom.getScale(), panzoom.getPan());
-                panzoom.pan(pX - eX + (pW - eW) / 2, pY - eY + (pH - eH) / 2, { animate: true });
-
-            /*setTimeout(() => panzoom.reset({ animate: true },00));
-            setTimeout(() => panzoom.reset({ animate: true },100));*/
-           /* let count = 5;
-            const func = () => {
-              if (count > 0) {
-                panzoom.pan(pX - eX + (pW - eW) / 2, pY - eY + (pH - eH) / 2, { animate: true });
-                console.log("zoomin3", panzoom.getScale(), panzoom.getPan(), pX - eX + (pW - eW) / 2, pY - eY + (pH - eH) / 2);
-                count--;
-                setTimeout(func, 100);
-              }
-            }
-            setTimeout(func, 100);*/
+            panzoom.pan(pX - eX + (pW - eW) / 2, pY - eY + (pH - eH) / 2, { animate: true });
         }
     });
     cloneHolder.observer.observe(cloneHolder);
