@@ -64,6 +64,7 @@ const treeConfig = {
     },
 };
 
+
 function printToTree(trace) {
     const scope = parseInt(scopeNum.value.trim());
     const root = parseTrace(trace, scope);
