@@ -22,6 +22,7 @@ body {
     user-select: none;
     transform: scale(1);
     font-size: 13px;
+    z-index: 5;
 }
 .header-title {
     color: inherit;
@@ -31,6 +32,7 @@ body {
     padding: 0px 5px;
     margin: 0 0px;
     margin-left: auto; /* Add this line to align the text to the right */
+    white-space: nowrap;
 }
 
 .header-title:hover {
@@ -139,6 +141,16 @@ body {
     /*filter: brightness(80%);*/
     box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
 }
+
+
+#titleInput{
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1ch 0;
+}
+
+
 
 .answer-controls input[type=number] {
     display: inline-block;

@@ -2,85 +2,80 @@
 
 /* Define custom dropdown */
 custom-dropdown {
-   position: relative;
-   display: inline-block;
-   background-color: transparent;
-   color:inherit;
-   margin-right: 0px; /* Add this line to align the custom dropdown elements to the left */
-   text-decoration: none;
-    font:inherit;
-
+    position: relative;
+    display: inline-block;
+    background-color: transparent;
+    color: inherit;
+    margin-right: 0px; /* Add this line to align the custom dropdown elements to the left */
+    text-decoration: none;
+    font: inherit;
 }
 
 /* Style the button in the custom dropdown */
 custom-dropdown button {
-    font:inherit;
+    font: inherit;
 
-   background-color: inherit;
-   color:inherit;
-   border: none;
-   text-align: left; /* Add this line to left-align text within items */
-   padding: 8px 15px;
-   margin: 0 0px;
-   cursor: pointer;
-   transition: all 0.2s;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    text-align: left; /* Add this line to left-align text within items */
+    padding: 8px 15px;
+    margin: 0 0px;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 /* Style the custom dropdown on hover */
 custom-dropdown:hover .dropdown-button {
-   transition: all 0s;
-   background-color: DimGray;
-   color: white;
+    transition: all 0s;
+    background-color: DimGray;
+    color: white;
 }
 
 /* Define the content of the dropdown */
 .dropdown-content {
-   display: none;
-   position: absolute;
-   background-color: DimGray;
-   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-   z-index: 1;
-   white-space: nowrap;
+    display: none;
+    position: absolute;
+    background-color: DimGray;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    white-space: nowrap;
 }
 /* Show the dropdown content on hover */
 custom-dropdown:hover .dropdown-content {
-   display: block;
+    display: block;
 }
 
-.dropdown-content > *{
-   /*
+.dropdown-content > hr {
+    border-top: 1px solid grey;
+    border-bottom: none;
+    margin: 1px;
+}
 
-    */
-    font:inherit;
+.dropdown-content > *:not(hr) {
+    font: inherit;
     color: inherit;
     text-decoration: inherit;
     display: block; /* Add this line to set items to display as blocks */
     width: 100%; /* Add this line to set width to 100% */
     text-align: left; /* Add this line to left-align text within items */
     padding: 5px 50px 5px 10px;
- }
+}
 
-
-/* Style the buttons in the dropdown content */
-/*.dropdown-content button {
-   display: block;
-   width: 100%;
-   text-align: left;
-   padding: 5px 50px 5px 10px;
-}*/
 
 /* Style the buttons in the dropdown content on hover */
-.dropdown-content button:hover, a:hover {
-   transition: all 0.2s;
-   background-color: CornflowerBlue;
-   color: white;
+.dropdown-content button:hover,
+a:hover {
+    transition: all 0.2s;
+    background-color: CornflowerBlue;
+    color: white;
 }
 .dropdown-content button:active {
-   transition: all 0.2s;
-   filter: brightness(90%);
+    transition: all 0.2s;
+    filter: brightness(90%);
 }
 
-.dropdown-content button:disabled{
+.dropdown-content button:disabled {
     color: silver;
     filter: brightness(90%) saturate(10%);
 }

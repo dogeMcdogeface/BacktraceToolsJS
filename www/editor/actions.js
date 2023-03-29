@@ -126,6 +126,7 @@ treeArea.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
 
 function displayProgram(program) {
     console.log(program.title);
+    titleArea.value = program.title || generateTitle();
     codeArea.value = program.program;
     queryArea.value = program.query;
     document.dispatchEvent(new Event("input"));

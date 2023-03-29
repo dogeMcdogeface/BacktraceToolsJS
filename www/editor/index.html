@@ -19,9 +19,15 @@
     <!-- Define header section ------------------------------------------------------------------->
     <header class="custom-header">
         <custom-dropdown title="File">
-            <button>New</button>
-            <button disabled>Open</button>
-            <button disabled>Save</button>
+            <button id="new-file-button"     title="New empty program">New</button>
+            <hr>
+            <button id="load-local-button"    title="Load from browser memory"   >Open Recent</button>
+            <button id="load-file-button"   title="Upload a program"           >Load File</button>
+            <button id="load-string-button"  title="Load an encoded program"    >Load String</button>
+            <hr>
+            <button id="save-local-button"   title="Save to browser memory"     >Save Online</button>
+            <button id="save-file-button"    title="Save to a file"             >Save To File</button>
+            <button id="share-string-button" title="Share program as a link"    >Share String</button>
         </custom-dropdown>
         <custom-dropdown title="Edit">
             <button disabled>Undo</button>
@@ -32,6 +38,7 @@
             <a href="https://github.com/dogeMcdogeface/BacktraceToolsJS" target="_blank">Backtrace Tools JS</a>
         </custom-dropdown>
 
+        <input  required value=generateTitle() id="titleInput" onfocusout="this.value = this.checkValidity() ? this.value : generateTitle();" />
         <a class="header-title" href="https://github.com/dogeMcdogeface/BacktraceToolsJS" target="_blank">Backtrace Tools JS</a>
     </header>
     <!-- Define code editor section with line numbers and input textarea ------------------------->

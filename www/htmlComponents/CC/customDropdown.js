@@ -14,7 +14,6 @@ class CustomDropdown extends HTMLElement {
     this.dropList.className = 'dropdown-content';
     // Loop through each child element of the custom dropdown element
     for (let child of Array.from(this.children)) {
-      child.id = "header-" + child.textContent + "-" + child.tagName;
       this.dropList.appendChild(child);
     }
 
@@ -23,7 +22,6 @@ class CustomDropdown extends HTMLElement {
     this.appendChild(this.dropList); // Add the dropdown list to the custom dropdown element
   }
   appendElement(child) {
-        child.id = "header-" + child.textContent + "-" + child.tagName;
         this.dropList.appendChild(child);
       }
 }
