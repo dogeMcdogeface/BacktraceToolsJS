@@ -122,7 +122,7 @@ const panzoom = Panzoom(treeArea, {
 
 treeArea.parentElement.addEventListener("wheel", panzoom.zoomWithWheel);
 
-//-------------------------------------------- EXAMPLE PROGRAMS FUNCTIONS --------------------------------------------//
+//-------------------------------------------- DISPLAY PROGRAMS FUNCTIONS --------------------------------------------//
 
 function displayProgram(program) {
     console.log(program.title);

@@ -4,8 +4,12 @@
 */
 
 //-------------------------------------------- CONSTANTS AND ELEMENTS ------------------------------------------------//
+const url = window.location.href.split('?')[0];
+const encodeParam = "?encoded=";
 
 const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml", "example6.xml"];
+const exampleEncoded = "https://domain/editor/index.html?encoded=PGV4YW1wbGU%2BCiAgICAgICAgICAgPHRpdGxlPjEtU2FuaXR5IENoZWNrPC90aXRsZT4KICAgICAgICAgICA8cHJvZ3JhbT48IVtDREFUQVtdXT48L3Byb2dyYW0%2BCiAgICAgICAgICAgPHF1ZXJ5PmN1cnJlbnRfbW9kdWxlKE0pPC9xdWVyeT4KICAgICAgIDwvZXhhbXBsZT4%3D";
+
 
 const workerTimeout = 10000;
 const treeMaxNodes = 500;
@@ -44,6 +48,20 @@ document.getElementById("zoom-out-btn").onclick = () => btn_zoomTree(-1);
 
 queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom action to the query area. Pressing enter executes the query
 
+
+const urlParams = new URLSearchParams(window.location.search);
+const encodedString = urlParams.get('encoded');
+if (encodedString) {
+  // do something with the encoded value, such as decoding it
+    let XmlString = atob(decodeURIComponent(encodedString));
+  console.log('Encoded value:', encodedString, XmlString);
+  displayProgram(parseProgramXML(XmlString));
+
+  console.log(url);
+  history.replaceState({}, "", url);
+}
+
+
 validateInputs();
 loadPrograms();
 clearTrace();
@@ -59,31 +77,32 @@ function btn_loadLocal() {
 
 function btn_loadString() {
     console.log("btn_loadString");
-    let encodedString = prompt("Please enter the encoded string:", "");
-    let XmlString = atob(encodedString);
-    console.log(XmlString);
+    let encodedString = prompt("Please enter the encoded string:", exampleEncoded);
+
+    try {
+    const urlParams = new URLSearchParams(new URL(encodedString).search);
+    if (urlParams.get('encoded')) {
+      encodedString =  urlParams.get('encoded');
+    }
+    } catch (_) {
+        }
+
+    console.log(window.location.search, urlParams);
+    let XmlString = atob(decodeURIComponent(encodedString));
+    displayProgram(parseProgramXML(XmlString));
 }
 
 function btn_loadFile() {
-    console.log("btn_loadFile");
-    readFile((contents) => {
-        console.log(contents);
-    });
-}
-
-function readFile(callback) {
     const input = document.createElement("input");
     input.type = "file";
-    input.accept = ".xml, .pl";
+    input.accept = ".xml,.pl";
     input.addEventListener("change", () => {
-        const file = input.files[0];
         const reader = new FileReader();
-        reader.onload = () => callback(reader.result);
-        reader.readAsText(file);
+        reader.onload = () => displayProgram(parseProgramXML(reader.result));
+        reader.readAsText(input.files[0]);
     });
     input.click();
-}
-
+};
 
 
 //---------------------------------- SAVE PROGRAM BTN --------------------------------------------//
@@ -98,19 +117,20 @@ function btn_saveFile() {
 
 function btn_saveLocal() {
     console.log("btn_saveLocal");
-       const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
-   localStorage.setItem("exampleXml", xmlString);
+    const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
+    localStorage.setItem("exampleXml", xmlString);
 }
 
 function btn_shareString() {
     console.log("btn_shareString");
-        const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
-      const encodedString = btoa(xmlString);
-      console.log(encodedString);
+      const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
+      const encodedString = encodeURIComponent(btoa(xmlString));
+      console.log(url+encodeParam+encodedString);
+       window.alert("You can share this link, or paste it into the Load String menu\n" + url+encodeParam+encodedString);
 }
 
 
-//----------------------------------                  --------------------------------------------//
+//---------------------------------- INTERFACE BUTTONS -------------------------------------------//
 
 function btn_saveTree(ext) {
     console.log("btn_downloadTree");
@@ -178,7 +198,7 @@ function inp_scopeNum() {
     inpScopeTimer = setTimeout(finishedTrace, 400);
 }
 
-//-------------------------------------------- DATA UTILITY FUNCTIONS ------------------------------------------------//
+//----------------------------------------- PROGRAM UTILITY FUNCTIONS ------------------------------------------------//
 
 
 function getAsXML(title, program, query) {
@@ -200,6 +220,27 @@ function generateTitle() {
     return `untitled-${year}-${month}-${day}-${hours}${minutes}${seconds}-${randomSuffix}`;
 }
 
+function parseProgramXML(xmlString){
+    const xml = new DOMParser().parseFromString(xmlString, "application/xml");
+    const title = xml.querySelector("title").textContent;
+    const programText = xml.querySelector("program").textContent;
+    const query = xml.querySelector("query").textContent;
+    return { title, program: programText, query } ;
+}
+
+async function loadPrograms() {
+    const storedPrograms = [];
+    const folder = "../examples/";
+    const programRequests = programFiles.map((file) =>
+        fetch(folder + file)
+            .then((response) => response.text())
+            .then((program) => storedPrograms.push(parseProgramXML(program)))
+            .catch((error) => console.warn(error))
+    );
+    await Promise.all(programRequests);
+    console.log("Stored programs ", storedPrograms);
+    populateExamples(storedPrograms);
+}
 
 //-------------------------------------------- DATA UTILITY FUNCTIONS ------------------------------------------------//
 
@@ -213,26 +254,6 @@ function validateInputs() {
     return valid;
 }
 
-async function loadPrograms() {
-    const storedPrograms = [];
-    const folder = "../examples/";
-    const xmlParser = new DOMParser();
-    const programRequests = programFiles.map((file) =>
-        fetch(folder + file)
-            .then((response) => response.text())
-            .then((program) => xmlParser.parseFromString(program, "application/xml"))
-            .then((xml) => {
-                const title = xml.querySelector("title").textContent;
-                const programText = xml.querySelector("program").textContent;
-                const query = xml.querySelector("query").textContent;
-                storedPrograms.push({ title, program: programText, query });
-            })
-            .catch((error) => console.warn(error))
-    );
-    await Promise.all(programRequests);
-    console.log("Stored programs ", storedPrograms);
-    populateExamples(storedPrograms);
-}
 
 function saveTreeAs(filename, format) {
   const treeElement = treeHolder;
