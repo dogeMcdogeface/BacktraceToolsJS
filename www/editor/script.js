@@ -4,12 +4,13 @@
 */
 
 //-------------------------------------------- CONSTANTS AND ELEMENTS ------------------------------------------------//
-const url = window.location.href.split('?')[0];
+const url = window.location.href.split("?")[0];
 const encodeParam = "?encoded=";
 
 const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml", "example6.xml"];
-const exampleEncoded = "https://domain/editor/index.html?encoded=PGV4YW1wbGU%2BCiAgICAgICAgICAgPHRpdGxlPjEtU2FuaXR5IENoZWNrPC90aXRsZT4KICAgICAgICAgICA8cHJvZ3JhbT48IVtDREFUQVtdXT48L3Byb2dyYW0%2BCiAgICAgICAgICAgPHF1ZXJ5PmN1cnJlbnRfbW9kdWxlKE0pPC9xdWVyeT4KICAgICAgIDwvZXhhbXBsZT4%3D";
-
+const exampleEncoded =
+    "https://domain/editor/index.html?encoded=PGV4YW1wbGU%2BCiAgICAgICAgICAgPHRpdGxlPjEtU2FuaXR5IENoZWNrPC90aXRsZT4KICAgICAgICAgICA8cHJvZ3JhbT48IVtDREFUQVtdXT48L3Byb2dyYW0%2BCiAgICAgICAgICAgPHF1ZXJ5PmN1cnJlbnRfbW9kdWxlKE0pPC9xdWVyeT4KICAgICAgIDwvZXhhbXBsZT4%3D";
+let randomWords = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"];
 
 const workerTimeout = 10000;
 const treeMaxNodes = 500;
@@ -30,14 +31,14 @@ const downloadButtons = document.querySelectorAll(".download-btn");
 document.addEventListener("input", validateInputs);
 scopeNum.addEventListener("input", inp_scopeNum);
 
-document.getElementById("new-file-button").onclick      = btn_headerNew;
-document.getElementById("load-local-button").onclick    = btn_loadLocal;
-document.getElementById("load-file-button").onclick     = btn_loadFile;
-document.getElementById("load-string-button").onclick   = btn_loadString;
+document.getElementById("new-file-button").onclick = btn_headerNew;
+document.getElementById("load-local-button").onclick = btn_loadLocal;
+document.getElementById("load-file-button").onclick = btn_loadFile;
+document.getElementById("load-string-button").onclick = btn_loadString;
 
-document.getElementById("save-local-button").onclick    = btn_saveLocal;
-document.getElementById("save-file-button").onclick     = btn_saveFile;
-document.getElementById("share-string-button").onclick   = btn_shareString;
+document.getElementById("save-local-button").onclick = btn_saveLocal;
+document.getElementById("save-file-button").onclick = btn_saveFile;
+document.getElementById("share-string-button").onclick = btn_shareString;
 
 document.getElementById("answer-show-button").onclick = btn_showAnswer;
 document.getElementById("clear-console-button").onclick = btn_clearConsole;
@@ -48,22 +49,29 @@ document.getElementById("zoom-out-btn").onclick = () => btn_zoomTree(-1);
 
 queryArea.customKeyBehaviour("Enter", queryArea_enter); // Assign a custom action to the query area. Pressing enter executes the query
 
-
 const urlParams = new URLSearchParams(window.location.search);
-const encodedString = urlParams.get('encoded');
+const encodedString = urlParams.get("encoded");
 if (encodedString) {
-  // do something with the encoded value, such as decoding it
+    // do something with the encoded value, such as decoding it
     let XmlString = atob(decodeURIComponent(encodedString));
-  console.log('Encoded value:', encodedString, XmlString);
-  displayProgram(parseProgramXML(XmlString));
+    console.log("Encoded value:", encodedString, XmlString);
+    displayProgram(parseProgramXML(XmlString));
 
-  console.log(url);
-  history.replaceState({}, "", url);
+    console.log(url);
+    history.replaceState({}, "", url);
 }
 
-titleArea.value = titleArea.checkValidity() ? titleArea.value : generateTitle();
+fetch("../examples/words.txt")
+    .then((response) => response.text())
+    .then((wordsText) => {
+        randomWords = wordsText
+            .trim()
+            .split("\n")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+        titleArea.value = titleArea.checkValidity() ? titleArea.value : generateTitle();
+    });
 validateInputs();
-loadPrograms();
+loadExamples();
 clearTrace();
 
 //-------------------------------------------- BUTTON FUNCTIONS ------------------------------------------------------//
@@ -80,12 +88,11 @@ function btn_loadString() {
     let encodedString = prompt("Please enter the encoded string:", exampleEncoded);
 
     try {
-    const urlParams = new URLSearchParams(new URL(encodedString).search);
-    if (urlParams.get('encoded')) {
-      encodedString =  urlParams.get('encoded');
-    }
-    } catch (_) {
+        const urlParams = new URLSearchParams(new URL(encodedString).search);
+        if (urlParams.get("encoded")) {
+            encodedString = urlParams.get("encoded");
         }
+    } catch (_) {}
 
     console.log(window.location.search, urlParams);
     let XmlString = atob(decodeURIComponent(encodedString));
@@ -102,8 +109,7 @@ function btn_loadFile() {
         reader.readAsText(input.files[0]);
     });
     input.click();
-};
-
+}
 
 //---------------------------------- SAVE PROGRAM BTN --------------------------------------------//
 
@@ -123,12 +129,11 @@ function btn_saveLocal() {
 
 function btn_shareString() {
     console.log("btn_shareString");
-      const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
-      const encodedString = encodeURIComponent(btoa(xmlString));
-      console.log(url+encodeParam+encodedString);
-       window.alert("You can share this link, or paste it into the Load String menu\n\n" + url+encodeParam+encodedString);
+    const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
+    const encodedString = encodeURIComponent(btoa(xmlString));
+    console.log(url + encodeParam + encodedString);
+    window.alert("You can share this link, or paste it into the Load String menu\n\n" + url + encodeParam + encodedString);
 }
-
 
 //---------------------------------- INTERFACE BUTTONS -------------------------------------------//
 
@@ -200,7 +205,6 @@ function inp_scopeNum() {
 
 //----------------------------------------- PROGRAM UTILITY FUNCTIONS ------------------------------------------------//
 
-
 function getAsXML(title, program, query) {
     return `<example>
            <title>${title}</title>
@@ -211,24 +215,22 @@ function getAsXML(title, program, query) {
 function generateTitle() {
     const date = new Date();
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
-    const randomSuffix = Math.random().toString(36).substring(2, 8);
-    return `untitled-${year}-${month}-${day}-${hours}${minutes}${seconds}-${randomSuffix}`;
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const randomWord1 = randomWords[Math.floor(Math.random() * randomWords.length)];
+    const randomWord2 = randomWords[Math.floor(Math.random() * randomWords.length)];
+    return `untitled-${year}-${month}-${day}-${randomWord1}${randomWord2}`;
 }
 
-function parseProgramXML(xmlString){
+function parseProgramXML(xmlString) {
     const xml = new DOMParser().parseFromString(xmlString, "application/xml");
     const title = xml.querySelector("title").textContent;
     const programText = xml.querySelector("program").textContent;
     const query = xml.querySelector("query").textContent;
-    return { title, program: programText, query } ;
+    return { title, program: programText, query };
 }
 
-async function loadPrograms() {
+async function loadExamples() {
     const storedPrograms = [];
     const folder = "../examples/";
     const programRequests = programFiles.map((file) =>
@@ -244,7 +246,6 @@ async function loadPrograms() {
 
 //-------------------------------------------- DATA UTILITY FUNCTIONS ------------------------------------------------//
 
-
 function validateInputs() {
     const validQuery = queryArea.value.trim() !== "";
     queryArea.classList.toggle("invalid", !validQuery);
@@ -254,25 +255,22 @@ function validateInputs() {
     return valid;
 }
 
-
 function saveTreeAs(filename, format) {
-  const treeElement = treeHolder;
-  if (treeElement.innerHTML === "") return;
-  const options = { style: { transform: "none", cursor: "default", skipFonts: true } };
-  const toImage = format === "svg" ? htmlToImage.toSvg : htmlToImage.toPng;
-  toImage(treeElement, options)
-    .then((dataUrl) => {
-      saveToFile(filename.replace(/\./g, ""), dataUrl);
-    })
-    .catch((error) => {
-      console.error("Error saving tree image:", error);
-    });
+    const treeElement = treeHolder;
+    if (treeElement.innerHTML === "") return;
+    const options = { style: { transform: "none", cursor: "default", skipFonts: true } };
+    const toImage = format === "svg" ? htmlToImage.toSvg : htmlToImage.toPng;
+    toImage(treeElement, options)
+        .then((dataUrl) => {
+            saveToFile(filename.replace(/\./g, ""), dataUrl);
+        })
+        .catch((error) => {
+            console.error("Error saving tree image:", error);
+        });
 }
 
-
-
 function saveToFile(filename, data) {
-  const link = Object.assign(document.createElement("a"), { href: data, download: filename, style: "display: none" });
-  document.body.appendChild(link).click();
-  link.remove();
+    const link = Object.assign(document.createElement("a"), { href: data, download: filename, style: "display: none" });
+    document.body.appendChild(link).click();
+    link.remove();
 }
