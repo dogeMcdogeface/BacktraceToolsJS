@@ -61,7 +61,7 @@ if (encodedString) {
   history.replaceState({}, "", url);
 }
 
-
+titleArea.value = titleArea.checkValidity() ? titleArea.value : generateTitle();
 validateInputs();
 loadPrograms();
 clearTrace();

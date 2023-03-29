@@ -19,15 +19,15 @@
     <!-- Define header section ------------------------------------------------------------------->
     <header class="custom-header">
         <custom-dropdown title="File">
-            <button id="new-file-button"     title="New empty program">New</button>
-            <hr>
-            <button id="load-local-button"    title="Load from browser memory"   >Open Recent</button>
-            <button id="load-file-button"   title="Upload a program"           >Load File</button>
-            <button id="load-string-button"  title="Load an encoded program"    >Load String</button>
-            <hr>
-            <button id="save-local-button"   title="Save to browser memory"     >Save Online</button>
-            <button id="save-file-button"    title="Save to a file"             >Save To File</button>
-            <button id="share-string-button" title="Share program as a link"    >Share String</button>
+            <button id="new-file-button"     title="New empty program"                  >New</button>
+            <hr />
+            <button id="load-local-button"   title="Load from browser memory" disabled  >Open Recent</button>
+            <button id="load-file-button"    title="Upload a program"                   >Load File</button>
+            <button id="load-string-button"  title="Load an encoded program"            >Load String</button>
+            <hr />
+            <button id="save-local-button"   title="Save to browser memory" disabled    >Save Online</button>
+            <button id="save-file-button"    title="Save to a file"                     >Save To File</button>
+            <button id="share-string-button" title="Share program as a link"            >Share String</button>
         </custom-dropdown>
         <custom-dropdown title="Edit">
             <button disabled>Undo</button>
@@ -38,7 +38,7 @@
             <a href="https://github.com/dogeMcdogeface/BacktraceToolsJS" target="_blank">Backtrace Tools JS</a>
         </custom-dropdown>
 
-        <input  required value=generateTitle() id="titleInput" onfocusout="this.value = this.checkValidity() ? this.value : generateTitle();" />
+        <input required id="titleInput" onfocusout="this.value = this.checkValidity() ? this.value : generateTitle();" />
         <a class="header-title" href="https://github.com/dogeMcdogeface/BacktraceToolsJS" target="_blank">Backtrace Tools JS</a>
     </header>
     <!-- Define code editor section with line numbers and input textarea ------------------------->
@@ -49,9 +49,9 @@
             <div id="traceArea"></div>
         </div>
         <div id="Tree">
-            <ul class="zoom-btn-container" >
-                <li> <button class="zoom-btn" id="zoom-in-btn"> + </button></li>
-                <li> <button class="zoom-btn" id="zoom-out-btn"> - </button></li>
+            <ul class="zoom-btn-container">
+                <li><button class="zoom-btn" id="zoom-in-btn">+</button></li>
+                <li><button class="zoom-btn" id="zoom-out-btn">-</button></li>
             </ul>
             <div id="treeArea"></div>
         </div>
@@ -61,7 +61,7 @@
     <!-- Define a textarea which acts as a console ----------------------------------------------->
     <console-area id="consoleArea">
         <!--  <answer-block></answer-block>
-    <answer-block></answer-block>-->
+<answer-block></answer-block>-->
     </console-area>
     <!-- Define answer request section with button, input field, and text ------------------------>
     <div id="answer-request-area" class="answer-controls">
@@ -76,7 +76,7 @@
         <button id="save-tree-svg-button" class="download-btn">Download Tree</button>
         <button id="save-tree-png-button" class="download-btn">Download Tree as Image</button>
         <!-- <button id="stop-query-button" disabled>Stop</button>
-     <div id="query-status-label" align="right ">Query status:</div>-->
+<div id="query-status-label" align="right ">Query status:</div>-->
     </div>
     <div id="treeHolder" class="tree-holder"></div>
     <div id="leftdragbar" onmousedown="StartLeftDrag()"></div>
