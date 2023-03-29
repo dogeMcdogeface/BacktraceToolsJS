@@ -126,7 +126,7 @@ function btn_shareString() {
       const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
       const encodedString = encodeURIComponent(btoa(xmlString));
       console.log(url+encodeParam+encodedString);
-       window.alert("You can share this link, or paste it into the Load String menu\n" + url+encodeParam+encodedString);
+       window.alert("You can share this link, or paste it into the Load String menu\n\n" + url+encodeParam+encodedString);
 }
 
 
