@@ -30,10 +30,18 @@ class Modal extends HTMLElement {
 
 
         // create the modal body element
-        modal.body = document.createElement("div");
-        modal.body.classList.add("modal-body");
-        modal.body.innerHTML = content;
-        modalContent.appendChild(modal.body);
+         modal.body = document.createElement("div");
+         modal.body.classList.add("modal-body");
+         modal.body.innerHTML = content;
+         modalContent.appendChild(modal.body);
+
+
+        // create the modal footer element
+         modal.footer = document.createElement("div");
+         modal.footer.classList.add("modal-footer");
+         modalContent.appendChild(modal.footer);
+
+
 
 
         // add the modal content to the modal element

@@ -8,7 +8,6 @@
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     backdrop-filter: blur(3px);
-    background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
     animation-name: fadeIn;
     animation-duration: 0.4s;
@@ -26,9 +25,7 @@
 .modal-content {
     position: fixed;
     bottom: 0;
-    background-color: dodgerblue;
     width: 100%;
-    padding-bottom: 1ch;
     animation-name: slideIn;
     animation-duration: 0.4s;
 }
@@ -63,11 +60,12 @@ animation-fill-mode: forwards;
     padding: 0 2ch 0;
     display: flex;
     justify-content: flex-end;
+    background-color: rgba(30, 144, 255, 0.9);
     color: white;
 }
 
 .modal-body {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 1ch 2ch 1ch;
 }
 .modal-body > * {
@@ -75,6 +73,11 @@ animation-fill-mode: forwards;
     padding-bottom: 2ch;
 }
 
+
+.modal-footer {
+    background-color: rgba(30, 144, 255, 0.9);
+    padding: 0.5ch;
+}
 
 
 
