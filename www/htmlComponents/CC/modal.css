@@ -14,28 +14,29 @@
     overflow-y: hidden;
 }
 /* Hide Modal */
-.modal.hide  {
+.modal.hide {
     animation-name: fadeOut;
     animation-duration: 0.4s;
     animation-fill-mode: forwards;
 }
 
-
 /* Modal Content */
 .modal-content {
     position: fixed;
-    /*width:100%;*/
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
     animation: slideIn 0.4s;
-    margin-bottom:2ch;
+    margin-bottom: 3ch;
+    border-radius: 5px; /* set the desired border radius */
+    overflow: hidden; /* clip the corners of the children */
 }
+
 /* Hide Modal */
 .modal.hide .modal-content {
     animation-name: slideOut;
     animation-duration: 0.4s;
-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 /* The Close Button */
@@ -48,7 +49,6 @@ animation-fill-mode: forwards;
     align-items: center;
     max-width: 1em;
     max-height: 1em;
-    text-decoration: none;
     cursor: pointer;
 }
 
@@ -75,13 +75,10 @@ animation-fill-mode: forwards;
     padding-bottom: 2ch;
 }
 
-
 .modal-footer {
     background-color: rgba(30, 144, 255, 0.9);
     padding: 0.5ch;
 }
-
-
 
 /* Add Animation */
 
@@ -95,15 +92,14 @@ animation-fill-mode: forwards;
 }
 @keyframes fadeOut {
     99% {
-        height : initial;
+        height: initial;
         opacity: 1;
     }
     100% {
-        height : 0;
+        height: 0;
         opacity: 0;
     }
 }
-
 
 @keyframes slideIn {
     from {
@@ -126,6 +122,3 @@ animation-fill-mode: forwards;
         opacity: 0;
     }
 }
-
-
-
