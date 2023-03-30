@@ -47,18 +47,36 @@ This tool is built on top of a WebAssembly (WASM) port of SWI-Prolog, and is des
 - [x] Automatic tabulation of results, with indication of whether more results are available.
 - [X] Automatic tracing of the steps taken to reach each solution.
   - [X] Display the steps taken in a graphical tree form.
+  - [X] Ability to zoom in and out of the tree.
+  - [X] Filter tree nodes based on the scope value.
   - [X] Download trees as PNG or SVG.
-- [ ] Implement rich text features in the code editors and trace area, such as colored keywords...
 - [x] Implement multi-threaded Prolog queries.
-- [ ] User file loading and saving.
 
 
 ## Usage
-Simply open the [editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) in your browser, write your Prolog program, write your query, and press `Enter`. A set of examples is provided for testing both the functionality and limits of the tool. Users can select the number of solutions to compute, and abort the process if necessary.
+Simply open the [editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) in your browser, write your Prolog program, write your query, and press `Enter`.
 
-![alt text](./Screenshots/Example1.png)
-![alt text](./Screenshots/Example2.png)
-![alt text](./Screenshots/ExampleTimeout.png)
+![alt text](./Screenshots/ExampleTrace.png)
+![alt text](./Screenshots/ExampleTree.png)
+
+A set of examples is provided for testing both the functionality and limits of the tool.
+
+![alt text](./Screenshots/BlankExample.png)
+![alt text](./Screenshots/AnimalsExample.png)
+
+Users can select the number of solutions to compute, and abort the process if necessary.
+
+![alt text](./Screenshots/ExampleTimeOut.png)
+
+For greater readability and more concise reading of the tree, users can select a reference scope to ignore nodes above a certain threshold.
+
+![alt text](./Screenshots/ExampleScope.png)
+
+It is even possible to download the graphic representation of the displayed tree in svg or png format.
+
+![alt text](./Screenshots/ExampledwSVG.png)
+![alt text](./Screenshots/ExampledwPNG.png)
+
 
 ## Setup
 Only the [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) folder is required for the editor to work. A simple File Server in Java is included, but not required. Any other server may be used; The [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) for example uses [Github Pages](https://pages.github.com/) with no additional configuration.

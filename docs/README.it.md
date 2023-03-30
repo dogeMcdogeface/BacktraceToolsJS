@@ -44,19 +44,38 @@ Questo strumento è basato su un port WebAssembly (WASM) di SWI-Prolog ed è pro
 - [x] Il codice e le query sono persistenti attraverso i caricamenti della pagina. È disponibile anche un insieme di esempi.
 - [x] Tabulazione automatica dei risultati, con indicazione se ci sono altri risultati disponibili.
 - [X] Tracciamento automatico dei passaggi necessari per raggiungere ogni soluzione.
-  - [X] Visualizza i passaggi in una forma di albero grafico.
+  - [X] Visualizza i passaggi sotto forma di albero grafico.
+  - [X] Possibilità di ingrandire e rimpicciolire l'albero.
+  - [X] Filtrare i nodi dell'albero in base al valore dello scope.
   - [X] Scarica l'albero come PNG o SVG.
-- [ ] Implementare funzionalità di testo formattato negli editor di codice e nell'area della trace, come parole chiave colorate...
 - [x] Implementare query Prolog multi-threaded.
-- [ ] Caricamento e salvataggio di file utente.
 
 
 ## Utilizzo
-Basta aprire l'[editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) nel browser, scrivere il programma Prolog, scrivere la query e premere `Invio`. Sono forniti alcuni esempi per testare sia la funzionalità che i limiti del tool. Gli utenti possono selezionare il numero di soluzioni da calcolare e interrompere il processo se necessario.
+Basta aprire l'[editor](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) nel browser, scrivere il programma Prolog, scrivere la query e premere `Invio`.
 
-![alt text](./Screenshots/Example1.png)
-![alt text](./Screenshots/Example2.png)
-![alt text](./Screenshots/ExampleTimeout.png)
+![alt text](./Screenshots/ExampleTrace.png)
+![alt text](./Screenshots/ExampleTree.png)
+
+Sono forniti alcuni esempi per testare sia la funzionalità che i limiti del tool.
+
+![alt text](./Screenshots/BlankExample.png)
+![alt text](./Screenshots/AnimalsExample.png)
+
+Gli utenti possono selezionare il numero di soluzioni da calcolare e interrompere il processo se necessario.
+
+![alt text](./Screenshots/ExampleTimeOut.png)
+
+Per una  maggiore leggibilità e lettura più sintetica dell'albero gli utenti possono selezionare uno scope di riferimento per trascurare i nodi sopra una certa soglia.
+
+![alt text](./Screenshots/ExampleScope.png)
+
+È persino possibile scaricare la rappresentazione grafica dell'albero visualizzato in formato svg o png.
+
+![alt text](./Screenshots/ExampledwSVG.png)
+![alt text](./Screenshots/ExampledwPNG.png)
+
+
 
 ## Configurazione
 Per avere una versione privata, è necessaria solo la cartella [www/](https://github.com/dogeMcdogeface/BacktraceToolsJS/tree/master/www) per far funzionare l'editor. Nella repository è incluso un semplice File Server in Java, ma non è necessario. Qualsiasi altro server può essere utilizzato; ad esempio la [live version](https://dogemcdogeface.github.io/BacktraceToolsJS/www/editor/) utilizza [Github Pages](https://pages.github.com/) senza alcuna configurazione aggiuntiva.
