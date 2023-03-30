@@ -133,9 +133,9 @@ function btn_shareCode() {
     shareCodeModalLink.href = (url + encodeParam + encodedString);
     shareCodeModal.show();
 
-    //let timeoutID = setTimeout(() => {shareCodeModal.hide();}, 1500);
-    //shareCodeModal.body.addEventListener("mouseenter", () => clearTimeout(timeoutID));
-    //shareCodeModal.body.addEventListener("mouseleave", () => timeoutID = setTimeout(() => shareCodeModal.hide(), 1000));
+    let timeoutID = setTimeout(() => {shareCodeModal.hide();}, 1500);
+    shareCodeModal.body.addEventListener("mouseenter", () => clearTimeout(timeoutID));
+    shareCodeModal.body.addEventListener("mouseleave", () => timeoutID = setTimeout(() => shareCodeModal.hide(), 1000));
 }
 
 //---------------------------------- INTERFACE BUTTONS -------------------------------------------//
