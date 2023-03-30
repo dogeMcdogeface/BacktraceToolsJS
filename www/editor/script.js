@@ -15,16 +15,16 @@ let randomWords = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", 
 const workerTimeout = 10000;
 const treeMaxNodes = 500;
 
-const titleArea = document.getElementById("titleInput");
-const codeArea = document.getElementById("codeArea");
-const queryArea = document.getElementById("queryArea");
-const queryNum = document.getElementById("answer-number-input");
-const scopeNum = document.getElementById("tree-scope-input");
-const consoleArea = document.getElementById("consoleArea");
-const traceArea = document.getElementById("traceArea");
-const treeArea = document.getElementById("treeArea");
-const treeHolder = document.getElementById("treeHolder");
-const examplesMenu = document.getElementById("examplesMenu");
+const titleArea     = document.getElementById("titleInput");
+const codeArea      = document.getElementById("codeArea");
+const queryArea     = document.getElementById("queryArea");
+const queryNum      = document.getElementById("answer-number-input");
+const scopeNum      = document.getElementById("tree-scope-input");
+const consoleArea   = document.getElementById("consoleArea");
+const traceArea     = document.getElementById("traceArea");
+const treeArea      = document.getElementById("treeArea");
+const treeHolder    = document.getElementById("treeHolder");
+const examplesMenu  = document.getElementById("examplesMenu");
 const downloadButtons = document.querySelectorAll(".download-btn");
 
 //-------------------------------------------- LISTENERS -------------------------------------------------------------//
@@ -38,7 +38,8 @@ document.getElementById("load-string-button").onclick = btn_loadString;
 
 document.getElementById("save-local-button").onclick = btn_saveLocal;
 document.getElementById("save-file-button").onclick = btn_saveFile;
-document.getElementById("share-string-button").onclick = btn_shareString;
+document.getElementById("share-code-button").onclick = btn_shareCode;
+document.getElementById("hdr-share-code-button").onclick = btn_shareCode;
 
 document.getElementById("answer-show-button").onclick = btn_showAnswer;
 document.getElementById("clear-console-button").onclick = btn_clearConsole;
@@ -127,12 +128,15 @@ function btn_saveLocal() {
     localStorage.setItem("exampleXml", xmlString);
 }
 
-function btn_shareString() {
-    console.log("btn_shareString");
+function btn_shareCode() {
+    console.log("btn_shareCode");
     const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
     const encodedString = encodeURIComponent(btoa(xmlString));
     console.log(url + encodeParam + encodedString);
-    window.alert("You can share this link, or paste it into the Load String menu\n\n" + url + encodeParam + encodedString);
+    try{
+    navigator.clipboard.writeText(url + encodeParam + encodedString);
+    }catch(_){};
+    window.alert("A link to your code has been copied to your clipboard\nYou can share this link, or paste it into the Load String menu\n\n" + url + encodeParam + encodedString);
 }
 
 //---------------------------------- INTERFACE BUTTONS -------------------------------------------//

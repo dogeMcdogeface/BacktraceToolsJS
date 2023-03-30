@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Backtrace Tools GUI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="favicon.ico" />
     <!-- Import CSS files ------------------------------------------------------------------------>
     <link rel="stylesheet" href="../htmlComponents/components.css" />
@@ -27,7 +28,7 @@
             <hr />
             <button id="save-local-button"   title="Save to browser memory" disabled    >Save Online</button>
             <button id="save-file-button"    title="Save to a file"                     >Save To File</button>
-            <button id="share-string-button" title="Share program as a link"            >Share String</button>
+            <button id="share-code-button" title="Share a link to your code"            >Share Code</button>
         </custom-dropdown>
         <custom-dropdown title="Edit">
             <button disabled>Undo</button>
@@ -39,6 +40,7 @@
         </custom-dropdown>
 
         <input required id="titleInput" onfocusout="this.value = this.checkValidity() ? this.value : generateTitle();" />
+        <button id="hdr-share-code-button" title="Share a link to your code" ><i class="fa fa-share"></i>Share Code</button>
         <a class="header-title" href="https://github.com/dogeMcdogeface/BacktraceToolsJS" target="_blank">Backtrace Tools JS</a>
     </header>
     <!-- Define code editor section with line numbers and input textarea ------------------------->
