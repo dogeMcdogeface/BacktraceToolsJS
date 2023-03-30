@@ -8,23 +8,22 @@ const url = window.location.href.split("?")[0];
 const encodeParam = "?encoded=";
 
 const programFiles = ["example1.xml", "example2.xml", "example3.xml", "example4.xml", "example5.xml", "example6.xml"];
-const exampleEncoded =
-    "https://domain/editor/index.html?encoded=PGV4YW1wbGU%2BCiAgICAgICAgICAgPHRpdGxlPjEtU2FuaXR5IENoZWNrPC90aXRsZT4KICAgICAgICAgICA8cHJvZ3JhbT48IVtDREFUQVtdXT48L3Byb2dyYW0%2BCiAgICAgICAgICAgPHF1ZXJ5PmN1cnJlbnRfbW9kdWxlKE0pPC9xdWVyeT4KICAgICAgIDwvZXhhbXBsZT4%3D";
+const exampleEncoded = "https://domain/editor/index.html?encoded=PGV4YW1wbGU%2BCiAgICAgICAgICAgPHRpdGxlPjEtU2FuaXR5IENoZWNrPC90aXRsZT4KICAgICAgICAgICA8cHJvZ3JhbT48IVtDREFUQVtdXT48L3Byb2dyYW0%2BCiAgICAgICAgICAgPHF1ZXJ5PmN1cnJlbnRfbW9kdWxlKE0pPC9xdWVyeT4KICAgICAgIDwvZXhhbXBsZT4%3D";
 let randomWords = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"];
 
 const workerTimeout = 10000;
 const treeMaxNodes = 500;
 
-const titleArea     = document.getElementById("titleInput");
-const codeArea      = document.getElementById("codeArea");
-const queryArea     = document.getElementById("queryArea");
-const queryNum      = document.getElementById("answer-number-input");
-const scopeNum      = document.getElementById("tree-scope-input");
-const consoleArea   = document.getElementById("consoleArea");
-const traceArea     = document.getElementById("traceArea");
-const treeArea      = document.getElementById("treeArea");
-const treeHolder    = document.getElementById("treeHolder");
-const examplesMenu  = document.getElementById("examplesMenu");
+const titleArea = document.getElementById("titleInput");
+const codeArea = document.getElementById("codeArea");
+const queryArea = document.getElementById("queryArea");
+const queryNum = document.getElementById("answer-number-input");
+const scopeNum = document.getElementById("tree-scope-input");
+const consoleArea = document.getElementById("consoleArea");
+const traceArea = document.getElementById("traceArea");
+const treeArea = document.getElementById("treeArea");
+const treeHolder = document.getElementById("treeHolder");
+const examplesMenu = document.getElementById("examplesMenu");
 const downloadButtons = document.querySelectorAll(".download-btn");
 
 //-------------------------------------------- LISTENERS -------------------------------------------------------------//
@@ -62,15 +61,7 @@ if (encodedString) {
     history.replaceState({}, "", url);
 }
 
-fetch("../examples/words.txt")
-    .then((response) => response.text())
-    .then((wordsText) => {
-        randomWords = wordsText
-            .trim()
-            .split("\n")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
-        titleArea.value = titleArea.checkValidity() ? titleArea.value : generateTitle();
-    });
+loadCodeTitle();
 validateInputs();
 loadExamples();
 clearTrace();
@@ -133,9 +124,9 @@ function btn_shareCode() {
     const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
     const encodedString = encodeURIComponent(btoa(xmlString));
     console.log(url + encodeParam + encodedString);
-    try{
-    navigator.clipboard.writeText(url + encodeParam + encodedString);
-    }catch(_){};
+    try {
+        navigator.clipboard.writeText(url + encodeParam + encodedString);
+    } catch (_) {}
     window.alert("A link to your code has been copied to your clipboard\nYou can share this link, or paste it into the Load String menu\n\n" + url + encodeParam + encodedString);
 }
 
@@ -216,6 +207,21 @@ function getAsXML(title, program, query) {
            <query>${query}</query>
        </example>`;
 }
+
+function loadCodeTitle() {
+    titleArea.value = localStorage.getItem("titleAreaContent" + titleArea.id) || "";
+    window.addEventListener("beforeunload", () => localStorage.setItem("titleAreaContent" + titleArea.id, titleArea.value));
+    fetch("../examples/words.txt")
+        .then((response) => response.text())
+        .then((wordsText) => {
+            randomWords = wordsText
+                .trim()
+                .split("\n")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+            titleArea.value = titleArea.checkValidity() ? titleArea.value : generateTitle();
+        });
+}
+
 function generateTitle() {
     const date = new Date();
     const year = date.getFullYear();
