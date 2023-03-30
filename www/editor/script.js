@@ -65,7 +65,7 @@ loadCodeTitle();
 validateInputs();
 loadExamples();
 clearTrace();
-
+document.querySelector('body').style.display = 'initial';
 //-------------------------------------------- BUTTON FUNCTIONS ------------------------------------------------------//
 
 //---------------------------------- LOAD PROGRAM BTN --------------------------------------------//

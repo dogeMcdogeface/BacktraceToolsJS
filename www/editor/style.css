@@ -8,6 +8,7 @@
 body {
     font: 16px Tahoma, sans-serif;
     overflow: clip;
+    display:none;
 }
 
 /* Define styles for header */
