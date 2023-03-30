@@ -20,7 +20,7 @@ class CodeArea extends HTMLElement {
       this.textarea.value = localStorage.getItem("codeAreaContent" + this.id) || "";
       this.textarea.addEventListener("input", this.autoResize);
       window.addEventListener("resize", this.autoResize);
-      this.autoResize();
+      setTimeout(this.autoResize);
 
       window.addEventListener("beforeunload", () => localStorage.setItem("codeAreaContent" + this.id, this.textarea.value));
    }
