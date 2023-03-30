@@ -24,10 +24,12 @@
 /* Modal Content */
 .modal-content {
     position: fixed;
+    /*width:100%;*/
     bottom: 0;
-    width: 100%;
-    animation-name: slideIn;
-    animation-duration: 0.4s;
+    left: 50%;
+    transform: translate(-50%, 0);
+    animation: slideIn 0.4s;
+    margin-bottom:2ch;
 }
 /* Hide Modal */
 .modal.hide .modal-content {
