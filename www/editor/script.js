@@ -25,6 +25,8 @@ const treeArea = document.getElementById("treeArea");
 const treeHolder = document.getElementById("treeHolder");
 const examplesMenu = document.getElementById("examplesMenu");
 const downloadButtons = document.querySelectorAll(".download-btn");
+const shareCodeModal = document.getElementById("shareCodeModal");
+const shareCodeModalLink = document.getElementById("shareCodeModalLink");
 
 //-------------------------------------------- LISTENERS -------------------------------------------------------------//
 document.addEventListener("input", validateInputs);
@@ -127,7 +129,13 @@ function btn_shareCode() {
     try {
         navigator.clipboard.writeText(url + encodeParam + encodedString);
     } catch (_) {}
-    window.alert("A link to your code has been copied to your clipboard\nYou can share this link, or paste it into the Load String menu\n\n" + url + encodeParam + encodedString);
+    //window.alert("A link to your code has been copied to your clipboard\nYou can share this link, or paste it into the Load String menu\n\n" + url + encodeParam + encodedString);
+    shareCodeModalLink.href = (url + encodeParam + encodedString);
+    shareCodeModal.show();
+
+    //let timeoutID = setTimeout(() => {shareCodeModal.hide();}, 1500);
+    //shareCodeModal.body.addEventListener("mouseenter", () => clearTimeout(timeoutID));
+    //shareCodeModal.body.addEventListener("mouseleave", () => timeoutID = setTimeout(() => shareCodeModal.hide(), 1000));
 }
 
 //---------------------------------- INTERFACE BUTTONS -------------------------------------------//
