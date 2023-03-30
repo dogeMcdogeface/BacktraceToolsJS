@@ -24,6 +24,30 @@ body {
     font-size: 13px;
     z-index: 5;
 }
+
+#titleInput{
+    width:50%;
+    margin-left: auto;
+    margin-right: 1ch;
+    padding: 0 1ch 0;
+}
+
+.custom-header > Button{
+    margin-right: auto;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    text-align: left;
+    padding: 1ch 1ch;
+    transition: all 0.5s;
+}
+.custom-header > Button:hover {
+  transition: all 0s;
+  background-color: DimGray;
+  color: white;
+}
+
+
 .header-title {
     color: inherit;
     font-family: "Times new roman";
@@ -41,6 +65,8 @@ body {
     transition: transform 0.2s;
     transform: scale(0.99);
 }
+
+
 
 /* Define styles for code area */
 #codeArea {
@@ -142,17 +168,6 @@ body {
     box-shadow: 0 0 4px DodgerBlue, inset 0 0 4px DodgerBlue;
 }
 
-
-#titleInput{
-    width:50%;
-    margin-left: auto;
-    margin-right: 3ch;
-    padding: 0 1ch 0;
-}
-
-#hdr-share-code-button{
-    margin-right: auto;
-}
 
 
 .answer-controls input[type=number] {
