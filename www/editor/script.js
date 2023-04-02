@@ -55,7 +55,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const encodedString = urlParams.get("encoded");
 if (encodedString) {
     // do something with the encoded value, such as decoding it
-    let XmlString = atob(decodeURIComponent(encodedString));
+    let XmlString = LZString.decompressFromEncodedURIComponent(encodedString);
     console.log("Encoded value:", encodedString, XmlString);
     displayProgram(parseProgramXML(XmlString));
 
@@ -89,7 +89,7 @@ function btn_loadString() {
     } catch (_) {}
 
     console.log(window.location.search, urlParams);
-    let XmlString = atob(decodeURIComponent(encodedString));
+    let XmlString = LZString.decompressFromEncodedURIComponent(encodedString);
     displayProgram(parseProgramXML(XmlString));
 }
 
@@ -124,8 +124,11 @@ function btn_saveLocal() {
 function btn_shareCode() {
     console.log("btn_shareCode");
     const xmlString = getAsXML(titleArea.value, codeArea.value, queryArea.value);
-    const encodedString = encodeURIComponent(btoa(xmlString));
+    const encodedString = LZString.compressToEncodedURIComponent(xmlString);
     console.log(url + encodeParam + encodedString);
+
+    console.log("compressToEncodedURIComponent ", xmlString.length, encodedString.length, (encodedString.length)*100/xmlString.length +"%");
+
     try {
         navigator.clipboard.writeText(url + encodeParam + encodedString);
     } catch (_) {}
