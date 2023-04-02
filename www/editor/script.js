@@ -220,7 +220,7 @@ function getAsXML(title, program, query) {
 }
 
 function loadCodeTitle() {
-    titleArea.value = localStorage.getItem("titleAreaContent" + titleArea.id) || "";
+    titleArea.value = titleArea.value || localStorage.getItem("titleAreaContent" + titleArea.id) || "";
     window.addEventListener("beforeunload", () => localStorage.setItem("titleAreaContent" + titleArea.id, titleArea.value));
     fetch("../examples/words.txt")
         .then((response) => response.text())
