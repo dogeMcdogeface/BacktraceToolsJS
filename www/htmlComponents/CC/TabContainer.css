@@ -20,7 +20,7 @@ tab-container .btns {
 tab-container .btn {
    padding: 10px 20px;
    border: 1px solid #ccc;
-   background-color: #f1f1f1;
+   background-color: #fff;
    cursor: pointer;
 }
 
@@ -29,8 +29,8 @@ tab-container .btn:hover {
 }
 
 tab-container .btn.active {
-   background-color: #fff;
-   border-bottom: 1px solid #fff;
+   background-color: #f1f1f1;
+   border-bottom: 3px solid #e9e9e9;
 }
 
 tab-container .tabs {
